@@ -13,8 +13,8 @@ RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 # 上面規則有符合的話就直接導過去
 RewriteRule ^.*$ - [NC,L]
-# 沒有符合的就全部導向 index.php
-RewriteRule ^.*$ index.php [NC,L]
+# 沒有符合的就全部導向 index.html
+RewriteRule ^.*$ index.html [NC,L]
 
 # 關閉瀏覽器以目錄形式瀏覽
 Options -Indexes
