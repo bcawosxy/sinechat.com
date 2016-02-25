@@ -7,7 +7,7 @@
 		<!-- Nav -->
 			<nav id="nav">
 				<ul style="height:36px;">
-					<li><a class="" href="about"><span>關於新誠</span></a></li>
+					<li><a class="" href="<?php echo url('about', 'index') ?>"><span <?php echo (_CLASS=='about') ? 'class="active"' : null ; ?>>關於新誠</span></a></li>
 					<li>
 						<a href="service" class=""><span>修繕項目</span></a>
 						<ul>
@@ -25,10 +25,10 @@
 							<li><a href="javascript:void(0)">Veroeros feugiat</a></li>
 						</ul>
 					</li>
-					<li><a class="" href="javascript:void(0)"><span class="active">最新作品</span></a></li>
+					<li><a class="" href="javascript:void(0)"><span>最新作品</span></a></li>
 					<li><a class="" href="javascript:void(0)"><span>修繕作品</span></a></li>
 					<li><a class="" href="javascript:void(0)"><span>聯絡我們</span></a></li>
-					<li><a class="" href="index"><span>回首頁</span></a></li>
+					<li><a class="" href="<?php echo url('index', 'index') ?>"><span>回首頁</span></a></li>
 				</ul>
 			</nav>
 

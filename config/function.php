@@ -1521,16 +1521,15 @@ function toNum($data) {
  * @return string
  */
 function url($class='index', $function='index', array $param=array()) {
-	$url = URL_ROOT;
-	if ('admin' == M_PACKAGE) {
-		$url .= 'admin/';
-	}
+	$url = URL_ROOT.DIRECTORY_SEPARATOR;
+	
 	if ('index' != $function) {
 		$url .= $class.'/';
 		$url .= $function.'/';
 	} elseif ('index' != $class) {
 		$url .= $class.'/';
 	}
+	
 	if (!empty($param)) {
 		$tmp1 = array();
 		foreach ($param as $k1 => $v1) {

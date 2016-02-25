@@ -33,7 +33,6 @@
 	list($url) = explode('?', ($pos !== false)? substr_replace($_SERVER['REQUEST_URI'], '', $pos, strlen($SITE_FOLDER)) : $_SERVER['REQUEST_URI']);
 	list($package, $class, $function, $version) = route_rule($url);
 	define('_CLASS', $package);
-	define('URL_ROOT', $dev_root);	
 	
 	
 	//不同環境的DB 設定
