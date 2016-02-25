@@ -13,7 +13,7 @@
 		$level3 = empty($a_url[3])? 'index' : $a_url[3];
 		switch ($level1) {
 			case 'admin':
-			
+				$package = 'admin';
 				define('MAIN', 'admin');
 			break;
 			
@@ -35,6 +35,7 @@
 	define('_CLASS', $package);
 	define('URL_ROOT', $dev_root);	
 	
+	
 	//不同環境的DB 設定
 	switch($dev_root) {
 		/**
@@ -45,7 +46,7 @@
 		break;
 		
 		/**
-		 *	正式環境環境
+		 *	正式環境
 		 */
 		case 'www.sinechat.com':
 		case 'sinechat.com':
@@ -53,4 +54,5 @@
 		break;
 		
 	}
+
 ?>

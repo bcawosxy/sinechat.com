@@ -6,8 +6,8 @@
 -->
 <?php 
 include('./config/sinechat.php');
-include('./config/global.php');
 include('./config/function.php');
+include('./config/global.php');
 ?>
 
 <script>
@@ -28,7 +28,6 @@ console.log('CLASS:<?php echo _CLASS; ?>');
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<!-- Head -->	<?php include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR.'head.phtml') ?> <!-- end Head -->
 			</head>
-			
 			<body class="homepage">
 				<div id="page-wrapper">
 					<!-- Headbar --><?php include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR.'headbar.phtml') ?> <!-- end Headbar -->
@@ -37,7 +36,7 @@ console.log('CLASS:<?php echo _CLASS; ?>');
 					<div id="main-wrapper">
 						<div id="main" class="container">
 							<div class="row">
-								<?php include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR._CLASS.'/index.phtml') ?>
+								<?php include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR._CLASS.DIRECTORY_SEPARATOR.'index.phtml') ?>
 							</div>
 						</div>
 					</div>
@@ -46,7 +45,6 @@ console.log('CLASS:<?php echo _CLASS; ?>');
 				</div>
 				<!-- Foot --> <?php include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR.'foot.phtml') ?> <!-- end Foot -->
 			</body>
-			
 		<?php 
 		break;
 		
