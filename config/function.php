@@ -1328,6 +1328,26 @@ function server_ip() {
 }
 
 /**
+ * 輸出 Html引入JS的描述
+ * <p>v1.0 2016-02-26</p>
+ * @return string
+ */
+function set_js($file) {
+	$str = '<script src="'.static_file($file).'"></script>';
+	echo $str;
+}
+
+/**
+ * 輸出 Html引入CSS的描述
+ * <p>v1.0 2016-02-26</p>
+ * @return string
+ */
+function set_css($file) {
+	$str = '<link rel="stylesheet" href="'.static_file($file).'" />';
+	echo $str;
+}
+
+/**
  * \Core\Solr 實例
  * <p>v1.0 2015-11-09</p>
  * @param string $core
@@ -1400,12 +1420,13 @@ function sql_select_encode(array $column=null, array $join=null, array $where=nu
 
 /**
  * 靜態檔路徑
+ * <p>v2.0 2016-02-26</p>
  * <p>v1.0 2014-04-02</p>
  * @param unknown $file
  * @return string
  */
 function static_file($file) {
-	return URL_STATIC_FILE.M_PACKAGE.'/'.SITE_LANG.'/'.$file;
+	return URL_ASSETS.'/'.$file;
 }
 
 /**

@@ -35,9 +35,7 @@ console.log('CLASS:<?php echo _CLASS; ?>');
 					<!-- Main -->
 					<div id="main-wrapper">
 						<div id="main" class="container">
-							<div class="row">
-								<?php include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR._CLASS.DIRECTORY_SEPARATOR.'index.phtml') ?>
-							</div>
+							<?php include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR._CLASS.DIRECTORY_SEPARATOR.'index.phtml') ?>
 						</div>
 					</div>
 					<!-- end main -->

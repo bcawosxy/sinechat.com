@@ -1,24 +1,39 @@
 <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-<link rel="stylesheet" href="<?php echo URL_CSS.'main.css' ?>" />
 <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+<?php 
+	set_css('css/main.css');
+	set_css('css/font-awesome/css/font-awesome.css');
+	set_css('js/owl.carousel/css/owl.carousel.css');
+	set_css('js/owl.carousel/css/owl.theme.css');
+	set_css('js/owl.carousel/css/owl.transitions.css');
+?>
+
+<!-- Scripts -->
+<script src="<?php echo URL_JS.'jquery.min.js' ?>"></script>
+<script src="<?php echo URL_JS.'skel.min.js' ?>"></script>
+<script src="<?php echo URL_JS.'skel-viewport.min.js' ?>"></script>
+<script src="<?php echo URL_JS.'main.js' ?>"></script>
+<script src="<?php echo URL_JS.'jquery.dropotron.min.js' ?>"></script>
+<script src="<?php echo URL_JS.'util.js' ?>"></script>
+<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+<?php 
+	set_js('js/owl.carousel/js/owl.carousel.min.js');
+?>
+
 
 <?php 
 /**
- * 不同分類引入各自的css file
+ * 不同分類引入各自的css/js file
  */
 switch(_CLASS) {
 	case 'about':
-	
 	break;
-	case '':
+	case 'index':
 	break;
 	case '':
 	break;
 	case '':
 	break;	
 }
-
-
-
 ?>
 

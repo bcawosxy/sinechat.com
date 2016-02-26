@@ -11,9 +11,10 @@ define('PATH_CSS', PATH_ROOT.'assets'.DIRECTORY_SEPARATOR.'css'.DIRECTORY_SEPARA
 /**
  * URL
  */
-define('URL_CSS', URL_ROOT.'/assets/css/');
-define('URL_IMG', URL_ROOT.'/assets/images/');
-define('URL_JS', URL_ROOT.'/assets/js/');
+define('URL_ASSETS', URL_ROOT.'/assets/');
+define('URL_CSS', URL_ASSETS.'css/');
+define('URL_IMG', URL_ASSETS.'images/');
+define('URL_JS', URL_ASSETS.'js/');
 define('URL_UPLOAD', URL_ROOT.'/upload/');
 
 

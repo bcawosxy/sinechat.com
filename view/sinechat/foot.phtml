@@ -1,28 +1,10 @@
-<!-- Scripts -->
-<script src="<?php echo URL_JS.'jquery.min.js' ?>"></script>
-<script src="<?php echo URL_JS.'skel.min.js' ?>"></script>
-<script src="<?php echo URL_JS.'skel-viewport.min.js' ?>"></script>
-<script src="<?php echo URL_JS.'main.js' ?>"></script>
-<script src="<?php echo URL_JS.'jquery.dropotron.min.js' ?>"></script>
-<script src="<?php echo URL_JS.'util.js' ?>"></script>
-<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-
-
-<?php 
-/**
- * 不同分類引入各自的css file
- */
-switch(_CLASS) {
-	case 'about':
-	
-	break;
-	case '':
-	break;
-	case '':
-	break;
-	case '':
-	break;	
-}
-
-?>
-
+<script>
+$(function() {
+	$("#banner-wrapper").owlCarousel({
+		singleItem:true,
+		autoPlay : 5000,
+		stopOnHover : true,
+		autoHeight : true,
+	});
+});
+</script>
