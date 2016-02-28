@@ -1,0 +1,109 @@
+
+<div id="row">
+	<div class="12u 12u(mobile)">
+		<ol class="breadcrumb">
+			<li><a href="<?php echo url(); ?>">Home</a></li>
+			<li class="active">成果展示</li>
+		</ol>
+	</div>
+
+	<div id="content">
+
+		<article style="min-height:400px;" class="box post">
+			<header><h2><i class="fa fa-gavel">&nbsp;</i><strong>修繕作品</strong> </h2></header>
+			<div class="row" style="min-height: 280px;">
+				<div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
+					<header>鶯歌新誠居家修繕</header>
+					<p>
+						<a href="<?php echo url('product', 'content', ['id'=>1]) ?>" class="image" style="padding:0.2em;"> <img src="<?php echo static_file('images/4.jpg') ?>"> </a>
+					</p>
+				</div>
+				<div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
+					<header>泥做工程</header>
+					<p>
+						<a href="javascript:void(0)" class="image" style="padding:0.2em;"> <img src="<?php echo static_file('images/5.jpg') ?>"> </a>
+					</p>
+				</div>
+				<div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
+					<header>泥做工程</header>
+					<p>
+						<a href="javascript:void(0)" class="image" style="padding:0.2em;"> <img src="<?php echo static_file('images/6.jpg') ?>"> </a>
+					</p>
+				</div>
+				<div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
+					<header>泥做工程</header>
+					<p>
+						<a href="javascript:void(0)" class="image" style="padding:0.2em;"> <img src="<?php echo static_file('images/7.jpg') ?>"> </a>
+					</p>
+				</div>
+
+			</div>
+			<div class="row" style="min-height:  280px;">
+				<div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
+					<header>泥做工程</header>
+					<p>
+						<a href="javascript:void(0)" class="image" style="padding:0.2em;"> <img src="<?php echo static_file('images/8.jpg') ?>"> </a>
+					</p>
+				</div>
+				<div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
+					<header>泥做工程</header>
+					<p>
+						<a href="javascript:void(0)" class="image" style="padding:0.2em;"> <img src="<?php echo static_file('images/9.jpg') ?>"> </a>
+					</p>
+				</div>
+				<div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
+					<header>泥做工程</header>
+					<p>
+						<a href="javascript:void(0)" class="image" style="padding:0.2em;"> <img src="<?php echo static_file('images/10.jpg') ?>"> </a>
+					</p>
+				</div>
+				<div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
+					<header>泥做工程</header>
+					<p>
+						<a href="javascript:void(0)" class="image" style="padding:0.2em;"> <img src="<?php echo static_file('images/15.jpg') ?>"> </a>
+					</p>
+				</div>
+
+			</div>
+			<div class="row" style="min-height:  280px;">
+				<div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
+					<header>泥做工程</header>
+					<p>
+						<a href="javascript:void(0)" class="image" style="padding:0.2em;"> <img src="<?php echo static_file('images/2.jpg') ?>"> </a>
+					</p>
+				</div>
+				<div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
+					<header>泥做工程</header>
+					<p>
+						<a href="javascript:void(0)" class="image" style="padding:0.2em;"> <img src="<?php echo static_file('images/19.jpg') ?>"> </a>
+					</p>
+				</div>
+				<div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
+					<header>泥做工程</header>
+					<p>
+						<a href="javascript:void(0)" class="image" style="padding:0.2em;"> <img src="<?php echo static_file('images/3.jpg') ?>"> </a>
+					</p>
+				</div>
+			</div>
+
+			<div class="row" style="min-height:30px;">
+				<ul id="pagination-demo" class="pagination-sm"></ul>
+			</div>
+		</article>
+	</div>
+</div>
+
+<script>
+	$('#pagination-demo').twbsPagination({
+		totalPages: 8,
+		visiblePages: 5,
+		first:'第一頁',
+		prev :'上一頁',
+		next  :'下一頁',
+		last  :'最後一頁',
+		// href: '?page={{number}}',
+		onPageClick: function (event, page) {
+			$('#page-content').text('Page ' + page);
+		}
+	});
+</script>

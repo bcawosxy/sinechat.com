@@ -14,6 +14,7 @@ include('./config/global.php');
 console.log('Execute:<?php echo $_SERVER['PHP_SELF']?>');
 console.log('Uri:<?php echo $_SERVER['REQUEST_URI']?>');
 console.log('CLASS:<?php echo _CLASS; ?>');
+console.log('_SUB_CLASS:<?php echo _SUB_CLASS; ?>');
 </script>
 <html>
 <?php 
@@ -35,7 +36,7 @@ console.log('CLASS:<?php echo _CLASS; ?>');
 					<!-- Main -->
 					<div id="main-wrapper">
 						<div id="main" class="container">
-							<?php include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR._CLASS.DIRECTORY_SEPARATOR.'index.phtml') ?>
+							<?php include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR._CLASS.DIRECTORY_SEPARATOR._SUB_CLASS.'.phtml') ?>
 						</div>
 					</div>
 					<!-- end main -->

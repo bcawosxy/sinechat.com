@@ -23,5 +23,6 @@ define('URL_UPLOAD', URL_ROOT.'/upload/');
  * 引入[view][controller]判斷
  */
 (!is_dir( PATH_ROOT.'view'.DIRECTORY_SEPARATOR.MAIN.DIRECTORY_SEPARATOR._CLASS)) ? redirect(URL_ROOT) : null;
+(!is_file( PATH_ROOT.'view'.DIRECTORY_SEPARATOR.MAIN.DIRECTORY_SEPARATOR._CLASS.DIRECTORY_SEPARATOR._SUB_CLASS.'.phtml')) ? redirect(URL_ROOT) : null;
 (!is_file( PATH_ROOT.'controller'.DIRECTORY_SEPARATOR.MAIN.DIRECTORY_SEPARATOR._CLASS.'.php')) ?  : include(PATH_ROOT.'controller'.DIRECTORY_SEPARATOR.MAIN.DIRECTORY_SEPARATOR._CLASS.'.php');
 

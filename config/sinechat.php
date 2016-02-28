@@ -19,6 +19,7 @@
 			
 			default :
 				$package = $level1;
+				$class = $level2;
 				define('MAIN', SITE_NAME);
 			break;
 		}
@@ -33,6 +34,7 @@
 	list($url) = explode('?', ($pos !== false)? substr_replace($_SERVER['REQUEST_URI'], '', $pos, strlen($SITE_FOLDER)) : $_SERVER['REQUEST_URI']);
 	list($package, $class, $function, $version) = route_rule($url);
 	define('_CLASS', $package);
+	define('_SUB_CLASS', $class);
 	
 	
 	//不同環境的DB 設定
