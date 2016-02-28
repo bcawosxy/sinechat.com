@@ -315,22 +315,22 @@
 	}
 
 	.\38 u, .\38 u\24 {
-		width: 20%;
+		width: 66.6666666667%;
 		clear: none;
 		margin-left: 0;
 	}
 
 	/*mars*/
-	.\38 u, .\38 u\24 > homepage {
+	/* .\38 u, .\38 u\24 > homepage {
 		width: 30%;
 		clear: none;
-	}
+	} */
 	
 	/*mars*/
-	.\38 u, .\38 u\24 > service {
-		width: 20%;
+	/* .\38 u, .\38 u\24 > service {
+		width: 66.6666666667%%;
 		clear: none;
-	}
+	} */
 
 	.\37 u, .\37 u\24 {
 		width: 58.3333333333%;
@@ -351,22 +351,22 @@
 	}
 
 	.\34 u, .\34 u\24 {
-		width: 80%;
+		width: 33.3333333333%;
 		clear: none;
 		margin-left: 0;
 	}
 	
 	/*mars*/
-	.\34 u, .\34 u\24 > homepage{
+	/* .\34 u, .\34 u\24 > homepage{
 		width: 70%;
 		padding: 0 0 0 50px;
-	}
+	} */
 	
 	/*mars*/
-	.\34 u, .\34 u\24 > service{
+	/* .\34 u, .\34 u\24 > service{
 		width: 80%;
 		padding: 0 0 0 50px;
-	}
+	} */
 
 	.\33 u, .\33 u\24 {
 		width: 25%;
@@ -1223,6 +1223,14 @@
 		clear: both;
 	}
 
+	.index_item {
+		font-size:0.9em ;
+		padding:0 2em 2em 2em;
+		letter-spacing:2px;
+		/* font-family:"微軟正黑體"; */
+	}
+	
+	
 /* Sections/Article */
 
 	section, article {
