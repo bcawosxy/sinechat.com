@@ -333,7 +333,8 @@
   }
   .sm-mint.sm-vertical {
     border-bottom: 0;
-    border-right: 2px solid rgba(107, 168, 178, 1);
+    border-right: 2px solid #fff;
+    /* border-right: 2px solid rgba(107, 168, 178, 1); */
   }
   .sm-mint.sm-vertical a {
     padding: 10px 20px;

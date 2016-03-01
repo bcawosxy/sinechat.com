@@ -25,7 +25,7 @@
 	body {
 		line-height: 1;
 	}
-
+	
 	ol, ul {
 		list-style: none;
 	}
@@ -1741,7 +1741,8 @@
 			}
 
 			#nav > ul > li > a > span.active {
-				color:#242424;
+				color:rgba(107, 168, 178, 1);
+				font-weight:bold;
 			}
 		#nav > ul > li.active > a:before, #nav > ul > li:hover > a:before {
 			background: #ED786A;
