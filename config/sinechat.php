@@ -14,7 +14,10 @@
 		switch ($level1) {
 			case 'admin':
 				$package = 'admin';
+				$class = $level2;
+				$function = $level3;
 				define('MAIN', 'admin');
+				define('_FUNCTION', $function);
 			break;
 			
 			default :
@@ -36,14 +39,16 @@
 	define('_CLASS', $package);
 	define('_SUB_CLASS', $class);
 	
-	
 	//不同環境的DB 設定
 	switch($dev_root) {
 		/**
 		 *	開發環境
 		 */
 		case 'dev.sinechat.com':
-			
+			$dbhost = 'dev.pindelta.com';
+			$dbuser = 'root';
+			$dbpass = 'a74109630';
+			$dbname = 'sinechat';
 		break;
 		
 		/**
@@ -55,5 +60,9 @@
 		break;
 		
 	}
+	
+	$conn = mysql_connect($dbhost,$dbuser,$dbpass);
+	mysql_query('SET NAMES "utf8"', $conn);
+	mysql_select_db($dbname, $conn);
 
 ?>

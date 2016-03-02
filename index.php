@@ -1,15 +1,15 @@
+<?php session_start() ?>
+<?php 
+include('./config/sinechat.php');
+include('./config/function.php');
+include('./config/global.php');
+?>
 <!DOCTYPE HTML>
 <!--
 	Strongly Typed by HTML5 UP
 	html5up.net | @n33co
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<?php 
-include('./config/sinechat.php');
-include('./config/function.php');
-include('./config/global.php');
-?>
-
 <script>
 console.log('Execute:<?php echo $_SERVER['PHP_SELF']?>');
 console.log('Uri:<?php echo $_SERVER['REQUEST_URI']?>');
@@ -24,7 +24,7 @@ console.log('_SUB_CLASS:<?php echo _SUB_CLASS; ?>');
 		 */
 		default : ?>
 			<head>
-				<title>Strongly Typed by HTML5 UP</title>
+				<title>新誠居家修繕工程</title>
 				<meta charset="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<!-- Head -->	<?php include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR.'head.phtml') ?> <!-- end Head -->
@@ -51,8 +51,18 @@ console.log('_SUB_CLASS:<?php echo _SUB_CLASS; ?>');
 		/**
 		 * 後台
 		 */
+			if(_SUB_CLASS =='login') {
+				include('./view'.DIRECTORY_SEPARATOR.MAIN.DIRECTORY_SEPARATOR._SUB_CLASS.DIRECTORY_SEPARATOR._FUNCTION.'.phtml');
+			} else {
+			
+			
+			
+			}
+		 
 		?>
-			welcome to Sinechat		
+
+		
+		
 		<?php 
 		break;	
 	}
