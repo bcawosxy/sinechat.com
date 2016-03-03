@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<?php 
+	//css file
+	set_css('css/bootstrap.min.css');
+	set_css('css/adminlte/AdminLTE.min.css');
+	set_css('css/adminlte/_all-skins.min.css');
+	set_css('js/icheck/all.css');
+	set_css('js/jBox/jBox.css');
+	set_css('css/font-awesome/css/font-awesome.css');
+
+	//js file
+	set_js('js/jquery.min.js');
+	set_js('js/bootstrap-admin/js/bootstrap.min.js');
+	set_js('js/adminlte/app.min.js');
+	set_js('js/adminlte/demo.js');
+	set_js('js/jBox/jBox.js');
+
+/**
+ * 不同分類引入各自的css/js file
+ */
+switch(_SUB_CLASS) {
+	case 'about':
+		set_js('js/slimscroll/jquery.slimscroll.min.js');
+		set_js('js/fastclick/fastclick.min.js');
+		set_js('js/ckeditor/ckeditor.js');
+		set_js('js/ckeditor/adapters/jquery.js');
+	break;
+	case 'index':
+	
+	break;
+	case 'service':
+		// set_css('js/smartmenus/css/sm-core-css.css');
+		// set_css('js/smartmenus/css/sm-mint/sm-mint.css');
+		// set_js('js/smartmenus/js/jquery.smartmenus.min.js');
+		// set_css('js/bootsrap-custom/css/bootstrap.min.css');
+		// set_css('js/bootsrap-custom/js/bootstrap.min.js');
+	break;
+	case 'product':
+		// set_css('js/bootsrap-custom/css/bootstrap.min.css');
+		// set_css('js/bootsrap-custom/js/bootstrap.min.js');
+		// set_css('js/jssor.slider/css/jssor.slider.css');
+		// set_js('js/jquery.twbsPagination.min.js');
+		// set_js('js/jssor.slider/js/jssor.slider.min.js');
+	break;
+	case 'contact':
+		// set_css('js/bootsrap-custom/css/bootstrap.min.css');
+		// set_css('js/bootsrap-custom/js/bootstrap.min.js');
+
+	break;	
+}
+
+?>
+

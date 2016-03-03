@@ -1,0 +1,24 @@
+<script>
+function _jbox(r, status) {
+	var message = r.message;
+	switch(status) {
+		case 'error' :
+			var icon = '<i style="color:#DD4B39;" class="fa fa-times-circle">';
+		break;
+		case 'success' :
+			var icon = '<i style="color:#6FE060;" class="fa fa-check-circle">';
+		break;
+	}
+
+	box = new jBox('Modal', {
+		closeButton: 'title',
+		delayOpen: 300,
+		maxWidth: 600,
+		minWidth: 100,
+		title: '<span style="display: inline-block;height: 100%;vertical-align: middle;">'+icon+'</span>',
+		onCloseComplete: function() {
+			if (r.redirect) location.href = r.redirect;
+		},
+	}).setContent('<div >' + message + '</div>').open();
+}
+</script>

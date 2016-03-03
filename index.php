@@ -17,7 +17,7 @@ console.log('CLASS:<?php echo _CLASS; ?>');
 console.log('_SUB_CLASS:<?php echo _SUB_CLASS; ?>');
 </script>
 <html>
-<?php 
+<?php 	
 	switch(MAIN) {
 		/**
 		 * 前台
@@ -51,21 +51,34 @@ console.log('_SUB_CLASS:<?php echo _SUB_CLASS; ?>');
 		/**
 		 * 後台
 		 */
+			//login 頁面
 			if(_SUB_CLASS =='login') {
 				include('./view'.DIRECTORY_SEPARATOR.MAIN.DIRECTORY_SEPARATOR._SUB_CLASS.DIRECTORY_SEPARATOR._FUNCTION.'.phtml');
 			} else {
-			
-			
-			
-			}
-		 
 		?>
-
-		
-		
+			<head>
+				<meta charset="utf-8">
+				<meta http-equiv="X-UA-Compatible" content="IE=edge">
+				<title>Sinechat.com | Admin System</title>
+				<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+				<!-- Head -->	<?php include('./view'.DIRECTORY_SEPARATOR.MAIN.DIRECTORY_SEPARATOR.'head.phtml') ?> <!-- end Head -->
+			</head>
+			<body class="hold-transition skin-blue sidebar-mini">
+				<div class="wrapper">
+					<!-- Headbar --> <?php include('./view'.DIRECTORY_SEPARATOR.MAIN.DIRECTORY_SEPARATOR.'headbar.phtml'); ?> <!-- ecd Headbar -->
+					<!-- navbar --> <?php include('./view'.DIRECTORY_SEPARATOR.MAIN.DIRECTORY_SEPARATOR.'navbar.phtml'); ?> <!-- echo navbar -->
+						<div class="content-wrapper">
+							<?php include('./view'.DIRECTORY_SEPARATOR.MAIN.DIRECTORY_SEPARATOR._SUB_CLASS.DIRECTORY_SEPARATOR._FUNCTION.'.phtml'); ?>
+						</div>
+					<!-- Footbar --> <?php include('./view'.DIRECTORY_SEPARATOR.MAIN.DIRECTORY_SEPARATOR.'footbar.phtml'); ?> <!-- end Footbar -->
+				</div>
+			</body>
+			<!-- Foot -->
+			<?php include('./view'.DIRECTORY_SEPARATOR.MAIN.DIRECTORY_SEPARATOR.'foot.phtml'); ?>
+			<!-- end Foot -->
 		<?php 
+		}
 		break;	
 	}
-
 ?>
 </html>

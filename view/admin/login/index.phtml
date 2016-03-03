@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AdminLTE 2 | Log in</title>
+	<title>Sinechat | Log in</title>
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<?php set_css('css/bootstrap.min.css'); ?>
 	<?php set_css('css/font-awesome.min.css'); ?>
@@ -25,11 +25,11 @@
 	</div>
 	<div class="login-box-body">
 		<div class="form-group has-feedback">
-			<input type="email" class="form-control" placeholder="Email">
-			<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+			<input type="email" class="form-control" name="account" placeholder="Account">
+			<span class="glyphicon glyphicon-user form-control-feedback"></span>
 		</div>
 		<div class="form-group has-feedback">
-			<input type="password" class="form-control" placeholder="Password">
+			<input type="password" class="form-control" name="password" placeholder="Password">
 			<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 		</div>
 		<div class="row">
@@ -45,23 +45,31 @@
 <?php set_js('js/jBox/jBox.js'); ?>
 <script>
 	function login_check() {
-		$.post('<?php echo url('/admin', 'login') ?>', {
-		
-		
+		$.post('<?php echo url('admin', 'login') ?>', {
+			account : $('input[name="account"]').val(),
+			password : $('input[name="password"]').val(),
 		},function(r){
 			r = $.parseJSON(r);
+			switch(r.result) {
+				case 0 :
+					var icon = '<i style="color:#DD4B39;" class="fa fa-times-circle">';
+				break;
+				case 1 :
+					var icon = '<i style="color:#6FE060;" class="fa fa-check-circle">';
+				break;
+			}
+
 			var box = new jBox('Modal', {
 				closeButton: 'title',
 				delayOpen: 300,
 				maxWidth: 600,
 				minWidth: 120,
-				title: '<span style="display: inline-block;height: 100%;vertical-align: middle;"><i style="color:#DD4B39;" class="fa fa-times-circle"></span>',
+				title: '<span style="display: inline-block;height: 100%;vertical-align: middle;">'+icon+'</span>',
 				onCloseComplete: function() {
-					
+					if (r.redirect) location.href = r.redirect;
 				},
 			}).setContent('<div style="color: #757575; font-size: 16px;line-height: 30px;font-weight:500">' + r.message + '</div>').open();
 		});
-	
 	}
 
 	$(function () {

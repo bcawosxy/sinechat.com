@@ -1221,6 +1221,25 @@ function query_string_parse() {
 }
 
 /**
+ * 0524 對query作空白處理 
+ */
+function query_despace($query = null){
+	if($query !== null){
+		//去掉開始和結束的空白
+		$query = trim($query);
+		//去掉跟隨別的擠在一塊的空白
+		$query = preg_replace('/\s(?=\s)/', '', $query);
+		//去掉非space 的空白，用一個空格代替
+		$query = preg_replace('/[\n\r\t]/', ' ', $query);
+		//
+		// $query = mysql_real_escape_string($query);
+		return $query;
+	}
+	return $query;
+}  
+
+
+/**
  * 隨機密碼
  * <p>v1.0 2014-02-24</p>
  * @param number $length
@@ -1542,7 +1561,7 @@ function toNum($data) {
  * @return string
  */
 function url($class='index', $function='index', array $param=array()) {
-	$url = URL_ROOT.DIRECTORY_SEPARATOR;
+	$url = URL_ROOT.'/';
 	
 	if ('index' != $function) {
 		$url .= $class.'/';
