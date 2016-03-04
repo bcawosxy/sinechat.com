@@ -8,21 +8,21 @@
 	<!-- Post -->
 	<article style="min-height:400px;" class="box post">
 		<header><h2><i class="fa fa-gavel">&nbsp;</i><strong>關於新誠居家修繕</strong> </h2></header>
-		<div style="padding:0 2em;">
-			<p>舉凡室內裝潢、室內裝修、房屋增建修改、拆除隔間、舊屋整修、室內裝修翻新、室內格局重整、浴室整修、廚房改造、加蓋頂樓、屋頂翻新加高、天花板、油漆粉刷、大小工作不拘
-			<p>
-				<span class="image featured" style="display:inline-block;width:auto;"><img style="max-width:200px;max-height:300px;" src="<?php echo static_file('images/1.jpg') ?>" /></span>
-				<span class="image featured" style="display:inline-block;width:auto;"><img style="max-width:200px;max-height:300px;" src="<?php echo static_file('images/2.jpg') ?>" /></span>
-				<span class="image featured" style="display:inline-block;width:auto;"><img style="max-width:200px;max-height:300px;" src="<?php echo static_file('images/3.jpg') ?>" /></span>
-				<span class="image featured" style="display:inline-block;width:auto;"><img style="max-width:200px;max-height:300px;" src="<?php echo static_file('images/4.jpg') ?>" /></span>
-			</p>
-			<p>免費至府估價、歡迎比價、二十多年房屋修繕、房屋增建、舊屋翻修、舊屋翻新、舊屋整修、房屋整修、房屋整建、房屋翻修的豐富經驗服務大台南縣市、油漆粉刷、室內裝潢、室內裝修、防水抓漏、房屋增建修改、披土修補、水泥漆、塑膠漆、房屋隔間、服務有口碑的二十多年經驗。</p>
-			<p>
-				<span class="image featured" style="display:inline-block;width:auto;"><img style="max-width:200px;max-height:300px;" src="<?php echo static_file('images/5.jpg') ?>" /></span>
-				<span class="image featured" style="display:inline-block;width:auto;"><img style="max-width:200px;max-height:300px;" src="<?php echo static_file('images/6.jpg') ?>" /></span>
-				<span class="image featured" style="display:inline-block;width:auto;"><img style="max-width:200px;max-height:300px;" src="<?php echo static_file('images/7.jpg') ?>" /></span>
-				<span class="image featured" style="display:inline-block;width:auto;"><img style="max-width:200px;max-height:300px;" src="<?php echo static_file('images/8.jpg') ?>" /></span>
-			</p>
+		<div class="editor_content" style="padding:0 2em;">
+			<?php 
+				echo htmlspecialchars_decode($data['value']); 
+			?>
+			<hr>
 		</div>
 	</article>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.editor_content').find('img').each(function(k,v){
+			var h_w = $(this).css(['height', 'width']);
+			$(this).removeAttr('style').css('max-height', h_w.height).css('max-width', h_w.width);
+			$(this).wrap('<span class="image"></div>'); 
+		});
+	});
+</script>

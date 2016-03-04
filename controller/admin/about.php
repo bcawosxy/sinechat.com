@@ -1,9 +1,7 @@
 <?php 
 	if(is_ajax()) {
 		$value = !empty($_POST['value']) ? $_POST['value'] : null ;
-
 		if($value == null) json_encode_return(0, '未輸入內容');
-
 		$value = stripslashes(htmlspecialchars($value));
 		$new_id = 1;
 		$query = 'UPDATE `about` SET  `value` =  \''.$value.'\' , `modify_name` = "'.$_SESSION['admin']['name'].'" ,`modify_time` = NOW() WHERE  `about`.`id` = "'.$new_id.'" LIMIT 1 ; ';

@@ -62,7 +62,7 @@ Examples:
 ATTENTION: The trailing slash is required.
 */
 // $baseUrl = 'http://pindelta.net/upload/ckfinder/'; 
-$baseUrl = 'http://'.$_SERVER['SERVER_NAME'].'/upload/';
+$baseUrl = 'http://'.$_SERVER['SERVER_NAME'].'/upload/ckeditor/';
 
 // if(!is_dir(PATH_UPLOAD._SUB_CLASS)) mkdir(PATH_UPLOAD._SUB_CLASS);
 // $baseUrl = URL_UPLOAD._SUB_CLASS
