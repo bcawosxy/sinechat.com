@@ -15,6 +15,7 @@ console.log('Execute:<?php echo $_SERVER['PHP_SELF']?>');
 console.log('Uri:<?php echo $_SERVER['REQUEST_URI']?>');
 console.log('CLASS:<?php echo _CLASS; ?>');
 console.log('_SUB_CLASS:<?php echo _SUB_CLASS; ?>');
+console.log('_FUNCTION:<?php echo _FUNCTION; ?>');
 </script>
 <html>
 <?php 	

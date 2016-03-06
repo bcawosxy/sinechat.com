@@ -1,0 +1,126 @@
+<section class="content-header">
+	<div class="box-body"><h2>最新消息</h2></div>
+	<h1>				
+		<small><p class="text-light-blue"></p></small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="<?php echo url('admin', 'index') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li><a href="<?php echo url('admin', 'news') ?>">最新消息</a></li>
+		<li class="active">詳情</li>
+	</ol>
+</section>
+<section class="content">
+	<div class="box">
+		<div class="box-body">
+			<div class="row">
+				<div class="col-md-10">
+					<div class="box-body box-solid">
+						<div class="box-header with-border">
+							<i class="fa fa-file-text-o"></i>
+							<h3 class="box-title"> 詳情 </h3>
+						</div>
+						<div class="box-body">
+							<dl class="dl-horizontal">
+								<dt>編號:</dt>
+									<dd># <?php echo $data['id'] ?></dd>
+								<br>
+								<dt>標題:</dt>
+									<dd>
+										<input type="text" class="form-control" placeholder="Enter ..." style="width:50%" value="<?php echo $data['title'] ?>">
+									</dd>
+								<br>
+								<dt>內文:</dt>
+									<dd>
+										<textarea class="form-control"> <?php echo $data['content'] ?> </textarea>
+									</dd>
+								<br>
+								<dt>時間:</dt>
+									<dd>
+									  <div class="form-group">
+										<div class="input-group">
+											<div class="input-group-addon">
+												<i class="fa fa-calendar"></i>
+											</div>
+											<input type="text" class="form-control pull-right" id="reservation">
+										</div>
+										<!-- /.input group -->
+									  </div>
+									  <!-- /.form group -->
+									</dd>
+								<br>
+								<dt>狀態:</dt>
+									<dd>
+										<div class="form-group">
+											<label for="r1">
+												<input id="r1" type="radio" name="status" class="minimal-red" <?php if($data['status'] == 'open') echo 'checked'; ?>>
+												Open
+											</label>
+											<label for="r2">
+												<input id="r2" type="radio" name="status" class="minimal-red" <?php if($data['status'] == 'close') echo 'checked'; ?>>
+												Close
+											</label>
+										</div>
+									</dd>
+								<br>
+								<dt>last edit time :</dt>
+							</dl>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<a class="btn btn-app" href="<?php echo url('admin', 'news') ?>">
+	<i class="fa fa-angle-double-left"></i> 上一頁
+</a>
+
+<a class="btn btn-app " id="save">
+	<i class="fa fa-save"></i> 儲存(Save)
+</a>
+
+<?php 
+	if($act =='edit') echo '<a class="btn btn-app " id="delete"><i class="fa fa-trash-o"></i> 刪除(Delete)</a>';
+?>
+<script>
+
+
+$(function () {
+    $( "#reservation" ).datepicker({
+		changeMonth: true,
+		changeYear: true
+	});
+
+	$( "#reservation" ).datepicker( "option", "dateFormat", 'yy-mm-dd' );
+	$( "#reservation" ).datepicker( "setDate", "<?php echo $data['date'] ?>" );
+	
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass: 'iradio_minimal-blue'
+    });
+    //Red color scheme for iCheck
+    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+      checkboxClass: 'icheckbox_minimal-red',
+      radioClass: 'iradio_minimal-red'
+    });
+	
+	$('#save').on('click', function(){
+		$.post('<?php echo url('admin', 'news/edit') ?>' , {
+			act : '<?php echo $act ?>',
+			id : '<?php echo $data['id'] ?>',
+			id : '<?php echo $data['id'] ?>',
+			id : '<?php echo $data['id'] ?>',
+			id : '<?php echo $data['id'] ?>',
+		},function(r){
+			r = $.parseJSON(r);
+			if(r.result == 1) {
+				_jbox(r, 'success');
+			}else{
+				_jbox(r, 'error');			
+			}
+		});
+		
+	});
+
+});
+</script>
