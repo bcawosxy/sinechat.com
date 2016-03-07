@@ -17,7 +17,7 @@
 					<div class="box-body box-solid">
 						<div class="box-header with-border">
 							<i class="fa fa-file-text-o"></i>
-							<h3 class="box-title"> 詳情 </h3>
+							<h3 class="box-title"> <?php echo ($act == 'add') ? '新增最新消息' : '編輯:'.$data['title'] ?> </h3>
 						</div>
 						<div class="box-body">
 							<dl class="dl-horizontal">
@@ -26,12 +26,12 @@
 								<br>
 								<dt>標題:</dt>
 									<dd>
-										<input type="text" class="form-control" placeholder="Enter ..." style="width:50%" value="<?php echo $data['title'] ?>">
+										<input type="text" class="form-control" name="title" placeholder="Title" style="width:50%" value="<?php echo $data['title'] ?>">
 									</dd>
 								<br>
 								<dt>內文:</dt>
 									<dd>
-										<textarea class="form-control"> <?php echo $data['content'] ?> </textarea>
+										<textarea class="form-control" rows="10" name="content"> <?php echo $data['content'] ?> </textarea>
 									</dd>
 								<br>
 								<dt>時間:</dt>
@@ -41,7 +41,7 @@
 											<div class="input-group-addon">
 												<i class="fa fa-calendar"></i>
 											</div>
-											<input type="text" class="form-control pull-right" id="reservation">
+											<input type="text" name="date" class="form-control pull-right" id="reservation">
 										</div>
 										<!-- /.input group -->
 									  </div>
@@ -52,17 +52,19 @@
 									<dd>
 										<div class="form-group">
 											<label for="r1">
-												<input id="r1" type="radio" name="status" class="minimal-red" <?php if($data['status'] == 'open') echo 'checked'; ?>>
+												<input id="r1" type="radio" name="status" class="minimal-red" value="open" <?php if($data['status'] == 'open') echo 'checked'; ?>>
 												Open
-											</label>
+											</label>&nbsp;&nbsp;&nbsp;
 											<label for="r2">
-												<input id="r2" type="radio" name="status" class="minimal-red" <?php if($data['status'] == 'close') echo 'checked'; ?>>
+												<input id="r2" type="radio" name="status" class="minimal-red" value="close" <?php if($data['status'] == 'close') echo 'checked'; ?>>
 												Close
 											</label>
 										</div>
 									</dd>
 								<br>
-								<dt>last edit time :</dt>
+								<dt>最後修改時間:</dt>
+									<dd> <?php echo $data['modify_time'] ?> </dd>
+								<br>
 							</dl>
 						</div>
 					</div>
@@ -108,9 +110,11 @@ $(function () {
 		$.post('<?php echo url('admin', 'news/edit') ?>' , {
 			act : '<?php echo $act ?>',
 			id : '<?php echo $data['id'] ?>',
-			id : '<?php echo $data['id'] ?>',
-			id : '<?php echo $data['id'] ?>',
-			id : '<?php echo $data['id'] ?>',
+			title : $('input[name="title"]').val(),
+			date : $('input[name="date"]').val(),
+			status : $('input[name="status"]').val(),
+			content : $('textarea[name="content"]').val(),
+
 		},function(r){
 			r = $.parseJSON(r);
 			if(r.result == 1) {
