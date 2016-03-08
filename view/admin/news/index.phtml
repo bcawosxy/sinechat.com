@@ -21,7 +21,7 @@
 									<th>編輯</th>
 									<th>標題</th>
 									<th>內文</th>
-									<th>時間</th>
+									<th>修改時間</th>
 									<th>狀態</th>
 								</tr>
 							</thead>
@@ -32,9 +32,9 @@
 									echo '<tr>
 											<td>'.$v0['id'].' </td>
 											<td><a href="'.url('admin', 'news/edit', ['id'=>$v0['id']]).'">編輯</a></td>
-											<td>'.$v0['title'].' </td>
-											<td>'.$v0['content'].' </td>
-											<td>'.$v0['date'].' </td>
+											<td><a href="'.url('admin', 'news/edit', ['id'=>$v0['id']]).'">'.$v0['title'].'</a></td>
+											<td class="content">'.$v0['content'].' </td>
+											<td>'.$v0['modify_time'].' </td>
 											<td>'.$status.' </td>																
 										</tr>';
 								}
@@ -54,7 +54,22 @@
 $(function () {
 	$("#example1").DataTable({
 		"order": [[ 0, "asc" ]],
+		"columns": [
+			{ "width": "3%" },
+			{ "width": "7%" },
+			{ "width": "20%" },
+			{ "width": "51%" },
+			{ "width": "13%" },
+			{ "width": "7%" },
+
+		],
 	});
+
+	$('td.content').each(function(){
+		var obj = $(this),value = obj.html();
+		if(value.length > 70) obj.html( value.slice(0,48)+'...' );
+	});
+	
 });
 
 </script>

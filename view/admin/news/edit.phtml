@@ -29,11 +29,6 @@
 										<input type="text" class="form-control" name="title" placeholder="Title" style="width:50%" value="<?php echo $data['title'] ?>">
 									</dd>
 								<br>
-								<dt>內文:</dt>
-									<dd>
-										<textarea class="form-control" rows="10" name="content"> <?php echo $data['content'] ?> </textarea>
-									</dd>
-								<br>
 								<dt>時間:</dt>
 									<dd>
 									  <div class="form-group">
@@ -46,6 +41,10 @@
 										<!-- /.input group -->
 									  </div>
 									  <!-- /.form group -->
+									</dd>
+								<br>								<dt>內文:</dt>
+									<dd>
+										<textarea class="form-control" rows="10" name="content"> <?php echo $data['content'] ?> </textarea>
 									</dd>
 								<br>
 								<dt>狀態:</dt>
@@ -112,7 +111,7 @@ $(function () {
 			id : '<?php echo $data['id'] ?>',
 			title : $('input[name="title"]').val(),
 			date : $('input[name="date"]').val(),
-			status : $('input[name="status"]').val(),
+			status : $('input[name="status"]:checked').val(),
 			content : $('textarea[name="content"]').val(),
 
 		},function(r){

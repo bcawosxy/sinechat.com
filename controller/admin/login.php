@@ -12,8 +12,8 @@ if(is_ajax()){
 		$a_admin = array();
 		while($row = mysql_fetch_array($result)) {
 			$_SESSION['admin']['id'] = $row['id'];
-			$_SESSION['admin']['account'] = $row['account'];	//找到此帳號
-			$_SESSION['admin']['passwd'] = $row['password'];	//將密碼丟進去
+			$_SESSION['admin']['account'] = $row['account'];
+			$_SESSION['admin']['passwd'] = $row['password'];	
 			$_SESSION['admin']['name'] = $row['name'];
 			$_SESSION['admin']['email'] = $row['email'];
 		}

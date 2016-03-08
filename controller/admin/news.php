@@ -39,9 +39,7 @@ switch (_FUNCTION) {
 				json_encode_return(1, '新增資料完成', url('admin', 'news'));
 			}
 			
-			
-			
-			json_encode_return(0, '登入失敗，請重新登入。');
+			json_encode_return(0, '錯誤，請重新操作');
 		}
 		
 		$id = ( !empty($_GET['id']) ) ? $_GET['id'] : null ;
