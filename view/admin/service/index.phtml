@@ -21,6 +21,7 @@
 									<th>編輯</th>
 									<th>名稱</th>
 									<th>分類群組</th>
+									<th>排序</th>
 									<th>修改時間</th>
 									<th>狀態</th>
 								</tr>
@@ -34,6 +35,7 @@
 											<td><a href="'.url('admin', 'service/edit', ['service_id'=>$v0['service_id']]).'">編輯</a></td>
 											<td><a href="'.url('admin', 'service/edit', ['service_id'=>$v0['service_id']]).'">'.$v0['name'].'</a></td>
 											<td>'.$v0['servicearea_name'].'</td>
+											<td>'.$v0['seqence'].'</td>
 											<td>'.$v0['modify_time'].' </td>
 											<td>'.$status.' </td>																
 										</tr>';

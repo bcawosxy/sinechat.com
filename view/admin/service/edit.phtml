@@ -24,9 +24,14 @@
 								<dt>編號:</dt>
 									<dd># <?php echo $data['servicearea_id'] ?></dd>
 								<br>
-								<dt>標題:</dt>
+								<dt>名稱:</dt>
 									<dd>
-										<input type="text" class="form-control" name="name" placeholder="分類名稱" style="width:50%" value="<?php echo $data['name'] ?>">
+										<input type="text" class="form-control" name="name" placeholder="修繕項目名稱" style="width:50%" value="<?php echo $data['name'] ?>">
+									</dd>
+								<br>
+								<dt>排序:</dt>
+									<dd>
+										<input type="number" class="form-control" name="seqence" placeholder="1~255" min="0" max="255" style="width:50%" value="<?php echo $data['seqence'] ?>">
 									</dd>
 								<br>
 								<dt>狀態:</dt>
@@ -73,20 +78,28 @@ $(function () {
     });
 	
 	$('#save').on('click', function(){
-		$.post('<?php echo url('admin', 'servicearea/edit') ?>' , {
-			act : '<?php echo $act ?>',
-			servicearea_id : '<?php echo $data['servicearea_id'] ?>',
-			name : $('input[name="name"]').val(),
-			status : $('input[name="status"]:checked').val(),
-		},function(r){
-			r = $.parseJSON(r);
-			if(r.result == 1) {
-				_jbox(r, 'success');
-			}else{
-				_jbox(r, 'error');			
-			}
-		});
-		
+		var seqence = $('input[name=seqence]');
+
+		if (!/^\d+$/.test(seqence.val())) {
+			seqence.val(/^\d+/.exec(seqence.val()));
+			r = {'message': '排序須輸入正整數。'};
+			site_jBox(r, 'error');
+		}else{
+			$.post('<?php echo url('admin', 'servicearea/edit') ?>' , {
+				act : '<?php echo $act ?>',
+				servicearea_id : '<?php echo $data['servicearea_id'] ?>',
+				name : $('input[name="name"]').val(),
+				seqence : seqence.val(),
+				status : $('input[name="status"]:checked').val(),
+			},function(r){
+				r = $.parseJSON(r);
+				if(r.result == 1) {
+					_jbox(r, 'success');
+				}else{
+					_jbox(r, 'error');			
+				}
+			});
+		}
 	});
 
 	$('#delete').on('click', function(){

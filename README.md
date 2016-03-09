@@ -1,4 +1,9 @@
 # sinechat.com
+###0310
+####v0.2.11
+1.後台servicearea、service 尚未完成
+2.調整資料表結構, id 加上前綴
+
 ###0309
 ####v0.2.9
 1.調整news 樣式

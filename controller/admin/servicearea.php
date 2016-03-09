@@ -30,13 +30,15 @@ switch (_FUNCTION) {
 			$act = (!empty($_POST['act'])) ? $_POST['act'] : null ;
 			$servicearea_id = (!empty($_POST['servicearea_id'])) ? $_POST['servicearea_id'] : null ;
 			$name = (!empty($_POST['name'])) ? $_POST['name'] : null ;
+			$seqence = (!empty($_POST['seqence'])) ? $_POST['seqence'] : null ;
 			$status = (!empty($_POST['status'])) ? $_POST['status'] : null ;
 			
 			if($act == 'edit' && $servicearea_id == null ) json_encode_return(0, '資料不完整，請重新填寫');
-			if($act == null || $name == null || $status == null ) json_encode_return(0, '資料不完整，請重新填寫');
+			if( $seqence == null || !is_numeric($seqence)) json_encode_return(0, '排序數值錯誤，請重新填寫');
+			if($act == null || $name == null|| $status == null ) json_encode_return(0, '資料不完整，請重新填寫');
 			switch ($act) {
 				case 'add':
-					$query = query_despace('INSERT INTO `servicearea` (`name` , `status`, `modify_time`) VALUES ("'.$name.'", "'.$status.'", NOW());');
+					$query = query_despace('INSERT INTO `servicearea` (`name`, `seqence` , `status`, `insert_time`, `modify_time`) VALUES ("'.$name.'", "'.$seqence.'" ,"'.$status.'", NOW(), NOW());');
 					$result = mysql_query($query);
 					if(!$result) json_encode_return(0, '新增資料失敗，請重新輸入資料');
 					json_encode_return(1, '新增資料完成', url('admin', 'servicearea'));
@@ -45,7 +47,7 @@ switch (_FUNCTION) {
 
 				
 				case 'edit':
-					$query = query_despace('UPDATE `servicearea` SET  `name` = "'.$name.'" , `status` = "'.$status.'" , `modify_time` = NOW() where `servicearea_id` = "'.$servicearea_id.'";');
+					$query = query_despace('UPDATE `servicearea` SET  `name` = "'.$name.'" , `seqence` = "'.$seqence.'",`status` = "'.$status.'" , `modify_time` = NOW() where `servicearea_id` = "'.$servicearea_id.'";');
 					$result = mysql_query($query);
 					if(!$result) json_encode_return(0, '更新資料失敗，請重新輸入資料');
 					json_encode_return(1, '更新完成', url('admin', 'servicearea/edit', ['servicearea_id'=>$servicearea_id]));
@@ -65,6 +67,7 @@ switch (_FUNCTION) {
 		$data = [
 			'servicearea_id'=>null,
 			'name'=>null,
+			'seqence'=>null,
 			'status'=>'open',
 			'modify_time'=>null,
 		];
