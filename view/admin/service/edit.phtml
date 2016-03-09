@@ -1,11 +1,11 @@
 <section class="content-header">
-	<div class="box-body"><h2>最新消息</h2></div>
+	<div class="box-body"><h2>修繕項目分類</h2></div>
 	<h1>				
 		<small><p class="text-light-blue"></p></small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="<?php echo url('admin', 'index') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li><a href="<?php echo url('admin', 'news') ?>">最新消息</a></li>
+		<li><a href="<?php echo url('admin', 'servicearea') ?>">修繕項目分類</a></li>
 		<li class="active">詳情</li>
 	</ol>
 </section>
@@ -17,34 +17,16 @@
 					<div class="box-body box-solid">
 						<div class="box-header with-border">
 							<i class="fa fa-file-text-o"></i>
-							<h3 class="box-title"> <?php echo ($act == 'add') ? '新增最新消息' : '編輯 ： '.$data['title'] ?> </h3>
+							<h3 class="box-title"> <?php echo ($act == 'add') ? '新增修繕項目分類' : '編輯分類 ： '.$data['name'] ?> </h3>
 						</div>
 						<div class="box-body">
 							<dl class="dl-horizontal">
 								<dt>編號:</dt>
-									<dd># <?php echo $data['news_id'] ?></dd>
+									<dd># <?php echo $data['servicearea_id'] ?></dd>
 								<br>
 								<dt>標題:</dt>
 									<dd>
-										<input type="text" class="form-control" name="title" placeholder="Title" style="width:50%" value="<?php echo $data['title'] ?>">
-									</dd>
-								<br>
-								<dt>時間:</dt>
-									<dd>
-									  <div class="form-group">
-										<div class="input-group">
-											<div class="input-group-addon">
-												<i class="fa fa-calendar"></i>
-											</div>
-											<input type="text" name="date" class="form-control pull-right" id="reservation">
-										</div>
-										<!-- /.input group -->
-									  </div>
-									  <!-- /.form group -->
-									</dd>
-								<br>								<dt>內文:</dt>
-									<dd>
-										<textarea class="form-control" rows="10" name="content"> <?php echo $data['content'] ?> </textarea>
+										<input type="text" class="form-control" name="name" placeholder="分類名稱" style="width:50%" value="<?php echo $data['name'] ?>">
 									</dd>
 								<br>
 								<dt>狀態:</dt>
@@ -61,9 +43,7 @@
 										</div>
 									</dd>
 								<br>
-								<dt>最後修改時間:</dt>
-									<dd> <?php echo $data['modify_time'] ?> </dd>
-								<br>
+								<?php if(!empty($data['modify_time'])) echo '<dt>最後修改時間:</dt><dd>'.$data['modify_time'].'</dd><br> '; ?> 
 							</dl>
 						</div>
 					</div>
@@ -72,7 +52,7 @@
 		</div>
 	</div>
 </section>
-<a class="btn btn-app" href="<?php echo url('admin', 'news') ?>">
+<a class="btn btn-app" href="<?php echo url('admin', 'servicearea') ?>">
 	<i class="fa fa-angle-double-left"></i> 上一頁
 </a>
 
@@ -85,35 +65,19 @@
 ?>
 <script>
 
-
 $(function () {
-    $( "#reservation" ).datepicker({
-		changeMonth: true,
-		changeYear: true
-	});
-
-	$( "#reservation" ).datepicker( "option", "dateFormat", 'yy-mm-dd' );
-	$( "#reservation" ).datepicker( "setDate", "<?php echo $data['date'] ?>" );
-	
-    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue'
-    });
-    //Red color scheme for iCheck
+  	//Red color scheme for iCheck
     $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
       checkboxClass: 'icheckbox_minimal-red',
       radioClass: 'iradio_minimal-red'
     });
 	
 	$('#save').on('click', function(){
-		$.post('<?php echo url('admin', 'news/edit') ?>' , {
+		$.post('<?php echo url('admin', 'servicearea/edit') ?>' , {
 			act : '<?php echo $act ?>',
-			news_id : '<?php echo $data['news_id'] ?>',
-			title : $('input[name="title"]').val(),
-			date : $('input[name="date"]').val(),
+			servicearea_id : '<?php echo $data['servicearea_id'] ?>',
+			name : $('input[name="name"]').val(),
 			status : $('input[name="status"]:checked').val(),
-			content : $('textarea[name="content"]').val(),
-
 		},function(r){
 			r = $.parseJSON(r);
 			if(r.result == 1) {
@@ -131,8 +95,8 @@ $(function () {
 				confirmButton: '是',
 				title : '<span style="display: inline-block;height: 100%;vertical-align: middle;"><i style="color:#3C8DBC;font-size:2em ;" class="fa fa-info-circle"></span>',
 				confirm: function() {
-					$.post('<?php echo url('admin', 'news/delete') ?>' , {
-						news_id : '<?php echo $data['news_id'] ?>',
+					$.post('<?php echo url('admin', 'servicearea/delete') ?>' , {
+						servicearea_id : '<?php echo $data['servicearea_id'] ?>',
 					},function(r){
 						r = $.parseJSON(r);
 						if(r.result == 1) {
@@ -151,6 +115,7 @@ $(function () {
 				'</div>'
 			).open();
 	});
-
+	
 });
+
 </script>

@@ -11,7 +11,7 @@ if(is_ajax()){
 	}else{
 		$a_admin = array();
 		while($row = mysql_fetch_array($result)) {
-			$_SESSION['admin']['id'] = $row['id'];
+			$_SESSION['admin']['id'] = $row['admin_id'];
 			$_SESSION['admin']['account'] = $row['account'];
 			$_SESSION['admin']['passwd'] = $row['password'];	
 			$_SESSION['admin']['name'] = $row['name'];
@@ -27,7 +27,7 @@ if(is_ajax()){
 		
 		$query = 'update `admin` set last_login_time = NOW() , 
 			last_login_ip = "'.$ip.'"
-			where id = "'.$_SESSION['admin']['id'].'" limit 1;';
+			where admin_id = "'.$_SESSION['admin']['id'].'" limit 1;';
 		$query = query_despace($query);
 		if($result = mysql_query($query)){ json_encode_return(1, '登入成功', url('admin', 'index')); }	
 		

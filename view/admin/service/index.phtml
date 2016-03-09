@@ -1,11 +1,11 @@
 <section class="content-header">
-	<div class="box-body"><h2>最新消息</h2></div>
+	<div class="box-body"><h2>修繕項目介紹</h2></div>
 	<h1>				
 		<small><p class="text-light-blue"></p></small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="<?php echo url('admin', 'index') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class="active">最新消息</li>
+		<li class="active">修繕項目介紹</li>
 	</ol>
 </section>
 <section class="content">
@@ -19,8 +19,8 @@
 								<tr>
 									<th>#</th>
 									<th>編輯</th>
-									<th>標題</th>
-									<th>內文</th>
+									<th>名稱</th>
+									<th>分類群組</th>
 									<th>修改時間</th>
 									<th>狀態</th>
 								</tr>
@@ -30,10 +30,10 @@
 								foreach($data as $k0 => $v0) {
 								$status = ($v0['status']== 'open') ? '<span class="label label-success">OPEN</span>' : '<span class="label label-warning">CLOSE</span>';
 									echo '<tr>
-											<td>'.$v0['news_id'].' </td>
-											<td><a href="'.url('admin', 'news/edit', ['news_id'=>$v0['news_id']]).'">編輯</a></td>
-											<td><a href="'.url('admin', 'news/edit', ['news_id'=>$v0['news_id']]).'">'.$v0['title'].'</a></td>
-											<td class="content">'.$v0['content'].' </td>
+											<td>'.$v0['service_id'].' </td>
+											<td><a href="'.url('admin', 'service/edit', ['service_id'=>$v0['service_id']]).'">編輯</a></td>
+											<td><a href="'.url('admin', 'service/edit', ['service_id'=>$v0['service_id']]).'">'.$v0['name'].'</a></td>
+											<td>'.$v0['servicearea_name'].'</td>
 											<td>'.$v0['modify_time'].' </td>
 											<td>'.$status.' </td>																
 										</tr>';
@@ -46,7 +46,7 @@
 			</div>
 		</div>
 	</div>
-		<a class="btn btn-app" href="<?php echo url('admin', 'news/edit'); ?>">
+		<a class="btn btn-app" href="<?php echo url('admin', 'service/edit'); ?>">
 			<i class="fa fa-pencil"></i> 新增
 		</a>
 </section>
@@ -54,20 +54,6 @@
 $(function () {
 	$("#example1").DataTable({
 		"order": [[ 0, "asc" ]],
-		"columns": [
-			{ "width": "3%" },
-			{ "width": "7%" },
-			{ "width": "20%" },
-			{ "width": "51%" },
-			{ "width": "13%" },
-			{ "width": "7%" },
-
-		],
-	});
-
-	$('td.content').each(function(){
-		var obj = $(this),value = obj.html();
-		if(value.length > 70) obj.html( value.slice(0,48)+'...' );
 	});
 	
 });
