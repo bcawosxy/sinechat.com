@@ -5,121 +5,66 @@
 			<li class="active">修繕項目</li>
 		</ol>
 	</div>
-	<!-- Content -->
-		<div id="content" class="3u 12u(mobile) service">
-			<!-- Post -->
-				<article class="box post">
-					<header><h2><i class="fa fa-gavel">&nbsp;</i><strong>修繕項目</strong> </h2></header>
-					<nav id="main-nav" role="navigation">
-						<ul id="main-menu-service" class="sm sm-vertical sm-mint">
-							<li><a id="content_1" href="javascript:void(0)">拆除清運</a></li>
-							<li><a href="javascript:void(0)">浴室防水施做</a></li>
+	<div id="content" class="3u 12u(mobile) service">
+		<article class="box post">
+			<header><h2><i class="fa fa-gavel">&nbsp;</i><strong>修繕項目</strong> </h2></header>
+			<nav id="main-nav" role="navigation">
+				<ul id="main-menu-service" class="sm sm-vertical sm-mint">
+					<?php 
+						foreach($a_service as $k0 => $v0) {
+							echo '<li>';
+								if(count($v0['service']) > 1) {
+									echo '<a href="javascript:void(0)">'.$v0['servicearea_name'].'</a><ul>';
+									foreach($v0['service'] as $k1 => $v1) {
+										echo '<li><a id="content_'.$v1['service_id'].'" href="javascript:void(0)">'.$v1['name'].'</a></li>';
+									}
+									echo '</ul>';
+								}else{
+									echo '<a id="content_'.$v0['service'][0]['service_id'].'" href="javascript:void(0)">'.$v0['servicearea_name'].'</a>';	
+								}
+							echo '</li>';
+						}
+					?>
+				</ul>
+			</nav>
+		</article>
+	</div>
+	<div id="sidebar" class="9u 12u(mobile) service editor_content">
+		<?php 
+			foreach($a_content as $k0 => $v0) {
+				echo '<section class="content_'.$v0['service_id'].'">
+						<ul class="divided">
 							<li>
-								<a href="javascript:void(0)">泥做工程</a>
-								<ul>
-									<li><a id="content_2" href="javascript:void(0)">隔間砌磚</a></li>
-									<li><a href="javascript:void(0)">地面打底</a></li>
-									<li><a href="javascript:void(0)">泯石</a></li>
-									<li><a href="javascript:void(0)">牆面粉光</a></li>
-								</ul>
+								<article>'.htmlspecialchars_decode($v0['content']).'</article>
 							</li>
-							<li >
-								<a href="javascript:void(0)">室內外地壁磚</a>
-								<ul>
-									<li><a id="content_3" href="javascript:void(0)">鋪設修改</a></li>
-								</ul>
-							</li>
-							<li >
-								<a href="javascript:void(0)">室內外樓梯磚</a>
-								<ul>
-									<li><a href="javascript:void(0)">鋪設</a></li>
-								</ul>
-							</li>
-							<li ><a href="javascript:void(0)">廚房浴室翻修</a></li>
 						</ul>
-					</nav>
-				</article>
-		</div>
-		<div id="sidebar" class="9u 12u(mobile) service">
-			<!-- Excerpts -->
-			
-			<section class="content_1">
-				<ul class="divided">
-					<li>
-						<!-- Excerpt -->
-							<header>
-								<h3><a href="#">拆除清運</a></h3>
-							</header>
-							<article class="box excerpt">
-								舉凡室內裝潢、室內裝修、房屋增建修改、拆除隔間、舊屋整修、室內裝修翻新、室內格局重整、浴室整修、廚房改造、加蓋頂樓、屋頂翻新加高、天花板、油漆粉刷、大小工作不拘、免費至府估價、歡迎比價、二十多年房屋修繕、房屋增建、舊屋翻修、舊屋翻新、舊屋整修、房屋整修、房屋整建、房屋翻修的豐富經驗、服務大台南縣市、油漆粉刷、室內裝潢、室內裝修、防水抓漏、房屋增建修改、披土修補、水泥漆、塑膠漆、房屋隔間、服務有口碑的二十多年經驗。
-							</article>
-
-					</li>
-				</ul>
-			</section>
-
-			<section class="content_2">
-				<ul class="divided">
-					<li>
-						<!-- Excerpt -->
-							<header>
-								<h3><a href="#">泥做工程</a></h3>
-							</header>
-							<article class="box excerpt">
-								隔間砌磚
-							</article>
-
-					</li>
-				</ul>
-			</section>
-			
-			<section class="content_3">
-				<ul class="divided">
-					<li>
-						<!-- Excerpt -->
-							<header>
-								<h3><a href="#">室內外地壁磚</a></h3>
-							</header>
-							<article class="box excerpt">
-								鋪設修改
-							</article>
-
-					</li>
-				</ul>
-			</section>
-
-			<!-- Highlights -->
-			<section>
-				<ul class="divided">
-					<li>
-					<!-- Highlight -->
-						<article class="box highlight">
-							<header>
-								<h3><a href="#"></a></h3>
-							</header>
-						</article>
-
-					</li>
-				</ul>
-			</section>
-		</div>
+					</section>';
+			}
+		?>
+	</div>
 </div>
 
 <script>
 	$(function() {
-		$('section').hide();
+		$('section').hide(); 
+
 		$('#main-menu-service').find('a[id]').on('click', function(){
 			$('section').hide();
 			var target = $(this).attr('id');
 			$('section.'+target).show();
-		
 		});
-		
+		$('#main-menu-service').find('a[id^="content_"]:first').click();
 		$('#main-menu-service').smartmenus({
 			mainMenuSubOffsetX: 6,
 			mainMenuSubOffsetY: -8,
 			subMenusSubOffsetX: 6,
 			subMenusSubOffsetY: -8
 		});
+		
+		$('.editor_content').find('img').each(function(k,v){
+			var h_w = $(this).css(['height', 'width']);
+			$(this).removeAttr('style').css('max-height', h_w.height).css('max-width', h_w.width);
+			$(this).wrap('<span class="image"></div>'); 
+		});	
 	});
 </script>
