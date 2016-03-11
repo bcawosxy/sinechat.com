@@ -4,10 +4,8 @@ switch (_FUNCTION) {
 
 	case 'index' :
 	{
-		if(is_ajax()) {
-			
-		}
-		$query = query_despace('select `service`.*, `servicearea`.`name` as servicearea_name from `service` left join `servicearea` using(`servicearea_id`) where `service`.`status` != "none" order by `service`.`service_id` desc;');
+		if(is_ajax()) {}
+		$query = query_despace('select `product`.*, `service`.`name` as service_name from `product` left join `service` using(`service_id`) where `product`.`status` != "none" order by `product`.`product_id` desc;');
 		$result = mysql_query($query);
 		$data = array();
 		while($row = mysql_fetch_assoc($result)){ $data[] = $row;	}
@@ -65,18 +63,23 @@ switch (_FUNCTION) {
 			json_encode_return(0, '錯誤，請重新操作');
 		}
 		
-		$service_id = ( !empty($_GET['service_id']) ) ? $_GET['service_id'] : null ;
+		$product_id = ( !empty($_GET['product_id']) ) ? $_GET['product_id'] : null ;
 		$act = 'add';
 		$data = [
-			'service_id'=>null,
+			'product_id'=>null,
 			'name'=>null,
+			'cover'=>null,
+			'image'=>null,
 			'content'=>null,
+			'service_id'=>null,
+			'seqence'=>null,
 			'status'=>'open',
+			'insert_time'=>'open',
 			'modify_time'=>null,
 		];
-		if($service_id != null && is_numeric($service_id)) {
+		if($product_id != null && is_numeric($product_id)) {
 			$act = 'edit';
-			$query = query_despace('select * from `service` where service_id = '.$service_id.' and status != "none";');
+			$query = query_despace('select * from `product` where product_id = '.$product_id.' and status != "none";');
 			$result = mysql_query($query);
 			$data = array();
 			while($row = mysql_fetch_assoc($result)){ $data = $row;	}			
@@ -85,10 +88,10 @@ switch (_FUNCTION) {
 		/**
 		 * 取得servicearea id 
 		 */
-		$query = query_despace('select * from `servicearea` where status != "none";');
-		$result = mysql_query($query);
-		$servicearea = array();
-		while($row = mysql_fetch_assoc($result)){ $servicearea[] = $row;	}
+		// $query = query_despace('select * from `servicearea` where status != "none";');
+		// $result = mysql_query($query);
+		// $servicearea = array();
+		// while($row = mysql_fetch_assoc($result)){ $servicearea[] = $row;	}
 
 	}
 	break;

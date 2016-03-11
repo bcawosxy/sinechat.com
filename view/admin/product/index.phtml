@@ -1,11 +1,11 @@
 <section class="content-header">
-	<div class="box-body"><h2>修繕項目主類別</h2></div>
+	<div class="box-body"><h2>作品列表</h2></div>
 	<h1>				
 		<small><p class="text-light-blue"></p></small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="<?php echo url('admin', 'index') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class="active">修繕項目主類別</li>
+		<li class="active">作品列表</li>
 	</ol>
 </section>
 <section class="content">
@@ -20,6 +20,8 @@
 									<th>#</th>
 									<th>編輯</th>
 									<th>名稱</th>
+									<th>封面</th>
+									<th>作品類別</th>
 									<th>排序</th>
 									<th>修改時間</th>
 									<th>狀態</th>
@@ -30,10 +32,12 @@
 								foreach($data as $k0 => $v0) {
 								$status = ($v0['status']== 'open') ? '<span class="label label-success">OPEN</span>' : '<span class="label label-warning">CLOSE</span>';
 									echo '<tr>
-											<td>'.$v0['servicearea_id'].' </td>
-											<td><a href="'.url('admin', 'servicearea/edit', ['servicearea_id'=>$v0['servicearea_id']]).'">編輯</a></td>
-											<td><a href="'.url('admin', 'servicearea/edit', ['servicearea_id'=>$v0['servicearea_id']]).'">'.$v0['name'].'</a></td>
-											<td>'.$v0['seqence'].' </td>
+											<td>'.$v0['product_id'].' </td>
+											<td><a href="'.url('admin', 'product/edit', ['product_id'=>$v0['product_id']]).'">編輯</a></td>
+											<td><a href="'.url('admin', 'product/edit', ['product_id'=>$v0['product_id']]).'">'.$v0['name'].'</a></td>
+											<td>'.$v0['cover'].'</td>
+											<td>'.$v0['service_name'].'</td>
+											<td>'.$v0['seqence'].'</td>
 											<td>'.$v0['modify_time'].' </td>
 											<td>'.$status.' </td>																
 										</tr>';
@@ -46,7 +50,7 @@
 			</div>
 		</div>
 	</div>
-		<a class="btn btn-app" href="<?php echo url('admin', 'servicearea/edit'); ?>">
+		<a class="btn btn-app" href="<?php echo url('admin', 'product/edit'); ?>">
 			<i class="fa fa-pencil"></i> 新增
 		</a>
 </section>
