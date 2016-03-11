@@ -1,5 +1,10 @@
 # sinechat.com
 ###0311
+####v0.3.1
+1.後台建立 作品展示 (product)
+2.須處理 product/edit 的 jquery fileupload 問題
+
+###0311
 ####v0.3.0
 1.後台servicearea、service 完成
 2.前台service 完成about
