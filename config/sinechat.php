@@ -56,7 +56,10 @@
 		 */
 		case 'www.sinechat.com':
 		case 'sinechat.com':
-		
+			$dbhost = 'localhost';
+			$dbuser = 'ccckaass';
+			$dbpass = '74109630';
+			$dbname = 'sinechat';
 		break;
 		
 	}
