@@ -31,10 +31,10 @@
 								<br>
 								<dt>作品修繕項目:</dt>
 									<dd>
-										<select class="form-control" id="servicearea" style="width:30%">
-											<option value="">選擇一個項目</option>
+										<select class="form-control" id="service" style="width:30%">
+											<option value="">選擇施工項目</option>
 											<?php 
-												foreach($servicearea as $k0 => $v0) {
+												foreach($service as $k0 => $v0) {
 													echo ($v0['service_id'] == $data['service_id']) ?
 													'<option value="'.$v0['service_id'].'" selected="selected">'.$v0['service_id'].' - '.$v0['name'].'</option>' :
 													'<option value="'.$v0['service_id'].'">'.$v0['service_id'].' - '.$v0['name'].'</option>';
@@ -74,50 +74,83 @@
 										</div>
 									</dd>
 								<br>
-								<dt>相片:</dt>
+								<dt></dt>
 									<dd>
 										<div class="form-group">
-										    <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
-										        <!-- Redirect browsers with JavaScript disabled to the origin page -->
-										        <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
-										        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-										        <div class="row fileupload-buttonbar">
-										            <div class="col-lg-7">
-										                <!-- The fileinput-button span is used to style the file input field as button -->
-										                <span class="btn btn-success fileinput-button">
-										                    <i class="glyphicon glyphicon-plus"></i>
-										                    <span>Add files...</span>
-										                    <input type="file" name="files[]" multiple>
-										                </span>
-										                <button type="submit" class="btn btn-primary start">
-										                    <i class="glyphicon glyphicon-upload"></i>
-										                    <span>Start upload</span>
-										                </button>
-										                <button type="reset" class="btn btn-warning cancel">
-										                    <i class="glyphicon glyphicon-ban-circle"></i>
-										                    <span>Cancel upload</span>
-										                </button>
-										                <button type="button" class="btn btn-danger delete">
-										                    <i class="glyphicon glyphicon-trash"></i>
-										                    <span>Delete</span>
-										                </button>
-										                <input type="checkbox" class="toggle">
-										                <!-- The global file processing state -->
-										                <span class="fileupload-process"></span>
-										            </div>
-										            <!-- The global progress state -->
-										            <div class="col-lg-5 fileupload-progress fade">
-										                <!-- The global progress bar -->
-										                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-										                    <div class="progress-bar progress-bar-success" style="width:0%;"></div>
-										                </div>
-										                <!-- The extended global progress state -->
-										                <div class="progress-extended">&nbsp;</div>
-										            </div>
-										        </div>
-										        <!-- The table listing the files available for upload/download -->
-										        <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
-										    </form>
+											<div class="text-muted">
+												<h4>※&nbsp;&nbsp;單點照片可放大&nbsp;&nbsp;拖動照片改變前台展示順序, 第一張照片為封面圖</h4>
+												<h4>圖片格式: JPG / JPEG / PNG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;檔案大小: 5MB</h4>
+											</div>
+										</div>
+									</dd>
+								<br>
+								<dt>照片燈箱:</dt>
+									<dd>
+										<div class="form-group">
+											<div><span class="label label-primary">封面</span></div>
+											<ul id="sortable">
+												<?php 
+													if(is_array($a_image)){
+														foreach($a_image as $k0 => $v0) {
+															image_reformat(PATH_FILES._SUB_CLASS.'/'.$data['product_id'].'/'.$v0, 'jpg', 150, 100);
+															echo '<li class="ui-state-default" data-set="old" data-filename="'.$v0.'">
+																	<a href="'.URL_FILES._SUB_CLASS.'/'.$data['product_id'].'/'.$v0.'" data-gallery><img src="'.URL_FILES._SUB_CLASS.'/'.$data['product_id'].'/'.sinechat_Thumbnail($v0, 150, 100).'">
+																	<a href="javascript:void(0)"> <button type="button" style="padding:0;margin-top:5px;" class="btn btn-block btn-danger box_delete">移除</button></a>
+																</li>';
+														}
+													}
+												?>
+											</ul>
+										</div>
+									</dd>
+								<br>
+								<dt>上傳作品相片:</dt>
+									<dd>
+										<div class="form-group">
+											<form id="fileupload" action="" method="POST" enctype="multipart/form-data">
+												<noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
+												<div class="row fileupload-buttonbar">
+													<div class="col-lg-12">
+														<!-- The fileinput-button span is used to style the file input field as button -->
+														<span class="btn btn-success fileinput-button">
+															<i class="glyphicon glyphicon-plus"></i>
+															<span>選擇檔案</span>
+															<input type="file" name="files[]" multiple>
+														</span>
+														<button type="submit" class="btn btn-primary start">
+															<i class="glyphicon glyphicon-upload"></i>
+															<span>上傳全部</span>
+														</button>
+														<button type="reset" class="btn btn-warning cancel">
+															<i class="glyphicon glyphicon-ban-circle"></i>
+															<span>取消全部</span>
+														</button>
+														<button type="button" class="btn btn-danger delete">
+															<i class="glyphicon glyphicon-trash"></i>
+															<span>刪除全部</span>
+														</button>
+														<input type="checkbox" class="toggle">
+														<span class="fileupload-process"></span>
+													</div>
+												</div>
+												<div class="row fileupload-buttonbar">
+													<div class="col-lg-12 fileupload-progress fade">
+														<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+															<div class="progress-bar progress-bar-success" style="width:0%;"></div>
+														</div>
+														<div class="progress-extended">&nbsp;</div>
+													</div>
+												</div>
+												<table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+												<div class="row">
+													<div class="col-lg-12">
+														<span class="btn bg-purple margin" id="put-in-box">
+															<i class="fa fa-inbox"></i>
+															<span>放入燈箱</span>
+														</span>
+													</div>
+												</div>
+											</form>
 										</div>
 									</dd>
 								<br>
@@ -130,51 +163,103 @@
 		</div>
 	</div>
 </section>
+
 <a class="btn btn-app" href="<?php echo url('admin', 'service') ?>">
 	<i class="fa fa-angle-double-left"></i> 上一頁
 </a>
-
 <a class="btn btn-app" id="save">
 	<i class="fa fa-save"></i> 儲存(Save)
 </a>
-
+<!-- The blueimp Gallery widget -->
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
 <?php 
 	if($act =='edit') echo '<a class="btn btn-app" id="delete"><i class="fa fa-trash-o"></i> 刪除(Delete)</a>';
 ?>
+
 <script>
+function save() {
+	var img_item = [];
+	$('#sortable li').each(function(k ,v) {
+		var tmp =  {'sequnce' : k, 'set' : $(this).data('set'), 'filename' : $(this).data('filename')}
+		img_item.push(tmp);
+	});
+	
+	var seqence = $('input[name=seqence]');
+
+	if (!/^\d+$/.test(seqence.val())) {
+		seqence.val(/^\d+/.exec(seqence.val()));
+		r = {'message': '排序須輸入正整數。'};
+		site_jBox(r, 'error');
+	}else{
+		$.post('<?php echo url('admin', 'product/edit') ?>' , {
+			act : '<?php echo $act ?>',
+			product_id : '<?php echo $data['product_id'] ?>',
+			image : JSON.stringify(img_item),
+			name : $('input[name="name"]').val(),
+			service_id : $('#service').val(),
+			seqence : seqence.val(),
+			status : $('input[name="status"]:checked').val(),
+			content : CKEDITOR.instances['content'].getData(),
+		},function(r){
+			r = $.parseJSON(r);
+			if(r.result == 1) {
+				$('button._auto').each(function() {
+					$(this).trigger('click');
+				});
+				
+				_jbox(r, 'success');
+			}else{
+				_jbox(r, 'error');			
+			}
+
+		});	
+	}
+
+}
+
+$(document).on('click', '.box_delete',function(){
+	$(this).parents('li').remove();
+});
+
 
 $(function () {
   	//Red color scheme for iCheck
     $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-      checkboxClass: 'icheckbox_minimal-red',
-      radioClass: 'iradio_minimal-red'
+		checkboxClass: 'icheckbox_minimal-red',
+		radioClass: 'iradio_minimal-red'
     });
 	
 	$('#save').on('click', function(){
-		var seqence = $('input[name=seqence]');
-
-		if (!/^\d+$/.test(seqence.val())) {
-			seqence.val(/^\d+/.exec(seqence.val()));
-			r = {'message': '排序須輸入正整數。'};
-			site_jBox(r, 'error');
-		}else{
-			$.post('<?php echo url('admin', 'service/edit') ?>' , {
-				act : '<?php echo $act ?>',
-				service_id : '<?php echo $data['service_id'] ?>',
-				content : CKEDITOR.instances['content'].getData(),
-				name : $('input[name="name"]').val(),
-				service_id : $('#servicearea').val(),
-				seqence : seqence.val(),
-				status : $('input[name="status"]:checked').val(),
-			},function(r){
-				r = $.parseJSON(r);
-				if(r.result == 1) {
-					_jbox(r, 'success');
-				}else{
-					_jbox(r, 'error');			
+		var img_unput = $('tr.unput').length, img_un_upload  = $('tr.un_upload ').length; 
+		if(img_unput > 0 || img_un_upload > 0) {
+			check = false;
+			var Confirm_box = new jBox('Confirm', {
+				cancelButton: '否',
+				confirmButton: '是',
+				title : '<span style="display: inline-block;height: 100%;vertical-align: middle;"><i style="color:#3C8DBC;font-size:2em ;" class="fa fa-info-circle"></span>',
+				confirm: function() {
+					save();	
+				},
+				cancel : function(){},
+				onCloseComplete: function() {	
+					Confirm_box.destroy();
 				}
-			});
-		}
+			}).setContent(
+				'<div class="jbox_div">' +
+				'<p>您有未上傳或未置入燈箱的圖片,繼續儲存動作將會刪除這些圖片,您要儲存嗎?</p>' +
+				'</div>'
+			).open();
+		}else{
+			save();
+		};
 	});
 
 	$('#delete').on('click', function(){
@@ -203,14 +288,65 @@ $(function () {
 				'</div>'
 			).open();
 	});
+
+    'use strict';
+    $('#fileupload').fileupload({
+        url: '<?php echo url('admin', 'product/fileupload') ?>',
+    });
+    $('#fileupload').fileupload(
+        'option',
+        'redirect',
+        window.location.href.replace(
+            /\/[^\/]*$/,
+            '/cors/result.html?%s'
+        )
+    );
+	$('#fileupload').addClass('fileupload-processing');
 	
+	$.ajax({
+		url: $('#fileupload').fileupload('option', 'url'),
+		dataType: 'json',
+		context: $('#fileupload')[0],
+	}).always(function () {
+		$(this).removeClass('fileupload-processing');
+	}).done(function (result) {
+		$(this).fileupload('option', 'done').call(this, $.Event('done'), {result: result});
+	}).success(function(result, textStatus, jqXHR) { 
+	
+	});
+	
+	$( "#sortable" ).sortable({
+		start: function( event, ui ) {},
+		stop: function( event, ui ) {},
+	});
+    $( "#sortable" ).disableSelection();
+	
+	$('#put-in-box').on('click' ,function() {
+		var _download = $('tbody.files tr.unput');
+		if(_download.length == 0) {
+			var r = {'message': '沒有可放入燈箱的圖片 !'};
+			_jbox(r, 'error');		
+		}else {
+			_download.each(function(k, v) {
+				var obj = $(v).find('span.preview a');
+				var item = '<li class="ui-state-default" data-set="new" data-filename="'+obj.attr('download')+'">' + 
+								'<a href="'+obj.attr('href')+'" data-gallery><img src="'+obj.attr('href')+'"></a>' + 
+								'<a href="javascript:void(0)"> <button type="button" style="padding:0;margin-top:5px;" class="btn btn-block btn-danger box_delete">移除</button></a>' ;
+							'</li>';
+				$('#sortable').append(item);
+				$(v).removeClass('unput').addClass('settled').find('td.delete_btn').children().hide();
+				$(v).removeClass('unput').find('td.delete_btn').append('<i class="fa fa-check-square-o"></i>');
+			});
+		}
+	});
 });
 
 </script>
 
+
 <script id="template-upload" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
-    <tr class="template-upload fade">
+    <tr class="un_upload template-upload fade">
         <td>
             <span class="preview"></span>
         </td>
@@ -226,23 +362,22 @@ $(function () {
             {% if (!i && !o.options.autoUpload) { %}
                 <button class="btn btn-primary start" disabled>
                     <i class="glyphicon glyphicon-upload"></i>
-                    <span>Start</span>
+                    <span>上傳</span>
                 </button>
             {% } %}
             {% if (!i) { %}
-                <button class="btn btn-warning cancel">
+                <button class="btn btn-warning cancel _auto">
                     <i class="glyphicon glyphicon-ban-circle"></i>
-                    <span>Cancel</span>
+                    <span>取消</span>
                 </button>
             {% } %}
         </td>
     </tr>
 {% } %}
 </script>
-<!-- The template to display files available for download -->
 <script id="template-download" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
-    <tr class="template-download fade">
+    <tr class="unput template-download fade ">
         <td>
             <span class="preview">
                 {% if (file.thumbnailUrl) { %}
@@ -265,20 +400,21 @@ $(function () {
         <td>
             <span class="size">{%=o.formatFileSize(file.size)%}</span>
         </td>
-        <td>
+        <td class="delete_btn">
             {% if (file.deleteUrl) { %}
-                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                <button class="btn btn-danger delete _auto" data-type="{%=file.deleteType%}" data-url="<?php echo url('admin', 'product/fileupload', ['file'=>'']) ?>{%=file.name%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
                     <i class="glyphicon glyphicon-trash"></i>
-                    <span>Delete</span>
+                    <span>刪除</span>
                 </button>
                 <input type="checkbox" name="delete" value="1" class="toggle">
             {% } else { %}
-                <button class="btn btn-warning cancel">
+                <button class="btn btn-warning cancel _auto">
                     <i class="glyphicon glyphicon-ban-circle"></i>
-                    <span>Cancel</span>
+                    <span>取消</span>
                 </button>
             {% } %}
         </td>
     </tr>
 {% } %}
 </script>
+

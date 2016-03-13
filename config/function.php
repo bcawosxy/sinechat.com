@@ -600,7 +600,7 @@ function getimageresize($image, $width_target=100, $height_target=100) {
 			$image_thumbnail = (1 == $w_rate && 1 == $h_rate)? $image_path : $dirname.'/'.$filename.'_'.$width_new.'x'.$height_new.'.'.$extension;//如果比例不變, 則維持原圖
 			
 			$image_thumbnail_path = fileinfo($image_thumbnail)['path'];
-			
+
 			//縮圖是否存在
 			if (!is_file($image_thumbnail_path)) {
 				if (class_exists('imagick')) {
@@ -1549,6 +1549,22 @@ function toNum($data) {
 	}
 	
 	return $num;
+}
+
+/**
+ * 只傳回檔名, 路徑不在此處理
+ * v1.0 2016-03-13
+ * @param $filename $width $height
+ * @return string
+ */
+function sinechat_Thumbnail($filename, $width, $height) {
+	$return = $filename;
+	if($return) {
+		//取得檔名不含副檔名
+		$name = fileinfo($filename);
+		$return = str_replace($name['filename'], $name['filename'].'_'.$width.'x'.$height, $filename  );
+	}
+	return $return;
 }
 
 /**

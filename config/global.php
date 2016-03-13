@@ -9,6 +9,9 @@ define('URL_ADMIN_ROOT', URL_PROTOCOL.$dev_root.'/admin');
 define('PATH_ROOT', dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR);
 define('PATH_CSS', PATH_ROOT.'assets'.DIRECTORY_SEPARATOR.'css'.DIRECTORY_SEPARATOR);
 define('PATH_UPLOAD', PATH_ROOT.'upload'.DIRECTORY_SEPARATOR);
+define('PATH_FILES', PATH_ROOT.'files'.DIRECTORY_SEPARATOR);
+define('PATH_STATIC_FILE', null);
+define('PATH_STORAGE', null);
 
 /**
  * URL
@@ -18,6 +21,9 @@ define('URL_UPLOAD', URL_ROOT.'/upload/');
 define('URL_CSS', URL_ASSETS.'css/');
 define('URL_IMG', URL_ASSETS.'images/');
 define('URL_JS', URL_ASSETS.'js/');
+define('URL_FILES', URL_ROOT.'/files/');
+define('URL_STATIC_FILE', null);
+define('URL_STORAGE', null);
 
 
 /**

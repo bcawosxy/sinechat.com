@@ -35,9 +35,10 @@
 											<option value="">選擇一個分類</option>
 											<?php 
 												foreach($servicearea as $k0 => $v0) {
+													$disabled = ($v0['status'] == 'close') ? 'disabled="disabled"' : null;
 													echo ($v0['servicearea_id'] == $data['servicearea_id']) ?
-													'<option value="'.$v0['servicearea_id'].'" selected="selected">'.$v0['servicearea_id'].' - '.$v0['name'].'</option>' :
-													'<option value="'.$v0['servicearea_id'].'">'.$v0['servicearea_id'].' - '.$v0['name'].'</option>';
+													'<option value="'.$v0['servicearea_id'].'" selected="selected" '.$disabled.'>'.$v0['servicearea_id'].' - '.$v0['name'].'</option>' :
+													'<option value="'.$v0['servicearea_id'].'" '.$disabled.'>'.$v0['servicearea_id'].' - '.$v0['name'].'</option>';
 												}
 											?>
 										</select>

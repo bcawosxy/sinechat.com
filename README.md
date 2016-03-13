@@ -1,14 +1,20 @@
 # sinechat.com
+###0313
+####v0.4.0
+1.product 建立完成(前/後)
+
 ###0311
 ####v0.3.1
-1.後台建立 作品展示 (product)
-2.須處理 product/edit 的 jquery fileupload 問題
+1.後台建立 作品展示 (product)<br>
+2.須處理 product/edit 的 jquery fileupload 問題<br>
 
 ###0311
 ####v0.3.0
-1.後台servicearea、service 完成
-2.前台service 完成about
+1.後台servicearea、service 完成<br>
+2.前台service 完成about<br>
 
+
+<!--
 ###0310
 ####v0.2.11
 1.後台servicearea、service 尚未完成
@@ -56,7 +62,7 @@
 ####v0.2.0
 1.全站初始版型完成
 
-<!--
+
 ###0227
 ####v0.1.6
 1.新增靜態檔案

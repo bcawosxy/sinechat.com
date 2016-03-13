@@ -7,7 +7,7 @@ switch (_FUNCTION) {
 		if(is_ajax()) {
 			
 		}
-		$query = query_despace('select `service`.*, `servicearea`.`name` as servicearea_name from `service` left join `servicearea` using(`servicearea_id`) where `service`.`status` != "none" order by `service`.`service_id` desc;');
+		$query = query_despace('select `service`.*, `servicearea`.`name` as servicearea_name, `servicearea`.`servicearea_id` as servicearea_id from `service` left join `servicearea` using(`servicearea_id`) where `service`.`status` != "none" order by `service`.`service_id` desc;');
 		$result = mysql_query($query);
 		$data = array();
 		while($row = mysql_fetch_assoc($result)){ $data[] = $row;	}
