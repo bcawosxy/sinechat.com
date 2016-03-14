@@ -13,8 +13,10 @@
 		while($row = mysql_fetch_assoc($result)){ $a_service[$k0]['service'][] = $row;	$tmp[] = $row;}
 	}
 
-	foreach($tmp as $k0 => $v0) {
-		$a_content[$k0]['service_id'] = $v0['service_id'];
-		$a_content[$k0]['content'] = $v0['content'];
+	if(!empty($tmp) && is_array($tmp)) {
+		foreach($tmp as $k0 => $v0) {
+			$a_content[$k0]['service_id'] = $v0['service_id'];
+			$a_content[$k0]['content'] = $v0['content'];
+		}
 	}
 ?>

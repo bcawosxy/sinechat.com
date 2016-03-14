@@ -10,7 +10,7 @@
 		<header><h2><i class="fa fa-gavel">&nbsp;</i><strong>關於新誠居家修繕</strong> </h2></header>
 		<div class="editor_content" style="padding:0 2em;">
 			<?php 
-				echo htmlspecialchars_decode($data['value']); 
+				if(!empty($data)) echo htmlspecialchars_decode($data['value']); 
 			?>
 			<hr>
 		</div>
