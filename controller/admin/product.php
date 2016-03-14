@@ -14,13 +14,13 @@ switch (_FUNCTION) {
 
 	case 'delete' :
 		if(is_ajax()) {
-			$service_id = (!empty($_POST['service_id'])) ? $_POST['service_id'] : null ;
-			if($service_id == null ) json_encode_return(0, '錯誤，請重新操作');
+			$product_id = (!empty($_POST['product_id'])) ? $_POST['product_id'] : null ;
+			if($product_id == null ) json_encode_return(0, '錯誤，請重新操作');
 			
-			$query = query_despace('DELETE FROM `service` WHERE `service_id`= '.$service_id.' limit 1;');
+			$query = query_despace('DELETE FROM `product` WHERE `product_id`= '.$product_id.' limit 1;');
 			$result = mysql_query($query);
 			if(!$result) json_encode_return(0, '刪除資料失敗，請重新操作');
-			json_encode_return(1, '刪除資料完成', url('admin', 'service'));
+			json_encode_return(1, '刪除資料完成', url('admin', 'product'));
 		}
 	break;
 
@@ -33,16 +33,19 @@ switch (_FUNCTION) {
 			$service_id = (!empty($_POST['service_id'])) ? $_POST['service_id'] : null ;
 			$name = (!empty($_POST['name'])) ? $_POST['name'] : null ;
 			$content = (!empty($_POST['content'])) ? $_POST['content'] : null ;
+			$description = (!empty($_POST['description'])) ? $_POST['description'] : null ;
 			$seqence = (!empty($_POST['seqence'])) ? $_POST['seqence'] : null ;
 			$status = (!empty($_POST['status'])) ? $_POST['status'] : null ;
 			$content = stripslashes(htmlspecialchars($content));
+			/* $description = preg_replace('/<br\\s*?\/??>/i','',$description); */ 
+			// $description = ($description);
 			$cover = null;
 			if($act == 'edit' && $product_id == null ) json_encode_return(0, '資料不完整，請重新填寫');
 			if($act == null || $name == null || $status == null || $seqence == null ) json_encode_return(0, '資料不完整，請重新填寫');
 			
 			switch($act){
 				case 'add' :
-					$query = query_despace('INSERT INTO `product` (`name` , `cover`, `image`,`service_id`, `status`, `content`, `seqence` ,`modify_time`) VALUES ("'.$name.'", "null", "null", "'.$service_id.'", "'.$status.'" ,"'.$content.'","'.$seqence.'", NOW());');
+					$query = query_despace('INSERT INTO `product` (`name` , `cover`, `image`,`service_id`, `status`, `content`, `description`, `seqence` ,`modify_time`) VALUES ("'.$name.'", "null", "null", "'.$service_id.'", "'.$status.'" ,"'.$content.'","'.$description.'","'.$seqence.'", NOW());');
 					$result = mysql_query($query);
 					if(!$result) json_encode_return(0, '新增資料失敗，請重新輸入資料[001]');
 					$insert_id = mysql_insert_id();
@@ -149,7 +152,7 @@ switch (_FUNCTION) {
 						}
 					}
 					
-					$query = query_despace('UPDATE `product` SET  `name` = "'.$name.'" , `cover` = "'.$cover.'" ,`image` = "'.implode(',', $a_image).'" ,`service_id` = "'.$service_id.'" ,  `status` = "'.$status.'" ,`content` = "'.$content.'" , `seqence` = "'.$seqence.'" , `modify_time` = NOW() where `product_id` = "'.$product_id.'";');
+					$query = query_despace('UPDATE `product` SET  `name` = "'.$name.'" , `cover` = "'.$cover.'" ,`image` = "'.implode(',', $a_image).'" ,`service_id` = "'.$service_id.'" ,  `status` = "'.$status.'" ,`content` = "'.$content.'" ,`description` = "'.$description.'" , `seqence` = "'.$seqence.'" , `modify_time` = NOW() where `product_id` = "'.$product_id.'";');
 					$result = mysql_query($query);
 					if(!$result) json_encode_return(0, '更新資料失敗，請重新輸入資料');
 					json_encode_return(1, '更新完成', url('admin', 'product/edit', ['product_id'=>$product_id]));
@@ -166,6 +169,7 @@ switch (_FUNCTION) {
 			'image'=>null,
 			'content'=>null,
 			'service_id'=>null,
+			'description'=>null,
 			'seqence'=>null,
 			'status'=>'open',
 			'insert_time'=>'open',

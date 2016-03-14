@@ -21,6 +21,7 @@
 									<th>編輯</th>
 									<th>標題</th>
 									<th>內文</th>
+									<th>發布時間</th>
 									<th>修改時間</th>
 									<th>狀態</th>
 								</tr>
@@ -34,6 +35,7 @@
 											<td><a href="'.url('admin', 'news/edit', ['news_id'=>$v0['news_id']]).'">編輯</a></td>
 											<td><a href="'.url('admin', 'news/edit', ['news_id'=>$v0['news_id']]).'">'.$v0['title'].'</a></td>
 											<td class="content">'.$v0['content'].' </td>
+											<td>'.$v0['date'].' </td>
 											<td>'.$v0['modify_time'].' </td>
 											<td>'.$status.' </td>																
 										</tr>';
@@ -58,8 +60,9 @@ $(function () {
 			{ "width": "3%" },
 			{ "width": "7%" },
 			{ "width": "20%" },
-			{ "width": "51%" },
-			{ "width": "13%" },
+			{ "width": "43%" },
+			{ "width": "10%" },
+			{ "width": "10%" },
 			{ "width": "7%" },
 
 		],
@@ -67,7 +70,7 @@ $(function () {
 
 	$('td.content').each(function(){
 		var obj = $(this),value = obj.html();
-		if(value.length > 70) obj.html( value.slice(0,48)+'...' );
+		if(value.length > 70) obj.html( value.slice(0,75)+'...' );
 	});
 	
 });

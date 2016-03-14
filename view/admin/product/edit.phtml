@@ -62,6 +62,13 @@
 										</div>
 									</dd>
 								<br>
+								<dt>簡述:</dt>
+									<dd>
+										<div class="form-group">
+											<textarea class="form-control" name="description" rows="3" placeholder="成品簡述"><?php echo $data['description'] ?></textarea>
+										</div>
+									</dd>
+								<br>
 								<dt>內文:</dt>
 									<dd>
 										<div class="form-group">
@@ -208,6 +215,7 @@ function save() {
 			seqence : seqence.val(),
 			status : $('input[name="status"]:checked').val(),
 			content : CKEDITOR.instances['content'].getData(),
+			description : $('textarea[name="description"]').val(),
 		},function(r){
 			r = $.parseJSON(r);
 			if(r.result == 1) {
@@ -219,10 +227,8 @@ function save() {
 			}else{
 				_jbox(r, 'error');			
 			}
-
 		});	
 	}
-
 }
 
 $(document).on('click', '.box_delete',function(){
@@ -268,8 +274,8 @@ $(function () {
 				confirmButton: '是',
 				title : '<span style="display: inline-block;height: 100%;vertical-align: middle;"><i style="color:#3C8DBC;font-size:2em ;" class="fa fa-info-circle"></span>',
 				confirm: function() {
-					$.post('<?php echo url('admin', 'service/delete') ?>' , {
-						service_id : '<?php echo $data['service_id'] ?>',
+					$.post('<?php echo url('admin', 'product/delete') ?>' , {
+						product_id : '<?php echo $data['product_id'] ?>',
 					},function(r){
 						r = $.parseJSON(r);
 						if(r.result == 1) {
