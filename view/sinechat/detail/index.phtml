@@ -21,7 +21,7 @@
 			<ul class="divided">
 				<li style="width:90%">
 					<?php 
-						if(is_array($other)) {
+						if(!empty($other) && is_array($other)) {
 							foreach($other as $k0 => $v0) {
 								image_reformat(PATH_FILES.'product/'.$v0['product_id'].'/'.$v0['cover'], 'jpg', 228, 152);
 								echo '<article class="box excerpt">
