@@ -33,15 +33,13 @@ switch (_FUNCTION) {
 			$service_id = (!empty($_POST['service_id'])) ? $_POST['service_id'] : null ;
 			$name = (!empty($_POST['name'])) ? $_POST['name'] : null ;
 			$content = (!empty($_POST['content'])) ? $_POST['content'] : null ;
-			$description = (!empty($_POST['description'])) ? $_POST['description'] : null ;
+			$description = (!empty($_POST['description'])) ? $_POST['description']   : null ;
 			$seqence = (!empty($_POST['seqence'])) ? $_POST['seqence'] : null ;
 			$status = (!empty($_POST['status'])) ? $_POST['status'] : null ;
 			$content = stripslashes(htmlspecialchars($content));
-			/* $description = preg_replace('/<br\\s*?\/??>/i','',$description); */ 
-			// $description = ($description);
 			$cover = null;
 			if($act == 'edit' && $product_id == null ) json_encode_return(0, '資料不完整，請重新填寫');
-			if($act == null || $name == null || $status == null || $seqence == null ) json_encode_return(0, '資料不完整，請重新填寫');
+			if($act == null || $name == null || $status == null || $seqence == null || $description == null ) json_encode_return(0, '資料不完整，請重新填寫');
 			
 			switch($act){
 				case 'add' :

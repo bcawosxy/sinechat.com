@@ -17,23 +17,23 @@
 				</tr>
 				<?php 
 					foreach($data as $k0 => $v0) {
-						echo '<tr class="data">
-								<td>'.$v0['name'].'</td>
+						if($v0['status'] == 'open') {
+							$o_checked ='checked';$c_checked='null';}else{$c_checked='checked';$o_checked='null';}
+						echo '<tr class="data" data-info_id="'.$v0['info_id'].'">
+								<td class="text-light-blue"><h4><b>'.ucfirst($v0['name']).'</b></h4></td>
 								<td><div class="input-group">
-										<div class="input-group-addon bg-light-blue color-palette">
-											<i class="fa '.$a_icon[$v0['name']].'"></i>
-										</div>
+							            <span class="input-group-addon"><i style="font-size:20px;" class="fa '.$a_icon[$v0['name']].'"></i></span>
 										<input type="text" name="value" class="form-control" value="'.$v0['value'].'">
 									</div>
 								</td>
 								<td>
 									<div class="form-group">
 										<label for="r'.$v0['info_id'].'_1">
-											<input id="r'.$v0['info_id'].'_1" type="radio" name="status" class="minimal-red" value="open" >
+											<input id="r'.$v0['info_id'].'_1" type="radio" name="radio_'.$v0['info_id'].'" class="minimal-red" value="open" '.$o_checked.'>
 											Open
 										</label>&nbsp;&nbsp;&nbsp;
 										<label for="r'.$v0['info_id'].'_2">
-											<input id="r'.$v0['info_id'].'_2" type="radio" name="status" class="minimal-red" value="close">
+											<input id="r'.$v0['info_id'].'_2" type="radio" name="radio_'.$v0['info_id'].'" class="minimal-red" value="close" '.$c_checked.'>
 											Close
 										</label>
 									</div>
@@ -45,34 +45,26 @@
 			</table>
 		</div>
 		<div class="box-footer">
-			
 		</div>
 	</div>
 </section>
+<a class="btn btn-app" id="save">
+	<i class="fa fa-save"></i> 儲存(Save)
+</a>
 
 <script>
 
 $(function () {
-  	//Red color scheme for iCheck
-    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-      checkboxClass: 'icheckbox_minimal-red',
-      radioClass: 'iradio_minimal-red'
-    });
-
-
 	$('#save').on('click', function(){
 		var data = new Array();
-		$('tr.data').each(function (k, v){
-			var obj = $(v);
-			var tmp = [
-				$(obj).find(':input[name="url"]').val(),
-				$(obj).find('[name="sort"] option:selected').val(),
-				$(obj).find('div[id^="switch_"]').attr('class'),
-			];
+		$('tr.data').each(function(){
+			var tmp, id = $(this).data('info_id');
+			tmp = {'id':id, 'value':$(this).find('input[name="value"]').val(), 'status':$(this).find('input[name="radio_'+id+'"]:checked').val()};
 			data.push(tmp);
 		});
-	
-		$.post('<?php echo ajax_url(URL_ADMIN2_AJAX, P_CLASS, P_FUNCTION) ?>' , {
+
+		$.post('<?php echo url('admin', 'info/edit') ?>' , {
+			act :'info',
 			data : JSON.stringify(data),
 		},function(r){
 			r = $.parseJSON(r);
@@ -82,6 +74,7 @@ $(function () {
 				_jbox(r, 'error');			
 			}
 		});
+	
 	});
   
 });

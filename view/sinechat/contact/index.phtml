@@ -7,7 +7,7 @@
 	</div>
 
 	<!-- Content -->
-	<div id="content" class="3u 12u(mobile) " >
+	<div id="content" class="4u 12u(mobile) " >
 		<section>
 			<div>
 				<article class="box post" style="font-size:80%">
@@ -20,19 +20,19 @@
 		</section>
 		<section class="contact_info">
 			<div class="row">
-				<div class="12u 12u(mobile)">
+				<div class="12u 12u(mobile)" style="padding-left: 20px;">
 					<ul class="icons">
 						<li class="icon fa-home">
-							新北市鶯歌區XX路XX巷XX號1樓
+							<?php echo $info['address'] ?>
 						</li>
 						<li class="icon fa-phone">
-							(00) 0000-0000
+							<?php echo $info['tel'] ?>
 						</li>
 						<li class="icon fa-envelope">
-							<a href="#">chang@sinechat.com</a>
+							<?php echo $info['email'] ?>
 						</li>
 						<li class="icon fa-facebook">
-							<a href="#">sinechat</a>
+							<?php echo $info['facebook'] ?>
 						</li>
 					</ul>
 				</div>
@@ -40,7 +40,7 @@
 		</section>
 	</div>
 	
-	<div id="sidebar" class="9u 12u(mobile) ">
+	<div id="sidebar" class="8u 12u(mobile) ">
 	<!-- Excerpts -->
 		<section>
 			<div>

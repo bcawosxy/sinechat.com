@@ -65,7 +65,8 @@
 								<dt>簡述:</dt>
 									<dd>
 										<div class="form-group">
-											<textarea class="form-control" name="description" rows="3" placeholder="成品簡述"><?php echo $data['description'] ?></textarea>
+											<div class="text-muted">※&nbsp;&nbsp;簡述介紹案件內容，於FB分享用</div>
+											<input type="text" class="form-control" name="description" value="<?php echo $data['description'] ?>"></input>
 										</div>
 									</dd>
 								<br>
@@ -215,7 +216,7 @@ function save() {
 			seqence : seqence.val(),
 			status : $('input[name="status"]:checked').val(),
 			content : CKEDITOR.instances['content'].getData(),
-			description : $('textarea[name="description"]').val(),
+			description : $('input[name="description"]').val(),
 		},function(r){
 			r = $.parseJSON(r);
 			if(r.result == 1) {
