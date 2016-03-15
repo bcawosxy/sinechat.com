@@ -47,7 +47,7 @@
 		case 'dev.sinechat.com':
 			$dbhost = 'dev.pindelta.com';
 			$dbuser = 'root';
-			$dbpass = 'a74109630';
+			$dbpass = '';
 			$dbname = 'sinechat';
 		break;
 		

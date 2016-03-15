@@ -20,7 +20,7 @@
 						if($v0['status'] == 'open') {
 							$o_checked ='checked';$c_checked='null';}else{$c_checked='checked';$o_checked='null';}
 						echo '<tr class="data" data-info_id="'.$v0['info_id'].'">
-								<td class="text-light-blue"><h4><b>'.ucfirst($v0['name']).'</b></h4></td>
+								<td class="text-light-blue"><h4>'.ucfirst($v0['name']).'</h4></td>
 								<td><div class="input-group">
 							            <span class="input-group-addon"><i style="font-size:20px;" class="fa '.$a_icon[$v0['name']].'"></i></span>
 										<input type="text" name="value" class="form-control" value="'.$v0['value'].'">

@@ -1,0 +1,124 @@
+<section class="content-header">
+	<div class="box-body"><h2>聯絡我們</h2></div>
+	<h1>				
+		<small><p class="text-light-blue"></p></small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="<?php echo url('admin', 'index') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="active">聯絡我們</li>
+	</ol>
+</section>
+<section class="content">
+	<div class="box">
+		<div class="box-body">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="nav-tabs-custom">
+						<ul class="nav nav-tabs">
+							<li class="<?php echo $tab1; ?>"><a href="#tab_1" data-toggle="tab"><i class="fa fa-inbox"></i>&nbsp;&nbsp;Inbox</a></li>
+							<li class="<?php echo $tab2; ?>"><a href="#tab_2" data-toggle="tab"><i class="fa fa-folder-open-o"></i>&nbsp;&nbsp;Archive</a></li>
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane <?php echo $tab1; ?>" id="tab_1">
+								<div class="box-header">
+									<div class="callout callout-success">
+										<h4 style="font-family:微軟正黑體;">聯繫我們 - 資料列表</h4>
+									</div>
+								</div>
+								<div class="box-body">
+									<table id="example1" class="table table-bordered table-striped">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>編輯</th>
+												<th>Name</th>
+												<th>Email</th>
+												<th>Tel</th>
+												<th>Gender</th>
+												<th>Read</th>
+												<th>聯絡時間</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php 
+											foreach($a_open as $k0 => $v0) {
+												echo '<tr>
+													<td>'.$v0['contact_id'].'</td>
+													<td><a href="'.url('admin', 'contact/edit', ['contact_id'=>$v0['contact_id']]).'">編輯</a></td>
+													<td>'.$v0['name'].' </td>
+													<td>'.$v0['email'].' </td>
+													<td>'.$v0['tel'].' </td>
+													<td>'.$v0['gender'].' </td>
+													<td>'.$v0['read'].' </td>
+													<td>'.$v0['inserttime'].' </td>
+												</tr>';
+											}
+											?>
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+							<div class="tab-pane <?php echo $tab2; ?>" id="tab_2">
+								<div class="box-header">
+									<div class="callout callout-success" >
+										<h4 style="font-family:微軟正黑體;">聯繫我們 - 封存列表</h4>
+									</div>
+								</div>										
+								<div class="box-body">
+									<table id="example2" class="table table-bordered table-striped">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>編輯</th>
+												<th>Name</th>
+												<th>Email</th>
+												<th>Tel</th>
+												<th>Gender</th>
+												<th>Read</th>
+												<th>時間</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php 
+											foreach($a_archive as $k0 => $v0) {
+												echo '<tr>
+													<td>'.$v0['contact_id'].' </td>
+													<td><a href="">編輯</a></td>
+													<td>'.$v0['name'].' </td>
+													<td>'.$v0['email'].' </td>
+													<td>'.$v0['tel'].' </td>
+													<td>'.$v0['gender'].' </td>
+													<td>'.$v0['read'].' </td>
+													<td>'.$v0['inserttime'].' </td>
+												</tr>';
+											}
+											?>
+										</tbody>
+									</table>
+								</div>								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+$(function () {
+	$("#example1").DataTable({
+		"order": [[ 0, "asc" ]],
+	});
+
+	$("#example2").DataTable({
+		"order": [[ 0, "asc" ]],
+	});
+
+
+
+});
+
+
+</script>
