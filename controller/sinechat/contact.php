@@ -1,4 +1,23 @@
 <?php 
+	if(is_ajax()) {
+		$name = (!empty($_POST['name'])) ? $_POST['name'] : null ;
+		$email = (!empty($_POST['email'])) ? $_POST['email'] : null ;
+		$tel = (!empty($_POST['tel'])) ? $_POST['tel'] : null ;
+		$gender = (!empty($_POST['gender'])) ? $_POST['gender'] : null ;
+		$memo = (!empty($_POST['memo'])) ? $_POST['memo'] : null ;
+		if($name == null || $email == null || $tel == null || $gender == null || $memo == null ) json_encode_return(0, '資料不完整，請重新填寫');
+
+		$query = query_despace('INSERT INTO `contact` (`name` , `email`, `tel`,`gender`, `memo`, `status`, `reading`, `ip`, `inserttime` )
+						VALUES ("'.$name.'", "'.$email.'", "'.$tel.'","'.$gender.'", "'.$memo.'", "open", "unread", "'.remote_ip().'", NOW());');
+
+		$result = mysql_query($query);
+		if(!$result) json_encode_return(0, '新增資料失敗，請重新輸入資料');
+		json_encode_return(1, '新增資料完成', url('index', 'index'));
+		
+		
+
+	}
+	
 	$query = query_despace('select * from `info`;');
 	$result = mysql_query($query);
 	$data = array();

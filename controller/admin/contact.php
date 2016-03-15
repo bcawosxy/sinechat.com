@@ -13,9 +13,9 @@ switch (_FUNCTION) {
 		while($row = mysql_fetch_assoc($result)){ $data[] = $row;	}
 
 		foreach ($data as $k0 => $v0) {
-			$read = ($v0['read'] == 'read')  ? '<span class="label label-success">Read</span>' : '<span class="label label-warning">Unread</span>' ;
+			$reading = ($v0['reading'] == 'reading')  ? '<span class="label label-success">Read</span>' : '<span class="label label-warning">Unread</span>' ;
 			$gender = ($v0['gender'] ='male')  ? '<i class="fa fa-male">&nbsp;&nbsp;Male</i>' : '<i class="fa fa-female">&nbsp;&nbsp;Female</i>' ;
-			$data[$k0]['read'] = $read;
+			$data[$k0]['reading'] = $reading;
 			$data[$k0]['gender'] = $gender;
 			switch ($v0['status']) {
 				case 'open':
@@ -92,8 +92,8 @@ switch (_FUNCTION) {
 			while($row = mysql_fetch_assoc($result)){ $data = $row;	}
 
 			//初次讀取時進行資料更新
-			if($data['read'] == 'unread') {
-				$query = query_despace('UPDATE `contact` SET `read` = "read", `read_time` = NOW() where `contact_id` = "'.$contact_id.'";');
+			if($data['reading'] == 'unread') {
+				$query = query_despace('UPDATE `contact` SET `reading` = "reading", `read_time` = NOW() where `contact_id` = "'.$contact_id.'";');
 				$result = mysql_query($query);
 			}
 

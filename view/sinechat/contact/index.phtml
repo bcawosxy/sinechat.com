@@ -23,10 +23,7 @@
 				<div class="12u 12u(mobile)" style="padding-left: 20px;">
 					<ul class="icons">
 						<?php
-							
-							foreach ($info as $k0 => $v0) {
-								echo $v0;
-							}
+							foreach ($info as $k0 => $v0) { echo $v0; }
 						?>
 					</ul>
 				</div>
@@ -58,26 +55,26 @@
 				</div>
 				<div class="row 50%" style="min-height:70px;">
 					<div class="6u 12u(mobile)">
-						<input name="name" placeholder="Tel" type="text" />
+						<input name="tel" placeholder="Tel" type="text" />
 					</div>
 					<div class="6u 12u(mobile)">
 					性別:&nbsp;&nbsp;
-						<label for="a" style="display:inline-block;">
-							<input id="a" type="radio">  男
+						<label for="a" style="display:inline-block;margin-left:20px;">
+							<input id="a" value="male" name="gender" type="radio" checked>  男
 						</label>
-						<label for="b"  style="display:inline-block;">
-							<input id="b" type="radio">  女
+						<label for="b"  style="display:inline-block;margin-left:20px;">
+							<input id="b" value="female" name="gender" type="radio">  女
 						</label>
 					</div>
 				</div>
 				<div class="row 50%" style="min-height:200px;">
 					<div class="12u">
-						<textarea name="message" placeholder="Message"></textarea>
+						<textarea name="memo" id="memo" placeholder="Message"></textarea>
 					</div>
 				</div>
 				<div class="row 50%" style="min-height:90px;">
 					<div class="12u">
-						<a href="#" class="form-button-submit button icon fa-envelope">Send Message</a>
+						<a href="javascript:void(0)" id="send" class="form-button-submit button icon fa-envelope">聯絡我們</a>
 					</div>
 				</div>
 			</form>
@@ -86,4 +83,51 @@
 </div>
 
 <script>
+	$('#send').on('click', function(){
+		var name = $('input[name="name"]').val(),email = $('input[name="email"]').val(),tel = $('input[name="tel"]').val(),gender = $('input[name="gender"]').val(),memo=$('#memo').val();
+
+		if(name == '' || email == '' || tel == '' || gender == '' || memo == '' ) {
+			var r = {'message':'資料填寫不完全，請重新確認'};
+			_jbox(r, 'error');
+		} else {
+			$.post('<?php echo url('contact', 'index') ?>' , {
+				name : name ,
+				email : email ,
+				tel : tel ,
+				gender : gender,
+				memo : memo,
+			},function(r){
+				r = $.parseJSON(r);
+				if(r.result == 1) {
+					_jbox(r, 'success');
+				}else{
+					_jbox(r, 'error');			
+				}
+			});
+		}
+	});
+	
+	function _jbox(r, status) {
+		var message = r.message;
+		switch(status) {
+			case 'error' :
+				var icon = '<i style="color:#DD4B39;" class="fa fa-times-circle">';
+			break;
+			case 'success' :
+				var icon = '<i style="color:#6FE060;" class="fa fa-check-circle">';
+			break;
+		}
+
+		box = new jBox('Modal', {
+			closeButton: 'title',
+			delayOpen: 300,
+			maxWidth: 600,
+			minWidth: 100,
+			title: '<span style="display: inline-block;height: 100%;vertical-align: middle;">'+icon+'</span>',
+			onCloseComplete: function() {
+				if (r.redirect) location.href = r.redirect;
+			},
+		}).setContent('<div >' + message + '</div>').open();
+}
+
 </script>
