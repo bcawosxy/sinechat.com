@@ -76,15 +76,15 @@
 												<th>Tel</th>
 												<th>Gender</th>
 												<th>Read</th>
-												<th>時間</th>
+												<th>聯絡時間</th>
 											</tr>
 										</thead>
 										<tbody>
 											<?php 
 											foreach($a_archive as $k0 => $v0) {
 												echo '<tr>
-													<td>'.$v0['contact_id'].' </td>
-													<td><a href="">編輯</a></td>
+													<td>'.$v0['contact_id'].'</td>
+													<td><a href="'.url('admin', 'contact/edit', ['contact_id'=>$v0['contact_id']]).'">編輯</a></td>
 													<td>'.$v0['name'].' </td>
 													<td>'.$v0['email'].' </td>
 													<td>'.$v0['tel'].' </td>

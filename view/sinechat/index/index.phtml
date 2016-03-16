@@ -10,8 +10,8 @@
 					foreach($data as $k0 => $v0) {
 						echo '<li><article class="box excerpt">
 							<header>
-								<span class="date">'.date('Y-m-d', strtotime($v0['date'])).'</span>
-								<h3><a onclick="show_news(\''.date('Y-m-d', strtotime($v0['date'])).'\', \''.$v0['title'].'\', \''.$v0['content'].'\')" href="javascript:void(0)">'.$v0['title'].'</a></h3>
+								<span class="date">'.date('Y-m-d', strtotime($v0['release'])).'</span>
+								<h3><a onclick="show_news(\''.date('Y-m-d', strtotime($v0['release'])).'\', \''.$v0['title'].'\', \''.$v0['content'].'\')" href="javascript:void(0)">'.$v0['title'].'</a></h3>
 							</header>
 							<p>'.$v0['content'].'</p>
 						</article>

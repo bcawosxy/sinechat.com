@@ -36,7 +36,7 @@
 											<div class="input-group-addon">
 												<i class="fa fa-calendar"></i>
 											</div>
-											<input type="text" name="date" class="form-control pull-right" id="reservation">
+											<input type="text" name="release" class="form-control pull-right" id="reservation">
 										</div>
 										<!-- /.input group -->
 									  </div>
@@ -63,7 +63,7 @@
 									</dd>
 								<br>
 								<dt>最後修改時間:</dt>
-									<dd> <?php echo $data['modify_time'] ?> </dd>
+									<dd> <?php echo $data['modifytime'] ?> </dd>
 								<br>
 							</dl>
 						</div>
@@ -94,7 +94,7 @@ $(function () {
 	});
 
 	$( "#reservation" ).datepicker( "option", "dateFormat", 'yy-mm-dd' );
-	$( "#reservation" ).datepicker( "setDate", "<?php echo $data['date'] ?>" );
+	$( "#reservation" ).datepicker( "setDate", "<?php echo $data['release'] ?>" );
 	
     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
       checkboxClass: 'icheckbox_minimal-blue',
@@ -111,7 +111,7 @@ $(function () {
 			act : '<?php echo $act ?>',
 			news_id : '<?php echo $data['news_id'] ?>',
 			title : $('input[name="title"]').val(),
-			date : $('input[name="date"]').val(),
+			release : $('input[name="release"]').val(),
 			status : $('input[name="status"]:checked').val(),
 			content : $('textarea[name="content"]').val(),
 

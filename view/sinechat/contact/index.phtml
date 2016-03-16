@@ -44,18 +44,18 @@
 			</header>
 		</section>
 		<section>
-			<form method="post" action="#">
+			<form id="form_send" method="post" action="javascript:void(0)">
 				<div class="row 50%" style="min-height:70px;">
 					<div class="6u 12u(mobile)">
-						<input name="name" placeholder="Name" type="text" />
+						<input name="name" placeholder="Name" type="text" required/>
 					</div>
 					<div class="6u 12u(mobile)">
-						<input name="email" placeholder="Email" type="text" />
+						<input name="email" placeholder="Email" type="text"/>
 					</div>
 				</div>
 				<div class="row 50%" style="min-height:70px;">
 					<div class="6u 12u(mobile)">
-						<input name="tel" placeholder="Tel" type="text" />
+						<input name="tel" placeholder="Tel" type="text" required/>
 					</div>
 					<div class="6u 12u(mobile)">
 					性別:&nbsp;&nbsp;
@@ -74,7 +74,7 @@
 				</div>
 				<div class="row 50%" style="min-height:90px;">
 					<div class="12u">
-						<a href="javascript:void(0)" id="send" class="form-button-submit button icon fa-envelope">聯絡我們</a>
+						<input type="submit" id="send" class="form-button-submit button icon fa-envelope" value="聯絡我們">
 					</div>
 				</div>
 			</form>
@@ -83,11 +83,18 @@
 </div>
 
 <script>
-	$('#send').on('click', function(){
+	$('#form_send').on('submit', function(){
 		var name = $('input[name="name"]').val(),email = $('input[name="email"]').val(),tel = $('input[name="tel"]').val(),gender = $('input[name="gender"]').val(),memo=$('#memo').val();
+		var reg = /^[^\s]+@[^\s]+\.[^\s]{2,3}$/;
 
-		if(name == '' || email == '' || tel == '' || gender == '' || memo == '' ) {
+		if(name == '' || tel == '' || gender == '' || memo == '' ) {
 			var r = {'message':'資料填寫不完全，請重新確認'};
+			_jbox(r, 'error');
+		} else if (!/^\d+$/.test(tel)) { 
+			r = {'message': '電話號碼格式錯誤。'};
+			_jbox(r, 'error');
+		} else if(!reg.test(email)){
+			r = {'message': '電子信箱格式錯誤。'};
 			_jbox(r, 'error');
 		} else {
 			$.post('<?php echo url('contact', 'index') ?>' , {

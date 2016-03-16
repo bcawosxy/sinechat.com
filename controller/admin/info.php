@@ -7,7 +7,7 @@
 		
 		$data = json_decode($data, true);
 		foreach ($data as $k0 => $v0) {
-			$query = 'UPDATE `info` SET  `value` =  "'.$v0['value'].'", `status` =  "'.$v0['status'].'" , `modify_time` = NOW() WHERE  `info`.`info_id` = "'.$v0['id'].'" LIMIT 1 ; ';
+			$query = 'UPDATE `info` SET  `value` =  "'.$v0['value'].'", `status` =  "'.$v0['status'].'" , `modifytime` = NOW() WHERE  `info`.`info_id` = "'.$v0['id'].'" LIMIT 1 ; ';
 			$query = query_despace($query);
 			$result = mysql_query($query);
 			if(!$result) json_encode_return(0, '修改失敗，請確認您輸入的資料是否有誤', url('admin', 'info'));

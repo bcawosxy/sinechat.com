@@ -13,14 +13,16 @@
 					<?php 
 						foreach($a_service as $k0 => $v0) {
 							echo '<li>';
-								if(count($v0['service']) > 1) {
-									echo '<a href="javascript:void(0)">'.$v0['servicearea_name'].'</a><ul>';
-									foreach($v0['service'] as $k1 => $v1) {
-										echo '<li><a id="content_'.$v1['service_id'].'" href="javascript:void(0)">'.$v1['name'].'</a></li>';
+								if(isset($v0['service'])) {
+									if(count($v0['service']) > 1) {
+										echo '<a href="javascript:void(0)">'.$v0['servicearea_name'].'</a><ul>';
+										foreach($v0['service'] as $k1 => $v1) {
+											echo '<li><a id="content_'.$v1['service_id'].'" href="javascript:void(0)">'.$v1['name'].'</a></li>';
+										}
+										echo '</ul>';
+									}else{
+										echo '<a id="content_'.$v0['service'][0]['service_id'].'" href="javascript:void(0)">'.$v0['servicearea_name'].'</a>';	
 									}
-									echo '</ul>';
-								}else{
-									echo '<a id="content_'.$v0['service'][0]['service_id'].'" href="javascript:void(0)">'.$v0['servicearea_name'].'</a>';	
 								}
 							echo '</li>';
 						}
@@ -33,12 +35,12 @@
 		<?php 
 			foreach($a_content as $k0 => $v0) {
 				echo '<section class="content_'.$v0['service_id'].'">
-						<ul class="divided">
-							<li>
-								<article>'.htmlspecialchars_decode($v0['content']).'</article>
-							</li>
-						</ul>
-					</section>';
+					<ul class="divided">
+						<li>
+							<article>'.htmlspecialchars_decode($v0['content']).'</article>
+						</li>
+					</ul>
+				</section>';
 			}
 		?>
 	</div>

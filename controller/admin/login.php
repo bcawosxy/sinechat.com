@@ -17,21 +17,8 @@ if(is_ajax()){
 			$_SESSION['admin']['name'] = $row['name'];
 			$_SESSION['admin']['email'] = $row['email'];
 		}
-		if (!empty($_SERVER['HTTP_CLIENT_IP'])){
-			$ip = $_SERVER['HTTP_CLIENT_IP'];
-		}elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
-			$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-		}else{
-			$ip = $_SERVER['REMOTE_ADDR'];
-		}
+		json_encode_return(1, '登入成功', url('admin', 'index')); 
 		
-		$query = 'update `admin` set last_login_time = NOW() , 
-			last_login_ip = "'.$ip.'"
-			where admin_id = "'.$_SESSION['admin']['id'].'" limit 1;';
-		$query = query_despace($query);
-		if($result = mysql_query($query)){ json_encode_return(1, '登入成功', url('admin', 'index')); }	
-		
-		json_encode_return(0, '異常，請重新登入。');
 	}
 
 }

@@ -43,7 +43,7 @@ switch (_FUNCTION) {
 			
 			switch($act){
 				case 'add' :
-					$query = query_despace('INSERT INTO `product` (`name` , `cover`, `image`,`service_id`, `status`, `content`, `description`, `seqence` ,`modify_time`) VALUES ("'.$name.'", "null", "null", "'.$service_id.'", "'.$status.'" ,"'.$content.'","'.$description.'","'.$seqence.'", NOW());');
+					$query = query_despace('INSERT INTO `product` (`name` , `cover`, `image`,`service_id`, `status`, `content`, `description`, `seqence` , `inserttime` ,`modifytime`) VALUES ("'.$name.'", "null", "null", "'.$service_id.'", "'.$status.'" ,"'.$content.'","'.$description.'","'.$seqence.'", NOW(), NOW());');
 					$result = mysql_query($query);
 					if(!$result) json_encode_return(0, '新增資料失敗，請重新輸入資料[001]');
 					$insert_id = mysql_insert_id();
@@ -92,7 +92,7 @@ switch (_FUNCTION) {
 						}
 					}
 					
-					$query = query_despace('UPDATE `product` SET `cover` = "'.$cover.'" ,`image` = "'.implode(',', $a_image).'" , `modify_time` = NOW() where `product_id` = "'.$insert_id.'";');
+					$query = query_despace('UPDATE `product` SET `cover` = "'.$cover.'" ,`image` = "'.implode(',', $a_image).'" , `modifytime` = NOW() where `product_id` = "'.$insert_id.'";');
 					$result = mysql_query($query);
 					if(!$result) json_encode_return(0, '新增資料失敗，請重新輸入資料[002]');
 					json_encode_return(1, '新增資料完成', url('admin', 'product'));
@@ -170,8 +170,8 @@ switch (_FUNCTION) {
 			'description'=>null,
 			'seqence'=>null,
 			'status'=>'open',
-			'insert_time'=>'open',
-			'modify_time'=>null,
+			'inserttime'=>'open',
+			'modifytime'=>null,
 		];
 		if($product_id != null && is_numeric($product_id)) {
 			$act = 'edit';

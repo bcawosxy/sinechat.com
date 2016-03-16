@@ -42,7 +42,7 @@ switch (_FUNCTION) {
 			if($act == null || $name == null || $status == null || $servicearea_id == null || $seqence == null ) json_encode_return(0, '資料不完整，請重新填寫');
 			switch ($act) {
 				case 'add':
-					$query = query_despace('INSERT INTO `service` (`name` , `servicearea_id`, `content`,`seqence`, `status`, `modify_time`) VALUES ("'.$name.'", "'.$servicearea_id.'", "'.$content.'","'.$seqence.'", "'.$status.'", NOW());');
+					$query = query_despace('INSERT INTO `service` (`name` , `servicearea_id`, `content`,`seqence`, `status`, `inserttime`, `modifytime`) VALUES ("'.$name.'", "'.$servicearea_id.'", "'.$content.'","'.$seqence.'", "'.$status.'", NOW(), NOW());');
 					$result = mysql_query($query);
 					if(!$result) json_encode_return(0, '新增資料失敗，請重新輸入資料');
 					json_encode_return(1, '新增資料完成', url('admin', 'service'));
@@ -50,7 +50,7 @@ switch (_FUNCTION) {
 					break;
 
 				case 'edit':
-					$query = query_despace('UPDATE `service` SET  `name` = "'.$name.'" , `status` = "'.$status.'" ,`content` = "'.$content.'" ,`servicearea_id` = "'.$servicearea_id.'" , `seqence` = "'.$seqence.'" , `modify_time` = NOW() where `service_id` = "'.$service_id.'";');
+					$query = query_despace('UPDATE `service` SET  `name` = "'.$name.'" , `status` = "'.$status.'" ,`content` = "'.$content.'" ,`servicearea_id` = "'.$servicearea_id.'" , `seqence` = "'.$seqence.'" , `modifytime` = NOW() where `service_id` = "'.$service_id.'";');
 					$result = mysql_query($query);
 					if(!$result) json_encode_return(0, '更新資料失敗，請重新輸入資料');
 					json_encode_return(1, '更新完成', url('admin', 'service/edit', ['service_id'=>$service_id]));
@@ -72,7 +72,7 @@ switch (_FUNCTION) {
 			'name'=>null,
 			'content'=>null,
 			'status'=>'open',
-			'modify_time'=>null,
+			'modifytime'=>null,
 		];
 		if($service_id != null && is_numeric($service_id)) {
 			$act = 'edit';

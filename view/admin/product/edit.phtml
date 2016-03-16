@@ -158,11 +158,17 @@
 														</span>
 													</div>
 												</div>
+												<div class="row">
+													<div class="col-lg-12">
+														
+														<?php if(!empty($data['modify_time'])) echo '<dt>最後修改時間:</dt><dd>'.$data['modifytime'].'</dd><br> '; ?> 
+														
+													</div>
+												</div>
 											</form>
 										</div>
 									</dd>
 								<br>
-								<?php if(!empty($data['modify_time'])) echo '<dt>最後修改時間:</dt><dd>'.$data['modify_time'].'</dd><br> '; ?> 
 							</dl>
 						</div>
 					</div>
