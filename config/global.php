@@ -25,6 +25,7 @@ define('URL_FILES', URL_ROOT.'/files/');
 define('URL_STATIC_FILE', null);
 define('URL_STORAGE', null);
 
+$web_title = null;$web_image = null;$web_description = null;
 
 /**
  * 引入[view][controller]判斷

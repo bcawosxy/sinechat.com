@@ -1,121 +1,43 @@
 <section class="content-header">
-	<div class="box-body"><h2>作品內容</h2></div>
+	<div class="box-body"><h2>Banner橫幅圖</h2></div>
 	<h1>				
 		<small><p class="text-light-blue"></p></small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="<?php echo url('admin', 'index') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li><a href="<?php echo url('admin', 'servicearea') ?>">作品內容</a></li>
-		<li class="active">詳情</li>
+		<li>Banner橫幅圖</li>
 	</ol>
 </section>
-<a class="btn btn-app" href="<?php echo url('admin', 'product') ?>">
-	<i class="fa fa-angle-double-left"></i> 上一頁
-</a>
+
 <section class="content">
 	<div class="box">
 		<div class="box-body">
 			<div class="row">
 				<div class="col-md-10">
 					<div class="box-body box-solid">
-						<div class="box-header with-border">
-							<i class="fa fa-file-text-o"></i>
-							<h3 class="box-title"> <?php echo ($act == 'add') ? '新增作品' : '編輯作品 ： '.$data['name'] ?> </h3>
-						</div>
 						<div class="box-body">
 							<dl class="dl-horizontal">
-								<dt>編號:</dt>
-									<dd># <?php echo $data['product_id'] ?></dd>
-								<br>
-								<dt>名稱:</dt>
-									<dd>
-										<input type="text" class="form-control" name="name" placeholder="作品名稱" style="width:30%" value="<?php echo $data['name'] ?>">
-									</dd>
-								<br>
-								<dt>作品修繕項目:</dt>
-									<dd>
-										<select class="form-control" id="service" style="width:30%">
-											<option value="">選擇施工項目</option>
-											<?php 
-												foreach($service as $k0 => $v0) {
-													echo ($v0['service_id'] == $data['service_id']) ?
-													'<option value="'.$v0['service_id'].'" selected="selected">'.$v0['service_id'].' - '.$v0['name'].'</option>' :
-													'<option value="'.$v0['service_id'].'">'.$v0['service_id'].' - '.$v0['name'].'</option>';
-												}
-											?>
-										</select>
-									</dd>
-								<br>
-								<dt>排序:</dt>
-									<dd>
-										<input type="number" class="form-control" name="seqence" placeholder="1~255" min="0" max="255" style="width:20%" value="<?php echo $data['seqence'] ?>">
-									</dd>
-								<br>
-								<dt>狀態:</dt>
-									<dd>
-										<div class="form-group">
-											<label for="r1">
-												<input id="r1" type="radio" name="status" class="minimal-red" value="open" <?php if($data['status'] == 'open') echo 'checked'; ?>>
-												Open
-											</label>&nbsp;&nbsp;&nbsp;
-											<label for="r2">
-												<input id="r2" type="radio" name="status" class="minimal-red" value="close" <?php if($data['status'] == 'close') echo 'checked'; ?>>
-												Close
-											</label>
-										</div>
-									</dd>
-								<br>
-								<dt>簡述:</dt>
-									<dd>
-										<div class="form-group">
-											<div class="text-muted">※&nbsp;&nbsp;簡述介紹案件內容，於FB分享用</div>
-											<input type="text" class="form-control" name="description" value="<?php echo $data['description'] ?>"></input>
-										</div>
-									</dd>
-								<br>
-								<dt>內文:</dt>
-									<dd>
-										<div class="form-group">
-											<form method="post">
-												<textarea rows="10" cols="50" id="content" name="content" class="ckeditor"><?php echo $data['content'] ?></textarea>
-												<script type="text/javascript">CKEDITOR.replace('content',
-												{toolbar : 'Full'});
-												</script><br>
-											</form>
-										</div>
-									</dd>
-								<br>
-								<dt></dt>
-									<dd>
-										<div class="form-group">
-											<div class="text-muted">
-												<h4>※&nbsp;&nbsp;單點照片可放大&nbsp;&nbsp;拖動照片改變前台展示順序, 第一張照片為封面圖</h4>
-												<h4>圖片格式: JPG / JPEG / PNG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;檔案大小: 5MB</h4>
-											</div>
-										</div>
-									</dd>
-								<br>
-								<dt>照片燈箱:</dt>
+								<dt>Banner燈箱:</dt>
 									<dd>
 										<div class="form-group">
 											<div><span class="label label-primary">封面</span></div>
 											<ul id="sortable">
 												<?php 
-													if(is_array($a_image)){
-														foreach($a_image as $k0 => $v0) {
-															image_reformat(PATH_FILES._SUB_CLASS.'/'.$data['product_id'].'/'.$v0, 'jpg', 150, 100);
-															echo '<li class="ui-state-default" data-set="old" data-filename="'.$v0.'">
-																	<a href="'.URL_FILES._SUB_CLASS.'/'.$data['product_id'].'/'.$v0.'" data-gallery><img src="'.URL_FILES._SUB_CLASS.'/'.$data['product_id'].'/'.sinechat_Thumbnail($v0, 150, 100).'">
-																	<a href="javascript:void(0)"> <button type="button" style="padding:0;margin-top:5px;" class="btn btn-block btn-danger box_delete">移除</button></a>
-																</li>';
-														}
-													}
+													// if(is_array($a_image)){
+														// foreach($a_image as $k0 => $v0) {
+															// image_reformat(PATH_FILES._SUB_CLASS.'/'.$data['product_id'].'/'.$v0, 'jpg', 150, 100);
+															// echo '<li class="ui-state-default" data-set="old" data-filename="'.$v0.'">
+																	// <a href="'.URL_FILES._SUB_CLASS.'/'.$data['product_id'].'/'.$v0.'" data-gallery><img src="'.URL_FILES._SUB_CLASS.'/'.$data['product_id'].'/'.sinechat_Thumbnail($v0, 150, 100).'">
+																	// <a href="javascript:void(0)"> <button type="button" style="padding:0;margin-top:5px;" class="btn btn-block btn-danger box_delete">移除</button></a>
+																// </li>';
+														// }
+													// }
 												?>
 											</ul>
 										</div>
 									</dd>
 								<br>
-								<dt>上傳作品相片:</dt>
+								<dt>上傳Banner:</dt>
 									<dd>
 										<div class="form-group">
 											<form id="fileupload" action="" method="POST" enctype="multipart/form-data">
@@ -164,9 +86,6 @@
 											</form>
 										</div>
 									</dd>
-									<dt>最後修改時間
-									</dt>
-									<?php if(!empty($data['modifytime'])) echo '<dd>'.$data['modifytime'].'</dd><br> '; ?> 
 								<br>
 							</dl>
 						</div>
@@ -177,7 +96,7 @@
 	</div>
 </section>
 
-<a class="btn btn-app" href="<?php echo url('admin', 'product') ?>">
+<a class="btn btn-app" href="<?php echo url('admin', 'setbanner') ?>">
 	<i class="fa fa-angle-double-left"></i> 上一頁
 </a>
 <a class="btn btn-app" id="save">
@@ -193,9 +112,6 @@
     <a class="play-pause"></a>
     <ol class="indicator"></ol>
 </div>
-<?php 
-	if($act =='edit') echo '<a class="btn btn-app" id="delete"><i class="fa fa-trash-o"></i> 刪除(Delete)</a>';
-?>
 
 <script>
 function save() {
@@ -212,16 +128,8 @@ function save() {
 		r = {'message': '排序須輸入正整數。'};
 		_jbox(r, 'error');
 	}else{
-		$.post('<?php echo url('admin', 'product/edit') ?>' , {
-			act : '<?php echo $act ?>',
-			product_id : '<?php echo $data['product_id'] ?>',
+		$.post('<?php echo url('admin', 'setbanner/edit') ?>' , {
 			image : JSON.stringify(img_item),
-			name : $('input[name="name"]').val(),
-			service_id : $('#service').val(),
-			seqence : seqence.val(),
-			status : $('input[name="status"]:checked').val(),
-			content : CKEDITOR.instances['content'].getData(),
-			description : $('input[name="description"]').val(),
 		},function(r){
 			r = $.parseJSON(r);
 			if(r.result == 1) {
@@ -274,36 +182,9 @@ $(function () {
 		};
 	});
 
-	$('#delete').on('click', function(){
-		var Confirm_box = new jBox('Confirm', {
-				cancelButton: '否',
-				confirmButton: '是',
-				title : '<span style="display: inline-block;height: 100%;vertical-align: middle;"><i style="color:#3C8DBC;font-size:2em ;" class="fa fa-info-circle"></span>',
-				confirm: function() {
-					$.post('<?php echo url('admin', 'product/delete') ?>' , {
-						product_id : '<?php echo $data['product_id'] ?>',
-					},function(r){
-						r = $.parseJSON(r);
-						if(r.result == 1) {
-							_jbox(r, 'success');
-						}else{
-							_jbox(r, 'error');			
-						}
-					});
-				},
-				onCloseComplete: function() {	
-					Confirm_box.destroy();
-				}
-			}).setContent(
-				'<div>' +
-				'<p>確定要刪除此筆資料嗎?</p>' +
-				'</div>'
-			).open();
-	});
-
     'use strict';
     $('#fileupload').fileupload({
-        url: '<?php echo url('admin', 'product/fileupload') ?>',
+        url: '<?php echo url('admin', 'setbanner/fileupload') ?>',
     });
     $('#fileupload').fileupload(
         'option',
@@ -414,7 +295,7 @@ $(function () {
         </td>
         <td class="delete_btn">
             {% if (file.deleteUrl) { %}
-                <button class="btn btn-danger delete _auto" data-type="{%=file.deleteType%}" data-url="<?php echo url('admin', 'product/fileupload', ['file'=>'']) ?>{%=file.name%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                <button class="btn btn-danger delete _auto" data-type="{%=file.deleteType%}" data-url="<?php echo url('admin', 'setbanner/fileupload', ['file'=>'']) ?>{%=file.name%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
                     <i class="glyphicon glyphicon-trash"></i>
                     <span>刪除</span>
                 </button>

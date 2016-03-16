@@ -25,10 +25,18 @@ console.log('_SUB_CLASS:<?php echo _SUB_CLASS; ?>');
 		 */
 		default : ?>
 			<head>
-				<title>新誠居家修繕工程</title>
+				<title>新誠修繕工程 <?php if(!is_null($web_title)) echo ' | '.$web_title ;?></title>
 				<meta charset="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<!-- Head -->	<?php include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR.'head.phtml') ?> <!-- end Head -->
+				<meta name="description" content="">
+				<meta property="og:title" content="新誠修繕工程 <?php if(!is_null($web_title)) echo ' | '.$web_title ;?>" />
+				<meta property="og:type" content='website' />
+				<meta property="og:url" content="" />
+				<meta property="og:description" content="<?php echo $web_description; ?>"/>
+				<meta property="og:image" content="https://s.yimg.com/dh/ap/default/130909/y_200_a.png"/>
+				<meta property="og:site_name" content="新誠修繕工程" />
+
+	<!-- Head -->	<?php include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR.'head.phtml') ?> <!-- end Head -->
 			</head>
 			<body class="homepage">
 				<div id="page-wrapper">

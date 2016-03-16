@@ -30,13 +30,13 @@
 							<tbody>
 								<?php 
 								foreach($data as $k0 => $v0) {
-									image_reformat(PATH_FILES._SUB_CLASS.'/'.$v0['product_id'].'/'.$v0['cover'], 'jpg', 150, 100);
+									if(is_file(PATH_FILES._SUB_CLASS.'/'.$v0['product_id'].'/'.$v0['cover'])) image_reformat(PATH_FILES._SUB_CLASS.'/'.$v0['product_id'].'/'.$v0['cover'], 'jpg', 150, 100);
 									$status = ($v0['status']== 'open') ? '<span class="label label-success">OPEN</span>' : '<span class="label label-warning">CLOSE</span>';
 									echo '<tr>
 											<td>'.$v0['product_id'].' </td>
 											<td><a href="'.url('admin', 'product/edit', ['product_id'=>$v0['product_id']]).'">編輯</a></td>
 											<td><a href="'.url('admin', 'product/edit', ['product_id'=>$v0['product_id']]).'">'.$v0['name'].'</a></td>
-											<td><img class="img-responsive pad datatable_img" src="'.URL_FILES._SUB_CLASS.'/'.$v0['product_id'].'/'.sinechat_Thumbnail($v0['cover'], 150, 100).'"></td>
+											<td><img onerror="this.src=\''.static_file('images/noimage.jpg').'\'" class="img-responsive pad datatable_img" src="'.URL_FILES._SUB_CLASS.'/'.$v0['product_id'].'/'.sinechat_Thumbnail($v0['cover'], 150, 100).'"></td>
 											<td>'.$v0['service_id'].' - '.$v0['service_name'].'</td>
 											<td>'.$v0['seqence'].'</td>
 											<td>'.$v0['modifytime'].' </td>

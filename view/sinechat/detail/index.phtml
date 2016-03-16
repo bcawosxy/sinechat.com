@@ -23,9 +23,9 @@
 					<?php 
 						if(!empty($other) && is_array($other)) {
 							foreach($other as $k0 => $v0) {
-								image_reformat(PATH_FILES.'product/'.$v0['product_id'].'/'.$v0['cover'], 'jpg', 228, 152);
+								if(is_file(PATH_FILES.'product/'.$v0['product_id'].'/'.$v0['cover'])) image_reformat(PATH_FILES.'product/'.$v0['product_id'].'/'.$v0['cover'], 'jpg', 228, 152);
 								echo '<article class="box excerpt">
-									<a href="'.url('detail', 'index', ['id'=>$v0['product_id']]).'" class="image"><img src="'.URL_FILES.'product/'.$v0['product_id'].'/'.sinechat_Thumbnail($v0['cover'], 228, 152).'"></a>
+									<a href="'.url('detail', 'index', ['id'=>$v0['product_id']]).'" class="image"><img onerror="this.src=\''.static_file('images/origin.png').'\'" src="'.URL_FILES.'product/'.$v0['product_id'].'/'.sinechat_Thumbnail($v0['cover'], 228, 152).'" width="228" height="152"></a>
 								</article>';
 							}
 						}

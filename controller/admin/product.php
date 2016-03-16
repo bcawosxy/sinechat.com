@@ -57,6 +57,7 @@ switch (_FUNCTION) {
 					if(!empty($image)) {
 						$a_image = array();
 						$image = json_decode($image, true);
+						if(count($image) < 1)  json_encode_return(0, '至少需要上傳一張圖片。');
 						foreach($image as $k0 => $v0) {
 							$info = fileinfo($v0['filename']);
 							switch($v0['set']) {
@@ -150,7 +151,7 @@ switch (_FUNCTION) {
 						}
 					}
 					
-					$query = query_despace('UPDATE `product` SET  `name` = "'.$name.'" , `cover` = "'.$cover.'" ,`image` = "'.implode(',', $a_image).'" ,`service_id` = "'.$service_id.'" ,  `status` = "'.$status.'" ,`content` = "'.$content.'" ,`description` = "'.$description.'" , `seqence` = "'.$seqence.'" , `modify_time` = NOW() where `product_id` = "'.$product_id.'";');
+					$query = query_despace('UPDATE `product` SET  `name` = "'.$name.'" , `cover` = "'.$cover.'" ,`image` = "'.implode(',', $a_image).'" ,`service_id` = "'.$service_id.'" ,  `status` = "'.$status.'" ,`content` = "'.$content.'" ,`description` = "'.$description.'" , `seqence` = "'.$seqence.'" , `modifytime` = NOW() where `product_id` = "'.$product_id.'";');
 					$result = mysql_query($query);
 					if(!$result) json_encode_return(0, '更新資料失敗，請重新輸入資料');
 					json_encode_return(1, '更新完成', url('admin', 'product/edit', ['product_id'=>$product_id]));

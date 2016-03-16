@@ -1,4 +1,9 @@
 # sinechat.com
+###0317
+####v0.4.10
+1.建立 setbanner 後台(未完成)
+2.SEO meta tag
+
 ###0315
 ####v0.4.7
 1.建立.contact後台(未完成)
