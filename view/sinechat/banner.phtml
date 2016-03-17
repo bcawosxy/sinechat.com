@@ -3,7 +3,6 @@
 	$result = mysql_query($query);
 	$a_banner = array();
 	while($row = mysql_fetch_assoc($result)){ $banner = $row;	}
-	
 	$a_banner = explode(',',  $banner['image']);
 
 ?>
