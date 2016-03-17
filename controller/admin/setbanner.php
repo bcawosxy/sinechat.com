@@ -55,9 +55,7 @@ switch (_FUNCTION) {
 				}
 			}
 			$query = query_despace('UPDATE `setbanner` SET `image` = "'.implode(',', $a_image).'" , `modifytime` = NOW() where `setbanner_id` = 1;');
-			echo $query;
 			$result = mysql_query($query);
-			
 			if(!$result) json_encode_return(0, '更新資料失敗，請重新輸入資料');
 			json_encode_return(1, '更新完成', url('admin', 'setbanner'));
 
