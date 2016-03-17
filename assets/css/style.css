@@ -14,3 +14,22 @@ img.datatable_img {
 	max-height : 100px;
 }
 
+
+@media only screen and (min-width:650px) {
+	a.social-likes__widget_line { display: none; }
+}
+
+a.social-likes__widget_line :hover{
+	color:white;
+    background-color:#22BC0C;
+}
+
+span.social-likes__icon_line {
+	background-repeat: no-repeat;
+    background-image: url(../images/line_icon2.png);
+	-moz-background-size:26px 27px;
+	-webkit-background-size:26px 27px;
+	-o-background-size:26px 27px;
+	background-size:26px 27px;
+
+}

@@ -28,12 +28,12 @@ console.log('_SUB_CLASS:<?php echo _SUB_CLASS; ?>');
 				<title>新誠修繕工程 <?php if(!is_null($web_title)) echo ' | '.$web_title ;?></title>
 				<meta charset="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<meta name="description" content="">
+				<meta name="description" content="<?php echo $web_description; ?>">
 				<meta property="og:title" content="新誠修繕工程 <?php if(!is_null($web_title)) echo ' | '.$web_title ;?>" />
 				<meta property="og:type" content='website' />
-				<meta property="og:url" content="" />
+				<meta property="og:url" content="<?php echo $web_url; ?>" />
 				<meta property="og:description" content="<?php echo $web_description; ?>"/>
-				<meta property="og:image" content="https://s.yimg.com/dh/ap/default/130909/y_200_a.png"/>
+				<meta property="og:image" content="<?php echo $web_image ?>"/>
 				<meta property="og:site_name" content="新誠修繕工程" />
 
 	<!-- Head -->	<?php include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR.'head.phtml') ?> <!-- end Head -->

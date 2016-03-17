@@ -20,4 +20,7 @@
 		}
 	}
 
+	$web_title = '修繕項目'; $web_url =url('service');
+	$web_description = '修繕項目';
+
 ?>

@@ -9,6 +9,7 @@
 		<li class="active">詳情</li>
 	</ol>
 </section>
+
 <section class="content">
 	<div class="box">
 		<div class="box-body">
@@ -38,14 +39,16 @@
 											</div>
 											<input type="text" name="release" class="form-control pull-right" id="reservation">
 										</div>
-										<!-- /.input group -->
 									  </div>
-									  <!-- /.form group -->
 									</dd>
 								<br>
 								<dt>內文:</dt>
 									<dd>
-										<textarea class="form-control" rows="10" name="content"> <?php echo $data['content'] ?> </textarea>
+										<form method="post">
+											<textarea rows="10" cols="50" id="content" name="content" class="ckeditor"><?php echo (!empty($data['content'])) ? $data['content'] : null; ?></textarea>
+											<script type="text/javascript">CKEDITOR.replace('content',{toolbar : 'Basic'});</script><br>
+										</form>
+
 									</dd>
 								<br>
 								<dt>狀態:</dt>
@@ -113,8 +116,7 @@ $(function () {
 			title : $('input[name="title"]').val(),
 			release : $('input[name="release"]').val(),
 			status : $('input[name="status"]:checked').val(),
-			content : $('textarea[name="content"]').val(),
-
+			content :  CKEDITOR.instances['content'].getData(),
 		},function(r){
 			r = $.parseJSON(r);
 			if(r.result == 1) {

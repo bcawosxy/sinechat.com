@@ -3,4 +3,8 @@
 	$result = mysql_query($query);
 	$data = array();
 	while($row = mysql_fetch_assoc($result)){ $data[] = $row;	}
+
+	$web_title = '修繕成果展示'; $web_url =url('product');
+	$web_description = '修繕成果展示';
+
 ?>

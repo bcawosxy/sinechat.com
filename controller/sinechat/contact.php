@@ -48,4 +48,7 @@
 		$info[$v0['name']]  = $tmp;
 	};
 	
+	$web_title = '聯絡資訊 | 聯絡新誠'; $web_url =url('contact');
+	$web_description = '新誠聯絡資訊 | 聯絡新誠';
+
 ?>

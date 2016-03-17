@@ -1,0 +1,158 @@
+<section class="content-header">
+	<div class="box-body"><h2>首頁施工內容簡述</h2></div>
+	<h1>				
+		<small><p class="text-light-blue"></p></small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="<?php echo url('admin', 'index') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="active">首頁施工內容簡述</li>
+	</ol>
+</section>
+<section class="content">
+	<div class="box">
+		<div class="box-body">
+			<div class="row">
+				<div class="col-md-10">
+					<div class="box-body box-solid">
+						<div class="box-header with-border">
+							<i class="fa fa-file-text-o"></i>
+							<h3 class="box-title"> 首頁施工內容簡述 </h3>
+						</div>
+						<div class="box-body">
+							<dl class="dl-horizontal">
+								<dd></dd>
+								<dt>標題:</dt>
+								<dd><input type="text" class="form-control" name="name" value="<?php echo $data[0]['name'] ?>"></dd><br>
+								<dt>狀態:</dt>
+									<dd>
+										<div class="form-group">
+											<label for="r1">
+												<input id="r1" type="radio" name="status_1" class="minimal-red" value="open" <?php if($data[0]['status'] == 'open') echo 'checked'; ?> >
+												Open
+											</label>&nbsp;&nbsp;&nbsp;
+											<label for="r2">
+												<input id="r2" type="radio" name="status_1" class="minimal-red" value="close" <?php if($data[0]['status'] == 'close') echo 'checked'; ?>>
+												Close
+											</label>
+										</div>
+									</dd>
+								<br>
+								<dt>內文:</dt>
+									<dd>
+										<div class="form-group">
+											<form method="post">
+												<textarea rows="10" cols="50" id="content1" name="content1" class="ckeditor"><?php echo $data[0]['content'] ?></textarea>
+												<script type="text/javascript">CKEDITOR.replace('content1',{toolbar : 'Basic'});</script><br>
+											</form>
+										</div>
+									</dd>
+								<br>
+							</dl>
+						</div>
+						<div class="box-body">
+							<dl class="dl-horizontal">
+								<dd></dd>
+								<dt>標題:</dt>
+								<dd><input type="text" class="form-control" name="name" value="<?php echo $data[1]['name'] ?>"></dd><br>
+								<dt>狀態:</dt>
+									<dd>
+										<div class="form-group">
+											<label for="r3">
+												<input id="r3" type="radio" name="status_2" class="minimal-red" value="open" <?php if($data[1]['status'] == 'open') echo 'checked'; ?>>
+												Open
+											</label>&nbsp;&nbsp;&nbsp;
+											<label for="r4">
+												<input id="r4" type="radio" name="status_2" class="minimal-red" value="close" <?php if($data[1]['status'] == 'close') echo 'checked'; ?>>
+												Close
+											</label>
+										</div>
+									</dd>
+								<br>
+								<dt>內文:</dt>
+									<dd>
+										<div class="form-group">
+											<form method="post">
+												<textarea rows="10" cols="50" id="content2" name="content2" class="ckeditor"><?php echo $data[1]['content'] ?></textarea>
+												<script type="text/javascript">CKEDITOR.replace('content2',{toolbar : 'Basic'});</script><br>
+											</form>
+										</div>
+									</dd>
+								<br>
+							</dl>
+						</div>
+						<div class="box-body">
+							<dl class="dl-horizontal">
+								<dd></dd>
+								<dt>標題:</dt>
+								<dd><input type="text" class="form-control" name="name" value="<?php echo $data[2]['name'] ?>"></dd><br>
+								<dt>狀態:</dt>
+									<dd>
+										<div class="form-group">
+											<label for="r5">
+												<input id="r5" type="radio" name="status_3" class="minimal-red" value="open" <?php if($data[2]['status'] == 'open') echo 'checked'; ?>>
+												Open
+											</label>&nbsp;&nbsp;&nbsp;
+											<label for="r5">
+												<input id="r5" type="radio" name="status_3" class="minimal-red" value="close" <?php if($data[2]['status'] == 'close') echo 'checked'; ?>>
+												Close
+											</label>
+										</div>
+									</dd>
+								<br>
+								<dt>內文:</dt>
+									<dd>
+										<div class="form-group">
+											<form method="post">
+												<textarea rows="10" cols="50" id="content3" name="content3" class="ckeditor"><?php echo $data[2]['content'] ?></textarea>
+												<script type="text/javascript">CKEDITOR.replace('content3',{toolbar : 'Basic'});</script><br>
+											</form>
+										</div>
+									</dd>
+								<br>
+							</dl>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<a class="btn btn-app" href="<?php echo url('admin', 'service_ad') ?>">
+	<i class="fa fa-angle-double-left"></i> 上一頁
+</a>
+
+<a class="btn btn-app" id="save">
+	<i class="fa fa-save"></i> 儲存(Save)
+</a>
+
+<script>
+
+$(function () {
+    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+      checkboxClass: 'icheckbox_minimal-red',
+      radioClass: 'iradio_minimal-red'
+    });
+
+	$('#save').on('click', function(){
+		var data = new Array();
+		$('dl.dl-horizontal').each(function(k ,v) {
+			var target = 'content'+(k+1);
+			data.push({'service_ad_id': (k+1),'title': $(this).find('input[name="name"]').val(), 'status': $(this).find('input[name^="status"]:checked').val(), 'content': CKEDITOR.instances[target].getData()});
+		});
+
+		$.post('<?php echo url('admin', 'service_ad') ?>' , {
+			data : JSON.stringify( data),
+		},function(r){
+			r = $.parseJSON(r);
+			if(r.result == 1) {
+				_jbox(r, 'success');
+			}else{
+				_jbox(r, 'error');			
+			}
+		});
+	});
+	
+});
+
+</script>

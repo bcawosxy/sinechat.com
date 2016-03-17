@@ -1,11 +1,17 @@
+<?php 
+	$query = query_despace('select * from `setbanner` where `setbanner_id` = 1 limit 1 ;');
+	$result = mysql_query($query);
+	$a_banner = array();
+	while($row = mysql_fetch_assoc($result)){ $banner = $row;	}
+	
+	$a_banner = explode(',',  $banner['image']);
+
+?>
 <div id="banner-wrapper">
-	<div class="inner">
-		<a href="<?php echo url('index', 'index') ?>" class="image"><img src="<?php echo URL_IMG.'12.jpg' ?>" style="max-width:980px;max-height:490px;"></a>
-	</div>
-	<div class="inner">
-		<a href="<?php echo url('index', 'index') ?>" class="image"><img src="<?php echo URL_IMG.'11.jpg' ?>" style="max-width:980px;max-height:490px;"></a>
-	</div>
-	<div class="inner">
-		<a href="<?php echo url('index', 'index') ?>" class="image"><img src="<?php echo URL_IMG.'14.jpg' ?>" style="max-width:980px;max-height:490px;" ></a>
-	</div>
+	<?php 
+		foreach ($a_banner as $k0 => $v0) {
+			echo '<div class="inner"><a href="'.url('index', 'index').'" class="image"><img src="'.URL_FILES.'setbanner/'.$v0.'" style="max-width:980px;max-height:490px;"></a></div>';
+		}
+	?>
+
 </div>

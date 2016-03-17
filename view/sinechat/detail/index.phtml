@@ -3,7 +3,7 @@
 		<ol class="breadcrumb">
 			<li><a href="<?php echo url(); ?>"><i class="fa fa-home"></i> Home</a></li>
 			<li><a href="<?php echo url('product', 'index'); ?>">成果展示</a></li>
-			<li class="active"><?php echo $data['name'] ?></li>
+			<li class="active"><?php echo $product['name'] ?></li>
 		</ol>
 	</div>
 
@@ -41,7 +41,7 @@
 		<section>
 			<div>
 				<article class="box post">
-					<header><h2><i class="fa fa-gavel">&nbsp;</i><strong><?php echo $data['name'] ?></strong> </h2></header>
+					<header><h2><i class="fa fa-gavel">&nbsp;</i><strong><?php echo $product['name'] ?></strong> </h2></header>
 				</article>
 			</div>
 			<header>
@@ -50,6 +50,12 @@
 			<ul class="divided">
 				<li>
 					<article class="box excerpt">
+						<div id="social_share" class="social-likes" data-url="<?php echo $web_url ?>" data-title="<?php echo $web_title ?>">
+							<div class="facebook" title="Share link on Facebook">Facebook</div>
+							<div class="twitter" title="Share link on Twitter">Twitter</div>
+							<div class="plusone" title="Share link on Google+">Google+</div>
+							<div class="line" title="Share link on Line">&nbsp;&nbsp;Line</div>
+						</div>				
 					</article>
 				</li>
 			</ul>
@@ -66,11 +72,11 @@
 					<?php 
 						if(is_array($a_image)) {
 							foreach($a_image as $k0 => $v0) {
-								image_reformat(PATH_FILES.'product/'.$data['product_id'].'/'.$v0, 'jpg', 750, 500);
-								image_reformat(PATH_FILES.'product/'.$data['product_id'].'/'.$v0, 'jpg', 72, 72);
+								image_reformat(PATH_FILES.'product/'.$product['product_id'].'/'.$v0, 'jpg', 750, 500);
+								image_reformat(PATH_FILES.'product/'.$product['product_id'].'/'.$v0, 'jpg', 72, 72);
 								echo '<div data-p="144.50" style="display: none;">
-									<img data-u="image" src="'.URL_FILES.'product/'.$data['product_id'].'/'.sinechat_Thumbnail($v0, 750, 500).'" />
-									<img data-u="thumb" src="'.URL_FILES.'product/'.$data['product_id'].'/'.sinechat_Thumbnail($v0, 72, 72).'" />
+									<img data-u="image" src="'.URL_FILES.'product/'.$product['product_id'].'/'.sinechat_Thumbnail($v0, 750, 500).'" />
+									<img data-u="thumb" src="'.URL_FILES.'product/'.$product['product_id'].'/'.sinechat_Thumbnail($v0, 72, 72).'" />
 								</div>';
 							}
 						}
@@ -98,7 +104,7 @@
 			<ul class="divided">
 				<li style="font-size:1.2em;">
 						<article class="box excerpt">
-							<?php echo htmlspecialchars_decode($data['content']);  ?>
+							<?php echo htmlspecialchars_decode($product['content']);  ?>
 						</article>
 
 				</li>
@@ -175,4 +181,30 @@
             $(window).bind("orientationchange", ScaleSlider);
             //responsive code end
         });
+
+	//line icon
+	var socialLikesButtons = {
+		line: {
+			clickUrl: 'http://line.naver.jp/R/msg/text/?<?php echo $product['name'].'  -  '.$web_url; ?>',	
+			pupupWidth: 650,
+			popupHeight: 500,
+		}
+	};
+
+	//initialize social
+	$('#social_share').socialLikes({
+		url: '<?php echo $web_url ?>',
+		title: '<?php echo $web_title; ?>',
+	    counters: true,
+	    singleTitle: 'Share it!',
+	});
+
+	//counter link
+	$('#social_share').on('popup_closed.social-likes', function(event, service) {
+	    $(event.currentTarget).socialLikes({forceUpdate: true});
+	    var counter = $(event.currentTarget).find('.social-likes__counter_' + service);
+	    counter.text(+(counter.text()||0)+1).removeClass('social-likes__counter_empty');
+	});
+
 </script>
+<script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411"></script>

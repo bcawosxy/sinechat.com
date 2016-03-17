@@ -17,21 +17,31 @@
 					<div class="box-body box-solid">
 						<div class="box-body">
 							<dl class="dl-horizontal">
-								<dt>Banner燈箱:</dt>
+									<dt></dt>
+										<dd>
+											<div class="form-group">
+												<div class="text-muted">
+													<h4>※&nbsp;&nbsp;單點照片可放大&nbsp;&nbsp;拖動照片改變順序</h4>
+													<h4>圖片格式: JPG / JPEG / PNG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;檔案大小: 5MB</h4>
+													<h4>圖片尺寸: 980 * 490</h4>
+												</div>
+											</div>
+										</dd>
+									<br>
+									<dt>Banner燈箱:</dt>
 									<dd>
 										<div class="form-group">
-											<div><span class="label label-primary">封面</span></div>
 											<ul id="sortable">
 												<?php 
-													// if(is_array($a_image)){
-														// foreach($a_image as $k0 => $v0) {
-															// image_reformat(PATH_FILES._SUB_CLASS.'/'.$data['product_id'].'/'.$v0, 'jpg', 150, 100);
-															// echo '<li class="ui-state-default" data-set="old" data-filename="'.$v0.'">
-																	// <a href="'.URL_FILES._SUB_CLASS.'/'.$data['product_id'].'/'.$v0.'" data-gallery><img src="'.URL_FILES._SUB_CLASS.'/'.$data['product_id'].'/'.sinechat_Thumbnail($v0, 150, 100).'">
-																	// <a href="javascript:void(0)"> <button type="button" style="padding:0;margin-top:5px;" class="btn btn-block btn-danger box_delete">移除</button></a>
-																// </li>';
-														// }
-													// }
+													if(is_array($a_image)){
+														foreach($a_image as $k0 => $v0) {
+															if(is_file(PATH_FILES._SUB_CLASS.'/'.$v0)) image_reformat(PATH_FILES._SUB_CLASS.'/'.$v0, 'jpg', 150, 100);
+															echo '<li class="ui-state-default" data-set="old" data-filename="'.$v0.'">
+																	<a href="'.URL_FILES._SUB_CLASS.'/'.$v0.'" data-gallery><img src="'.URL_FILES._SUB_CLASS.'/'.sinechat_Thumbnail($v0, 150, 100).'">
+																	<a href="javascript:void(0)"> <button type="button" style="padding:0;margin-top:5px;" class="btn btn-block btn-danger box_delete">移除</button></a>
+																</li>';
+														}
+													}
 												?>
 											</ul>
 										</div>
@@ -120,29 +130,23 @@ function save() {
 		var tmp =  {'sequnce' : k, 'set' : $(this).data('set'), 'filename' : $(this).data('filename')}
 		img_item.push(tmp);
 	});
-	
-	var seqence = $('input[name=seqence]');
 
-	if (!/^\d+$/.test(seqence.val())) {
-		seqence.val(/^\d+/.exec(seqence.val()));
-		r = {'message': '排序須輸入正整數。'};
-		_jbox(r, 'error');
-	}else{
-		$.post('<?php echo url('admin', 'setbanner/edit') ?>' , {
-			image : JSON.stringify(img_item),
-		},function(r){
-			r = $.parseJSON(r);
-			if(r.result == 1) {
-				$('button._auto').each(function() {
-					$(this).trigger('click');
-				});
-				
-				_jbox(r, 'success');
-			}else{
-				_jbox(r, 'error');			
-			}
-		});	
-	}
+
+	$.post('<?php echo url('admin', 'setbanner/index') ?>' , {
+		image : JSON.stringify(img_item),
+	},function(r){
+		r = $.parseJSON(r);
+		if(r.result == 1) {
+			$('button._auto').each(function() {
+				$(this).trigger('click');
+			});
+			
+			_jbox(r, 'success');
+		}else{
+			_jbox(r, 'error');			
+		}
+	});	
+
 }
 
 $(document).on('click', '.box_delete',function(){
