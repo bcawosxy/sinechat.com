@@ -10,13 +10,6 @@ include('./config/global.php');
 	html5up.net | @n33co
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<script>
-console.log('Execute:<?php echo $_SERVER['PHP_SELF']?>');
-console.log('Uri:<?php echo $_SERVER['REQUEST_URI']?>');
-console.log('CLASS:<?php echo _CLASS; ?>');
-console.log('_SUB_CLASS:<?php echo _SUB_CLASS; ?>');
-
-</script>
 <html>
 <?php 	
 	switch(MAIN) {

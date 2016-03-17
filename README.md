@@ -1,8 +1,9 @@
 # sinechat.com
 ###0318
 ####v0.5.0
-1.建立 setbanner 後台(未完成)
-2.SEO meta tag
+1.加入社群分享
+2.全站加入SEO meta tag
+3.首頁設定資料完成
 
 ###0317
 ####v0.4.10
