@@ -66,7 +66,7 @@ switch (_FUNCTION) {
 		$a_image = array();
 		while($row = mysql_fetch_assoc($result)){ $data = $row;	}
 		
-		$a_image = explode(',',  $data['image']);
+		if(mysql_num_rows($result) > 0) $a_image = explode(',',  $data['image']);
 	
 	break;
 	
