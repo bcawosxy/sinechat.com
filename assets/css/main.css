@@ -1320,10 +1320,7 @@
 			margin-left: 1em;
 		}
 
-			ul.links li:first-child {
-				margin-left: 0;
-				padding-left: 0;
-			}
+		
 
 	ul.actions {
 		margin-top: 2.5em;

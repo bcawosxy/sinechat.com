@@ -56,6 +56,9 @@
 		 */
 		case 'www.sinechat.com':
 		case 'sinechat.com':
+			//關閉錯誤訊息
+			ini_set('display_errors', 'Off');
+
 			$dbhost = 'localhost';
 			$dbuser = 'ccckaass';
 			$dbpass = '74109630';
@@ -64,7 +67,10 @@
 		
 	}
 	
-	$conn = mysql_connect($dbhost,$dbuser,$dbpass);
+	// $conn = mysql_connect($dbhost,$dbuser,$dbpass);
+	$conn = mysql_connect($dbhost, $dbuser, $dbpass) or die('資料庫連結錯誤，請聯絡系統管理員。');
+
+
 	mysql_query('SET NAMES "utf8"', $conn);
 	mysql_select_db($dbname, $conn);
 

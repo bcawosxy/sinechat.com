@@ -18,6 +18,7 @@ include('./config/global.php');
 		 */
 		default : ?>
 			<head>
+		<!-- Head -->	<?php include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR.'head.phtml') ?> <!-- end Head -->
 				<title>新誠修繕工程 <?php if(!is_null($web_title)) echo ' | '.$web_title ;?></title>
 				<meta charset="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -28,8 +29,6 @@ include('./config/global.php');
 				<meta property="og:description" content="<?php echo $web_description; ?>"/>
 				<meta property="og:image" content="<?php echo $web_image ?>"/>
 				<meta property="og:site_name" content="新誠修繕工程" />
-
-	<!-- Head -->	<?php include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR.'head.phtml') ?> <!-- end Head -->
 			</head>
 			<body class="homepage">
 				<div id="page-wrapper">
