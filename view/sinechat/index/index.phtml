@@ -47,11 +47,12 @@
 	<div id="content" class="4u 12u(mobile) homepage" >
 		<?php 
 			foreach ($a_product as $k0 => $v0) {
-				$_this_head = ($k0==0) ? '<h2 class="right_slider" style="border-bottom: 2px #d0d0d0 solid;"><a href="#">修繕成果</a></h2>' : null;
+				$_this_head = ($k0==0) ? '<h2 class="right_slider" style="border-bottom: 2px #d0d0d0 solid;"><a href="javascript:void(0);">修繕成果</a></h2>' : null;
+				if(is_file(PATH_FILES.'product/'.$v0['product_id'].'/'.$v0['cover'])) image_reformat(PATH_FILES.'product/'.$v0['product_id'].'/'.$v0['cover'], 'jpg', 371, 248);
 				echo '<article class="box post">
 						<header>'.$_this_head.'</header>
 						<h4>'.$v0['name'].'</h4>
-						<a href="'.url('detail', 'index', ['id'=>$v0['product_id']]).'" class="image featured"><img src="'.URL_FILES.'product/'.$v0['product_id'].'/'.$v0['cover'].'" /></a>
+						<a href="'.url('detail', 'index', ['id'=>$v0['product_id']]).'" class="image featured"><img src="'.URL_FILES.'product/'.$v0['product_id'].'/'.sinechat_Thumbnail($v0['cover'], 371, 248).'" /></a>
 					</article>';
 			}
 
