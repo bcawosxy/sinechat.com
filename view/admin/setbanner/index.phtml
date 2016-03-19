@@ -112,7 +112,6 @@
 <a class="btn btn-app" id="save">
 	<i class="fa fa-save"></i> 儲存(Save)
 </a>
-<!-- The blueimp Gallery widget -->
 <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
     <div class="slides"></div>
     <h3 class="title"></h3>
@@ -131,7 +130,6 @@ function save() {
 		img_item.push(tmp);
 	});
 
-
 	$.post('<?php echo url('admin', 'setbanner/index') ?>' , {
 		image : JSON.stringify(img_item),
 	},function(r){
@@ -139,23 +137,19 @@ function save() {
 		if(r.result == 1) {
 			$('button._auto').each(function() {
 				$(this).trigger('click');
-			});
-			
+			});	
 			_jbox(r, 'success');
 		}else{
 			_jbox(r, 'error');			
 		}
 	});	
-
 }
 
 $(document).on('click', '.box_delete',function(){
 	$(this).parents('li').remove();
 });
 
-
 $(function () {
-  	//Red color scheme for iCheck
     $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
 		checkboxClass: 'icheckbox_minimal-red',
 		radioClass: 'iradio_minimal-red'
@@ -239,7 +233,6 @@ $(function () {
 });
 
 </script>
-
 
 <script id="template-upload" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}

@@ -1,5 +1,4 @@
 <?php 
-
 switch (_FUNCTION) {
 
 	case 'index' :
@@ -7,7 +6,6 @@ switch (_FUNCTION) {
 		if(is_ajax()) {
 			$data = (!empty($_POST['data'])) ? $_POST['data'] : null ;
 			$param = json_decode($data, true);
-
 
 			foreach ($param as $k0 => $v0) {
 				$query = query_despace('UPDATE `service_ad` SET  `name` = "'.$v0['title'].'" , `status` = "'.$v0['status'].'" ,`content` = "'.$v0['content'].'" , `modifytime` = NOW() where `service_ad_id` = "'.$v0['service_ad_id'].'";');

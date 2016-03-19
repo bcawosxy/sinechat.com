@@ -4,9 +4,7 @@ switch (_FUNCTION) {
 
 	case 'index' :
 	{
-		if(is_ajax()) {
-			
-		}
+		if(is_ajax()) {}
 		$query = query_despace('select `service`.*, `servicearea`.`name` as servicearea_name, `servicearea`.`servicearea_id` as servicearea_id from `service` left join `servicearea` using(`servicearea_id`) where `service`.`status` != "none" order by `service`.`service_id` desc;');
 		$result = mysql_query($query);
 		$data = array();

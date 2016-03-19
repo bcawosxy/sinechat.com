@@ -4,9 +4,7 @@ switch (_FUNCTION) {
 
 	case 'index' :
 	{
-		if(is_ajax()) {
-			
-		}
+		if(is_ajax()) {}
 		$query = query_despace('select * from `servicearea` where status != "none" order by `servicearea_id` desc;');
 		$result = mysql_query($query);
 		$data = array();
@@ -38,14 +36,14 @@ switch (_FUNCTION) {
 			if($act == null || $name == null|| $status == null ) json_encode_return(0, '資料不完整，請重新填寫');
 			switch ($act) {
 				case 'add':
+					
 					$query = query_despace('INSERT INTO `servicearea` (`name`, `seqence` , `status`, `inserttime`, `modifytime`) VALUES ("'.$name.'", "'.$seqence.'" ,"'.$status.'", NOW(), NOW());');
 					$result = mysql_query($query);
 					if(!$result) json_encode_return(0, '新增資料失敗，請重新輸入資料');
 					json_encode_return(1, '新增資料完成', url('admin', 'servicearea'));
-
+					
 					break;
 
-				
 				case 'edit':
 					$query = query_despace('UPDATE `servicearea` SET  `name` = "'.$name.'" , `seqence` = "'.$seqence.'",`status` = "'.$status.'" , `modifytime` = NOW() where `servicearea_id` = "'.$servicearea_id.'";');
 					$result = mysql_query($query);

@@ -10,7 +10,6 @@ switch (_FUNCTION) {
 			$result = mysql_query($query);
 			json_encode_return(1, '封存完成', url('admin', 'contact/edit', ['contact_id'=>$contact_id]));
 		}
-
 	break;
 
 	case 'delete' :
@@ -41,7 +40,6 @@ switch (_FUNCTION) {
 				$query = query_despace('UPDATE `contact` SET `reading` = "reading", `readtime` = NOW() where `contact_id` = "'.$contact_id.'";');
 				$result = mysql_query($query);
 			}
-
 		}
 	break;
 

@@ -13,7 +13,6 @@
 		$result = mysql_query($query);
 		if(!$result) json_encode_return(0, '新增資料失敗，請重新輸入資料');
 		json_encode_return(1, '新增資料完成', url('index', 'index'));
-
 	}
 	
 	$query = query_despace('select * from `info`;');

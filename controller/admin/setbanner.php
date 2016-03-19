@@ -1,9 +1,7 @@
 <?php 
 
 switch (_FUNCTION) {
-
 	case 'index' :
-
 		if(is_ajax()) {
 			$image = (!empty($_POST['image'])) ? $_POST['image'] : null ;
 			
