@@ -26,7 +26,7 @@
 									</div>
 								</div>
 								<div class="box-body">
-									<table id="example1" class="table table-bordered table-striped">
+									<table id="example1" class="table table-bordered table-striped display" width="100%">
 										<thead>
 											<tr>
 												<th>#</th>
@@ -66,7 +66,7 @@
 									</div>
 								</div>										
 								<div class="box-body">
-									<table id="example2" class="table table-bordered table-striped">
+									<table id="example2" class="table table-bordered table-striped display" width="100%">
 										<thead>
 											<tr>
 												<th>#</th>
@@ -108,12 +108,47 @@
 
 <script>
 $(function () {
-	$("#example1").DataTable({
+	var table = $("#example1").DataTable({
 		"order": [[ 0, "asc" ]],
 	});
-
-	$("#example2").DataTable({
+	
+	if($(window).width()<1024){
+        var column = table.column( 7 );
+        column.visible( ! column.visible() );
+	}
+	if($(window).width()<900){
+        var column = table.column( 6 );
+        column.visible( ! column.visible() );
+		var column2 = table.column( 5 );
+        column2.visible( ! column2.visible() );
+	}
+	if($(window).width()<440){
+        var column = table.column( 4 );
+        column.visible( ! column.visible() );
+		var column2 = table.column( 3 );
+        column2.visible( ! column2.visible() );
+	}	
+	
+	var table2 = $("#example2").DataTable({
 		"order": [[ 0, "asc" ]],
 	});
+	
+	if($(window).width()<1024){
+        var column = table2.column( 7 );
+        column.visible( ! column.visible() );
+	}
+	if($(window).width()<900){
+        var column = table2.column( 6 );
+        column.visible( ! column.visible() );
+		var column2 = table2.column( 5 );
+        column2.visible( ! column2.visible() );
+	}
+	if($(window).width()<440){
+        var column = table2.column( 4 );
+        column.visible( ! column.visible() );
+		var column2 = table2.column( 3 );
+        column2.visible( ! column2.visible() );
+	}	
+	
 });
 </script>
