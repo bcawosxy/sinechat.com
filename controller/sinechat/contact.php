@@ -19,7 +19,7 @@
 	$result = mysql_query($query);
 	$data = array();
 	while($row = mysql_fetch_assoc($result)){$data[] = $row;}
-	$info = array();
+	$a_info = array();
 	foreach ($data as $k0 => $v0) {	
 		if($v0['status'] == 'open') {
 			switch ($v0['name']) {
@@ -42,10 +42,24 @@
 				case 'facebook':
 					$tmp = '<li class="icon fa-facebook">'.$v0['value'].'</li>';
 					break;
+
+				case 'host':
+					$tmp = '<li class="icon fa-user">'.$v0['value'].'</li>';
+					break;
 			}
 		}
-		$info[$v0['name']]  = $tmp;
+		$a_info[$v0['name']]  = $tmp;
 	};
+	
+	//調整順序
+	$info = [
+		'host' => $a_info['host'],
+		'address' => $a_info['address'],
+		'tel' => $a_info['tel'],
+		'cellphone' => $a_info['cellphone'],
+		'email' => $a_info['email'],
+		'facebook' => $a_info['facebook'],
+	];
 	
 	$web_title = '聯絡資訊 | 聯絡新誠'; $web_url =url('contact');
 	$web_description = '新誠聯絡資訊 | 聯絡新誠';

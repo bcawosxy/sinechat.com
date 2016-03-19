@@ -26,5 +26,6 @@
 		'cellphone' => 'fa-mobile-phone',
 		'email' => 'fa-envelope',
 		'facebook' => 'fa-facebook',
+		'host' => 'fa-user',
 	];
 ?>

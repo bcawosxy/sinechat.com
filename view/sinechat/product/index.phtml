@@ -17,7 +17,7 @@
 
 						echo '<div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
 								<header>'.$v0['name'].'</header>
-								<p><a href="'.url('detail', 'index', ['id'=>$v0['product_id']]).'" class="image" style="padding:0.2em;"> <img onerror="this.src=\''.static_file('images/origin.png').'\'" src="'.URL_FILES._CLASS.'/'.$v0['product_id'].'/'.sinechat_Thumbnail($v0['cover'], 249, 166).'" width="249" height="166"></a></p>
+								<p><a href="'.url('detail', 'index', ['id'=>$v0['product_id']]).'" class="image" style="padding:0.2em;"> <img class="img-responsive" onerror="this.src=\''.static_file('images/origin.png').'\'" src="'.URL_FILES._CLASS.'/'.$v0['product_id'].'/'.sinechat_Thumbnail($v0['cover'], 249, 166).'" width="249" height="166"></a></p>
 							</div>';
 						if(($k0%4) == 3 || $k0 == ($num-1)) {	echo '</div>';	}
 					}
