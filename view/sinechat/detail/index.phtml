@@ -1,10 +1,12 @@
 <div class="row">
 	<div class="12u 12u(mobile)">
-		<ol class="breadcrumb">
-			<li><a href="<?php echo url(); ?>"><i class="fa fa-home"></i> Home</a></li>
-			<li><a href="<?php echo url('product', 'index'); ?>">成果展示</a></li>
-			<li class="active"><?php echo $product['name'] ?></li>
-		</ol>
+		<div class="bc_container">
+			<ul id="bc1" class="breadcrumb">
+				<li><a href="<?php echo url(); ?>"><i class="fa fa-home"></i> Home</a></li>
+				<li><a href="<?php echo url('product', 'index'); ?>">成果展示</a></li>
+				<li class="active"><?php echo $product['name'] ?></li>
+			</ul>
+		</div>
 	</div>
 
 	<!-- Other -->
@@ -29,7 +31,6 @@
 								</article>';
 							}
 						}
-					
 					?>
 				</li>
 			</ul>

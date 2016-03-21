@@ -7,7 +7,7 @@
 	while($row = mysql_fetch_assoc($result)){ $product = $row;	}
 	$a_image = (!empty($product['image'])) ? explode(',', $product['image']) : null;
 
-	$query = query_despace('select * from `product` where `product`.`status` != "none" and `product`.`product_id` != "'.$product_id.'" order by RAND() limit 8;');
+	$query = query_despace('select * from `product` where `product`.`status` = "open" and `product`.`product_id` != "'.$product_id.'" order by RAND() limit 8;');
 	$result = mysql_query($query);
 	while($row = mysql_fetch_assoc($result)){ $other[] = $row; }
 	

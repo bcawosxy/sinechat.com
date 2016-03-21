@@ -12,7 +12,7 @@
 	while($row = mysql_fetch_assoc($result)){ $a_ad[] = $row;	}
 
 	//get product
-	$query = query_despace('select * from `product` where `product`.`status` != "none" order by RAND() limit 5;');
+	$query = query_despace('select * from `product` where `product`.`status` = "open" order by RAND() limit 5;');
 	$result = mysql_query($query);
 	while($row = mysql_fetch_assoc($result)){ $a_product[] = $row; }
 

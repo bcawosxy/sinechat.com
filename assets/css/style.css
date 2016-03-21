@@ -33,3 +33,28 @@ span.social-likes__icon_line {
 	background-size:26px 27px;
 
 }
+
+/*前台 product::index*/
+.product_item_name {
+	font-size:0.8em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/*前台 detail::index*/
+.bc_container {
+	margin: 2% auto;
+	width: 100%;
+}
+
+.bc_container .breadcrumb {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.bc_container .breadcrumb li {
+  display: inline;
+}
