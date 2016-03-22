@@ -76,8 +76,8 @@
 								image_reformat(PATH_FILES.'product/'.$product['product_id'].'/'.$v0, 'jpg', 750, 500);
 								image_reformat(PATH_FILES.'product/'.$product['product_id'].'/'.$v0, 'jpg', 72, 72);
 								echo '<div data-p="144.50" style="display: none;">
-									<img data-u="image" src="'.URL_FILES.'product/'.$product['product_id'].'/'.sinechat_Thumbnail($v0, 750, 500).'" />
-									<img data-u="thumb" src="'.URL_FILES.'product/'.$product['product_id'].'/'.sinechat_Thumbnail($v0, 72, 72).'" />
+									<img class="laz" data-u="image" src="'.URL_FILES.'product/'.$product['product_id'].'/'.sinechat_Thumbnail($v0, 750, 500).'" />
+									<img class="laz" data-u="thumb" src="'.URL_FILES.'product/'.$product['product_id'].'/'.sinechat_Thumbnail($v0, 72, 72).'" />
 								</div>';
 							}
 						}
@@ -183,6 +183,10 @@
             $(window).bind("orientationchange", ScaleSlider);
        
         });
+	
+	$("img.laz").lazyload({
+		effect : "fadeIn"
+	});
 
 	//line icon
 	var socialLikesButtons = {
