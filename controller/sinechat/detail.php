@@ -10,7 +10,7 @@
 	$query = query_despace('select * from `product` where `product`.`status` = "open" and `product`.`product_id` != "'.$product_id.'" order by RAND() limit 8;');
 	$result = mysql_query($query);
 	while($row = mysql_fetch_assoc($result)){ $other[] = $row; }
-	
+
 	$web_title = '成果展示 | '.$product['name'];
 	$web_description = $product['description'];
 	$web_url = url('detail', 'index', ['id'=>$product['product_id']]);
