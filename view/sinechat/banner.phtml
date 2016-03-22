@@ -10,7 +10,7 @@
 	<?php 
 		foreach ($a_banner as $k0 => $v0) {
 			if(is_file(PATH_FILES.'setbanner/'.$v0)) image_reformat(PATH_FILES.'setbanner/'.$v0, 'jpg', 980, 490);
-			echo '<div class="inner"><a href="'.url('index', 'index').'" class="image"><img src="'.URL_FILES.'setbanner/'.$v0.'" style="max-width:980px;max-height:490px;"></a></div>';
+			echo '<div class="inner"><a href="'.url('index', 'index').'" class="image"><img src="'.URL_FILES.'setbanner/'.sinechat_Thumbnail($v0, 980, 490).'" style="max-width:980px;max-height:490px;"></a></div>';
 		}
 	?>
 </div>
