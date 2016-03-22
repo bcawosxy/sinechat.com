@@ -1807,9 +1807,9 @@
 			width:25%;
 		}
 		
-		.header_line {
+/* 		.header_line {
 			border-bottom:0.3em solid rgba(107, 168, 178, 1);
-		}
+		} */
 	}
 /* Desktop */
 
@@ -1921,7 +1921,7 @@
 				}
 				
 				#header div.line {
-					width:250px;
+					width:270px;
 					border-bottom: 7px solid rgba(107, 168, 178, 1);
 					height: 0 !important;
 					min-height: 0 !important;

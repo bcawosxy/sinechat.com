@@ -1,5 +1,9 @@
 # sinechat.com
 ###0322
+####v1.3.0
+1.調整頂部logo樣式
+2.product::index 分頁完成
+
 ####v1.2.1
 1.banner img resize
 2.product::content set min-height

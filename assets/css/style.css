@@ -58,3 +58,35 @@ span.social-likes__icon_line {
 .bc_container .breadcrumb li {
   display: inline;
 }
+
+/**/
+.header_sub {
+	font-family: 'Source Sans Pro',sans-serif;
+    font-weight: 600;
+    line-height: 1.1;
+    color: inherit;
+	box-sizing: border-box;
+	font-size: 15px;
+	letter-spacing:3px;
+}
+
+@media screen and (min-width: 1200px) {
+	.header_sub {
+		margin-top:6px;
+	}
+}
+
+@media screen and (max-width: 1200px) and (min-width:737px) {
+	.header_sub {
+		margin-top:6px;
+		margin-left:4px;
+	}
+}
+
+@media screen and (max-width: 737px) {
+	.header_sub {
+		padding-bottom:10px;
+		margin-left:3px;
+		border-bottom:0.3em solid rgba(107, 168, 178, 1);
+	}
+}
