@@ -1,4 +1,12 @@
 # sinechat.com
+###0322
+####v1.2.1
+1.banner img resize
+2.product::content set min-height
+
+####v1.2.0
+1.後台產品管理儲存後,先產生裁切圖片
+
 ###0321
 ####v1.1.3
 1.調整product取出條件為open
