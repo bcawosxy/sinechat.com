@@ -30,10 +30,13 @@ $web_title = $web_image = $web_description = $web_url= null;
 /**
  * PDO
  */
-$Model = new Model($dbhost, $dbuser, $dbpass, $dbname, array(PDO::ATTR_PERSISTENT => true));
-$model = $Model->pdo;
-$model->setAttribute(PDO::ATTR_EMULATE_PREPARES, false); //禁用prepared statements的模擬效果
-$m_fetch = PDO::FETCH_ASSOC;
+if (!extension_loaded('pdo')) {
+	$Model = new Model($dbhost, $dbuser, $dbpass, $dbname, array(PDO::ATTR_PERSISTENT => true));
+	$model = $Model->pdo;
+	$model->setAttribute(PDO::ATTR_EMULATE_PREPARES, false); //禁用prepared statements的模擬效果
+	$m_fetch = PDO::FETCH_ASSOC;
+}
+
 
 /**
  * 引入[view][controller]判斷

@@ -63,12 +63,12 @@ $pie_data = json_encode($pie_data);
 
 
 /* PDO */
-	$id = 5;
-	$sql = 'SELECT value FROM test where id = :id' ;
+	// $id = 5;
+	// $sql = 'SELECT value FROM test where id = :id' ;
     
     // $query = query_despace('select `service`.`name`,`service_id`, COUNT(1) as num from `product` left join `service` using(`service_id`) where `product`.`status` = :status GROUP BY `service_id` ;');
 
-	echo $Model->db('service')->where([[[['value', '=', 1]], 'and']])->fetch();
+	// echo $Model->db('service')->where([[[['value', '=', 1]], 'and']])->fetch();
 
     // $result = $model->prepare($query);
    
