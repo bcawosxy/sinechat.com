@@ -2,6 +2,7 @@
 <?php 
 include('./config/sinechat.php');
 include('./config/function.php');
+include('./config/model.php');
 include('./config/global.php');
 ?>
 <!DOCTYPE HTML>
