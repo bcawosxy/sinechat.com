@@ -24,9 +24,11 @@
 					<div style="float:left;" class="col-md-4 col-sm-12 col-xs-12">
 						<ul class="list-unstyled">							
 	 						<?php 
-	 							foreach (json_decode($pie_data, true) as $k0 => $v0) {
-	 								echo '<li style="margin-top:5px;"><span class="label" style="background-color:'.$v0['color'].';">&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;'.$v0['label'].' ： '.$v0['value'].'</li>';
-	 							}
+	 							if($pie_data != null) {
+		 							foreach (json_decode($pie_data, true) as $k0 => $v0) {
+		 								echo '<li style="margin-top:5px;"><span class="label" style="background-color:'.$v0['color'].';">&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;'.$v0['label'].' ： '.$v0['value'].'</li>';
+		 							}
+		 						}
 	 						?>
 	 					</ul>
 					</div>
@@ -40,7 +42,7 @@
 $(function () {
 	/* Pie chars */
 	var ctx = $("#pieChart").get(0).getContext("2d");
-	var data = <?php print_r( ($pie_data)); ?>;
+	var data = <?php print_r( $pie_data); ?>;
 
     var pieOptions = {
       //Boolean - Whether we should show a stroke on each segment

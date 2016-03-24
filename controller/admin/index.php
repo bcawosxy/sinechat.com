@@ -1,8 +1,15 @@
 <?php 
-$query = query_despace('select `service`.`name`,`service_id`, COUNT(1) as num from `product` left join `service` using(`service_id`) where `product`.`status` = "open" GROUP BY `service_id` ;');
-$result = mysql_query($query);
-$data = array();
-while($row = mysql_fetch_assoc($result)){$data[] = $row;	}
+// $query = query_despace('select `service`.`name`,`service_id`, COUNT(1) as num from `product` left join `service` using(`service_id`) where `product`.`status` = "open" GROUP BY `service_id` ;');
+// $result = mysql_query($query);
+// $data = array();
+// while($row = mysql_fetch_assoc($result)){$data[] = $row;	}
+
+$column = ['service.*','COUNT(1) as num'];
+$join =[['left join', 'service', 'using(`service_id`)']];
+$param = ['status'=>'open'];
+$data =  null;
+$pie_data = array(array('value'=> '0', 'color'=>'#fffff', 'highlight'=>'#FF5A5E', 'label'=>'案件'));
+$data = $Model->table('product')->column($column)->join($join)->where([[[['product.status', '=', ':status' ]], 'and']])->param($param)->group(['service_id'])->fetch();
 
 $color=[
 	'0'=> [
@@ -47,40 +54,20 @@ $color=[
 	],
 ];
 
-$pie_data = array();
-foreach ($data as $k0=> $v0) {
-	if($k0 > count($color)) $k0 = 0;
-	$tmp = [
-		'value'=>$v0['num'],
-		'color' =>$color[$k0]['color'],
-		'highlight'=>$color[$k0]['highlight'],
-		'label'=>$v0['name'],
-	];
 
-	$pie_data[] = $tmp;
+if($data != null) {
+	$pie_data = array();
+	foreach ($data as $k0=> $v0) {
+		if($k0 > count($color)) $k0 = 0;
+		$tmp = [
+			'value'=>$v0['num'],
+			'color' =>$color[$k0]['color'],
+			'highlight'=>$color[$k0]['highlight'],
+			'label'=>$v0['name'],
+		];
+
+		$pie_data[] = $tmp;
+	}
 }
 $pie_data = json_encode($pie_data);
-
-
-/* PDO */
-	/* Work Sample
-		$id = 5;
-		$sql = 'SELECT value FROM test where id = :id' ;
-	    $result = $model->prepare($sql);
-	    $result->execute(['id'=>1]);
-	    while($row = $result->fetch($m_fetch)){
-			print_r($row);
-		}
-   */
-	
-    // $query = query_despace('select `service`.`name`,`service_id`, COUNT(1) as num from `product` left join `service` using(`service_id`) where `product`.`status` = :status GROUP BY `service_id` ;');
-	// echo $Model->db('service')->where([[[['value', '=', 1], ['test', '=', 'test']], 'and']])->fetch();
-
-    // $result = $model->prepare($sql);
-    // $result->execute(['id'=>1]);
-    // while($row = $result->fetch($m_fetch)){
-		// print_r($row);
-	// }
-	
-
 ?>
