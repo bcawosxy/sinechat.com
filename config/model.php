@@ -39,7 +39,6 @@ class Model {
 		if($table) {
 			$this->table = $table;
 		}
-		
 		return $this;
 	}
 
@@ -64,7 +63,6 @@ class Model {
 	    while($row = $result->fetch($this->fetch_method($method))){
 	    	$this->data[] = $row;
 	    }
-		
 		return $this->data;
 	}
 
@@ -99,7 +97,6 @@ class Model {
 			$group = array_filter($group, function($v0) {return $v0 !== null;});
 			self::$group = array_merge(self::$group, $group);
 		}
-		
 		return $this;
 	}
 	
@@ -197,7 +194,5 @@ class Model {
 		}
 		return $this;
 	}
-
-
 }
 
