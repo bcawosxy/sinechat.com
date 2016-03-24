@@ -1,9 +1,4 @@
 <?php 
-// $query = query_despace('select `service`.`name`,`service_id`, COUNT(1) as num from `product` left join `service` using(`service_id`) where `product`.`status` = "open" GROUP BY `service_id` ;');
-// $result = mysql_query($query);
-// $data = array();
-// while($row = mysql_fetch_assoc($result)){$data[] = $row;	}
-
 $column = ['service.*','COUNT(1) as num'];
 $join =[['left join', 'service', 'using(`service_id`)']];
 $param = ['status'=>'open'];

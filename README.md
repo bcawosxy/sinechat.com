@@ -1,4 +1,8 @@
 # sinechat.com
+###0324
+####v2.0.0
+1.使用PDO模組進行SQL查詢
+
 ###0323
 ####v1.3.1
 1.後台首頁pie統計圖表
@@ -8,6 +12,8 @@
 1.調整頂部logo樣式
 2.product::index 分頁完成
 
+
+<!--
 ####v1.2.1
 1.banner img resize
 2.product::content set min-height
@@ -68,7 +74,6 @@
 2.前台service 完成about<br>
 
 
-<!--
 ###0310
 ####v0.2.11
 1.後台servicearea、service 尚未完成
