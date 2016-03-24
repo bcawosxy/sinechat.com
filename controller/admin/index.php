@@ -60,4 +60,27 @@ foreach ($data as $k0=> $v0) {
 	$pie_data[] = $tmp;
 }
 $pie_data = json_encode($pie_data);
+
+
+/* PDO */
+	/* Work Sample
+		$id = 5;
+		$sql = 'SELECT value FROM test where id = :id' ;
+	    $result = $model->prepare($sql);
+	    $result->execute(['id'=>1]);
+	    while($row = $result->fetch($m_fetch)){
+			print_r($row);
+		}
+   */
+	
+    // $query = query_despace('select `service`.`name`,`service_id`, COUNT(1) as num from `product` left join `service` using(`service_id`) where `product`.`status` = :status GROUP BY `service_id` ;');
+	// echo $Model->db('service')->where([[[['value', '=', 1], ['test', '=', 'test']], 'and']])->fetch();
+
+    // $result = $model->prepare($sql);
+    // $result->execute(['id'=>1]);
+    // while($row = $result->fetch($m_fetch)){
+		// print_r($row);
+	// }
+	
+
 ?>
