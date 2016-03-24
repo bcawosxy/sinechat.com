@@ -44,7 +44,7 @@ class Model {
 						case '<=':
 						case '<':
 						case 'like':
-							$tmp2[] = $field." ".$operator." ".$this->db;
+							$tmp2[] = $field." ".$operator." ".$value;
 							break;
 								
 						// case 'between':
