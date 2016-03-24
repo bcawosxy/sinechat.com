@@ -58,7 +58,6 @@
 		case 'sinechat.com':
 			//關閉錯誤訊息
 			ini_set('display_errors', 'Off');
-
 			$dbhost = 'localhost';
 			$dbuser = 'ccckaass';
 			$dbpass = '74109630';
