@@ -21,6 +21,7 @@ class Model {
 		$dsn = 'mysql:dbname='.$dbname.';host='.$dbhost;
 		try {
 			$this->pdo = new PDO($dsn, $dbuser, $dbpass, $param);
+			$this->pdo->exec("SET NAMES utf8;");
 			$this->db = $dbname;
 		} catch (PDOException $e) {
 			echo 'Connection failed: '.$e->getMessage();
