@@ -99,12 +99,13 @@ class Model {
 		}
 		$this->sql = 'Update '.$this->db.'.'.$this->table.' set '.implode(',', $tmp0);
 		if (!empty(self::$where)) $this->sql .= ' where '.implode(' and ', self::$where);
-		
+
 		$result = $this->pdo->exec($this->sql);
 		return $result;
 	}
 
 	function table($table = null) {
+		//被function.php呼叫,故不可棄用
 		if($table) {
 			$this->table = $table;
 		}
