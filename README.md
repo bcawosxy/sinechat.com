@@ -1,4 +1,9 @@
 # sinechat.com
+###0325
+####v2.0.2
+1.後台調整為PDO查詢[index][setbanner][news(delete un do)]
+2.facebook info use link
+
 ###0324
 ####v2.0.0
 1.使用PDO模組進行SQL查詢

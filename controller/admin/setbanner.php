@@ -52,20 +52,19 @@ switch (_FUNCTION) {
 					if(is_file($file)) unlink($file); 
 				}
 			}
-			$query = query_despace('UPDATE `setbanner` SET `image` = "'.implode(',', $a_image).'" , `modifytime` = NOW() where `setbanner_id` = 1;');
-			$result = mysql_query($query);
+
+			$where = [[[['setbanner_id', '=', 1]] ,'and']];
+			$result = Model('setbanner')->where($where)->edit(['`image`'=>implode(',', $a_image), 'modifytime'=>inserttime()]);
+			
 			if(!$result) json_encode_return(0, '更新資料失敗，請重新輸入資料');
 			json_encode_return(1, '更新完成', url('admin', 'setbanner'));
 
 		}
 
-		$query = query_despace('select * from `setbanner` where `setbanner_id` = 1 limit 1 ;');
-		$result = mysql_query($query);
-		$a_image = array();
-		while($row = mysql_fetch_assoc($result)){ $data = $row;	}
-		
-		if(mysql_num_rows($result) > 0) $a_image = explode(',',  $data['image']);
-	
+		$param = ['setbanner_id'=>1];
+		$data = Model('setbanner')->where([[[['setbanner.setbanner_id', '=', ':setbanner_id' ]], 'and']])->param($param)->limit(1)->fetch();
+		if(count($data) > 0) $a_image = explode(',',  $data['image']);
+
 	break;
 	
 	case 'fileupload' :

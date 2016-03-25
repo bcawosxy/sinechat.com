@@ -28,6 +28,60 @@ class Model {
 	    }
 	}
 
+	function __destruct() { 
+		if (!empty(self::$where)) self::$where = '';
+		if (!empty(self::$column)) self::$column = '';
+		if (!empty(self::$join)) self::$join = '';
+		if (!empty(self::$group)) self::$group = '';
+		if (!empty(self::$having)) self::$having = '';
+		if (!empty(self::$order)) self::$order = '';
+		if (!empty(self::$param)) self::$param = '';
+		if (!empty(self::$limit)) self::$limit = '';
+		if (!empty(self::$lock)) self::$lock = '';
+	}
+
+	function add(array $param) {
+		if (empty($param)) throw new Exception('Parameters error');
+		
+		$this->pdo->exec($this->add_logic($param));
+		$id = (int)$this->pdo->lastInsertId();//沒有 AUTO_INCREMENT 的話，會得到 0
+		return $id? $id : true;
+	}
+	
+	function add_logic(array $param, $replace=false) {
+		$a_column = [];
+		$s_value = null;
+		switch (array_depth($param)) {
+			case 1:
+				$a_column = array_keys($param);
+				$s_value = '('.implode(',', array_map( [$this,'quote'] ,$param) ).')';
+				break;
+	
+			case 2:
+				$a_column = array_keys(reset($param));
+				$a_value = [];
+				foreach ($param as $v0) {
+					$a_value[] = '('.implode(',', array_map([$this, 'quote'], $v0)).')';
+				}
+				$s_value = implode(',', $a_value);
+				break;
+	
+			default:
+				throw new Exception('Unknown case');
+				break;
+		}
+		$sql = 'Insert into '.$this->db.'.'.$this->table.' ('.implode(',', array_map([$this, 'quote_column'], $a_column)).') values '.$s_value;
+		if ($replace) {
+			$tmp0 = [];
+			foreach ($a_column as $v0) {
+				$tmp0[] = $v0.'=values('.$v0.')';
+			}
+			$sql .= ' on duplicate key update '.implode(',', $tmp0);
+		}
+		
+		return $sql;
+	}
+
 	function column(array $column=null) {
 		if ($column) {
 			$column = array_filter($column, function($v0) {return $v0 !== null;});
@@ -36,6 +90,20 @@ class Model {
 		return $this;
 	}
 	
+	function edit(array $param) {
+		if (empty($param)) throw new Exception('Parameters error');
+		
+		$tmp0 = [];
+		foreach ($param as $k0 => $v0) {
+			$tmp0[] = '`'.$k0.'`'.'='.$this->pdo->quote($v0);
+		}
+		$this->sql = 'Update '.$this->db.'.'.$this->table.' set '.implode(',', $tmp0);
+		if (!empty(self::$where)) $this->sql .= ' where '.implode(' and ', self::$where);
+
+		$result = $this->pdo->exec($this->sql);
+		return $result;
+	}
+
 	function table($table = null) {
 		if($table) {
 			$this->table = $table;
@@ -43,7 +111,15 @@ class Model {
 		return $this;
 	}
 
+	function fetchAll($method = 'assoc') {
+		return $this->fetch_logic(__FUNCTION__, $method);
+	}
+
 	function fetch($method = 'assoc') {
+		return $this->fetch_logic(__FUNCTION__, $method);
+	}
+
+	function fetch_logic($fetch_case, $method) {
 		$this->sql = 'Select';
 		$this->sql .= (self::$column)? ' '.implode(',', array_map('trim', self::$column)) : ' '.$this->table.'.*';
 		$this->sql .= ' from '.$this->db.'.'.$this->table;
@@ -53,18 +129,26 @@ class Model {
 		if (!empty(self::$order)) $this->sql .= ' order by '.implode(',', self::$order);
 		if (!empty(self::$limit)) $this->sql .= ' limit '.self::$limit;
 		if (!empty(self::$lock)) $this->sql .= ' '.self::$lock;
-
+		
+		if($method=='debug') {
+			//display sql code for debug
+			$method = 'assoc';
+			echo '['.$this->sql.']';
+	    }
+	    
 	    $result = $this->pdo->prepare($this->sql);
 	    $result->execute(self::$param);
 	    $this->data = null;
 	    
 	    /**
+	     *  0325 加上fetchAll,並把case移出處理
 	     *  0324 這邊可能會再加強,不過目前以此fetch方式為主
 	     */
-	    while($row = $result->fetch($this->fetch_method($method))){
-	    	$this->data[] = $row;
+	    while($row = $result->$fetch_case($this->fetch_method($method))){
+	    	$this->data = $row;
 	    }
 		return $this->data;
+		
 	}
 
 	private function fetch_method($method = null) {
@@ -85,6 +169,7 @@ class Model {
 				case 'obj':
 					$this->method = PDO::FETCH_OBJ;
 					break;
+
 				default:
 					$this->method = PDO::FETCH_ASSOC;
 					break;
@@ -99,8 +184,7 @@ class Model {
 			self::$group = array_merge(self::$group, $group);
 		}
 		return $this;
-	}
-	
+	}	
 
 	function join(array $join=null) {
 		if ($join) {
@@ -113,7 +197,9 @@ class Model {
 	}
 	
 	function limit($limit=null) {
-		if ($limit) self::$limit = str_replace(' ', '', $limit);
+		if ($limit) {
+			self::$limit = str_replace(' ', '', $limit);
+		}
 		return $this;
 	}
 	
@@ -194,6 +280,26 @@ class Model {
 			}
 		}
 		return $this;
+	}
+
+	function quote($var, $param=null) {
+		if ($var === null) {
+			$return = "''";//目前欄位皆設置為 not null，故以空字串返回；但往後仍應考慮處理 null 的狀況
+		} else {
+			$return = is_string($var)? $this->pdo->quote($var) : $var;
+		}
+		
+		return $return;
+	}
+
+	function quote_column($var, $param=null) {
+		if ($var === null) {
+			$return = "''";//目前欄位皆設置為 not null，故以空字串返回；但往後仍應考慮處理 null 的狀況
+		} else {
+			$return = is_string($var)? '`'.$var.'`' : $var;
+		}
+		
+		return $return;
 	}
 }
 
