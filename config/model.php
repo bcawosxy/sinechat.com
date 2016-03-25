@@ -99,7 +99,7 @@ class Model {
 		}
 		$this->sql = 'Update '.$this->db.'.'.$this->table.' set '.implode(',', $tmp0);
 		if (!empty(self::$where)) $this->sql .= ' where '.implode(' and ', self::$where);
-
+		
 		$result = $this->pdo->exec($this->sql);
 		return $result;
 	}
@@ -135,7 +135,7 @@ class Model {
 			$method = 'assoc';
 			echo '['.$this->sql.']';
 	    }
-	    
+
 	    $result = $this->pdo->prepare($this->sql);
 	    $result->execute(self::$param);
 	    $this->data = null;
