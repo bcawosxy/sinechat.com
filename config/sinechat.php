@@ -64,7 +64,10 @@
 			$dbname = 'sinechat';
 		break;
 	}
-	
+	define('DBHOST', $dbhost);
+	define('DBUSER', $dbuser);
+	define('DBPASS', $dbpass);
+	define('DBNAME', $dbname);
 	// $conn = mysql_connect($dbhost,$dbuser,$dbpass);
 	$conn = mysql_connect($dbhost, $dbuser, $dbpass) or die('資料庫連結錯誤，請聯絡系統管理員。');
 	mysql_query('SET NAMES "utf8"', $conn);

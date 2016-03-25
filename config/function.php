@@ -1144,18 +1144,13 @@ function mkdir_p($root, $path) {
  * @param string $model
  * @return object
  */
-function Model($model=null) {
-	static $instance = array();
-	
-	if ($model == null) {
-		$model = 'Model';
-		if (!isset($instance[$model])) $instance[$model] = new \Model2;//使編輯器提供自動完成用
-	} else {
-		$model .= 'Model';
-		if (!isset($instance[$model])) $instance[$model] = new $model;
+function Model($table=null) {
+	static $instance;
+	if ($table) {
+		$Model = new Model(DBHOST, DBUSER, DBPASS, DBNAME, array(PDO::ATTR_PERSISTENT => true));
+		$instance = $Model->table($table);
 	}
-	
-	return $instance[$model];
+	return $instance;
 }
 
 /**

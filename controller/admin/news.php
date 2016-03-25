@@ -5,10 +5,7 @@ switch (_FUNCTION) {
 	case 'index' :
 	{
 		if(is_ajax()) {}
-		$query = query_despace('select * from `news` where status != "none" and status != "delete" order by `release` desc;');
-		$result = mysql_query($query);
-		$data = array();
-		while($row = mysql_fetch_assoc($result)){ $data[] = $row;	}
+		$data = Model('news')->where([[[['`status`', '!=', ':status'], ['`status`', '!=', ':status']], 'and']])->param(['status'=>'none', 'status'=>'delete'])->order(['`release`'=>'DESC'])->fetchAll();
 	}
 	break;	
 
@@ -36,17 +33,21 @@ switch (_FUNCTION) {
 			if($act == null || $title == null || $release == null || $status == null || $content == null) json_encode_return(0, '資料不完整，請重新填寫');
 			switch ($act) {
 				case 'add':
-					$query = query_despace('INSERT INTO `news` (`title` , `content` , `status`, `release` , `modifytime`) VALUES ("'.$title.'", "'.$content.'", "'.$status.'", "'.$release.'", NOW());');
-					$result = mysql_query($query);
+					$param = ['title'=>$title, 'content'=>$content, 'status'=>$status, 'release'=>$release, 'modifytime'=>inserttime()];
+					$result = Model('news')->add($param);
 					if(!$result) json_encode_return(0, '新增資料失敗，請重新輸入資料');
 					json_encode_return(1, '新增資料完成', url('admin', 'news'));
-
 					break;
-
 				
 				case 'edit':
-					$query = query_despace('UPDATE `news` SET  `title` = "'.$title.'" , `content` = "'.$content.'", `status` = "'.$status.'" , `release` = "'.$release.'" , `modifytime` = NOW() where `news_id` = "'.$news_id.'";');
-					$result = mysql_query($query);
+					$edit = [
+						'title'=>$title, 
+						'content'=>$content ,
+						'status'=>$status,
+						'release'=>$release,
+						'modifytime'=>inserttime()
+					];
+					$result = Model('news')->where([[[['news_id', '=', $news_id]], 'and']])->edit($edit);
 					if(!$result) json_encode_return(0, '更新資料失敗，請重新輸入資料');
 					json_encode_return(1, '更新完成', url('admin', 'news/edit', ['news_id'=>$news_id]));
 					
@@ -72,10 +73,7 @@ switch (_FUNCTION) {
 		];
 		if($news_id != null && is_numeric($news_id)) {
 			$act = 'edit';
-			$query = query_despace('select * from `news` where news_id = '.$news_id.' and status != "none";');
-			$result = mysql_query($query);
-			$data = array();
-			while($row = mysql_fetch_assoc($result)){ $data = $row;	}
+			$data = Model('news')->where([[[['news_id', '=', ':news_id'], ['status', '!=', ':status']], 'and']])->param(['news_id'=>$news_id, 'status'=>'none'])->fetch();
 		}
 	}
 }

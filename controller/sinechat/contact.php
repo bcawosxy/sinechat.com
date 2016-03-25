@@ -40,7 +40,7 @@
 					break;
 				
 				case 'facebook':
-					$tmp = '<li class="icon fa-facebook">'.$v0['value'].'</li>';
+					$tmp = '<li class="icon fa-facebook"><a href="'.$v0['value'].'">新誠粉絲專頁</a></li>';
 					break;
 
 				case 'host':
