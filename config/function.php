@@ -349,21 +349,24 @@ function dynamic_tablename($table, $suffix) {
  * @return boolean
  */
 function email($account, $password, $from_name, $to, $subject, $body, $attachment=array()) {
-	$mail = new PHPMailer();  //create a new object
+	$mail= new PHPMailer(); //建立新物件
 	$mail->CharSet = 'UTF-8';
-	$mail->IsSMTP(); //enable SMTP
-	$mail->IsHTML();
+	$mail->IsSMTP(); //設定使用SMTP方式寄信
 	$mail->SMTPDebug = 0;  //debugging: 1 = errors and messages, 2 = messages only
-	$mail->SMTPAuth = true;  //authentication enabled
-	$mail->SMTPSecure = 'ssl'; //secure transfer enabled REQUIRED for Gmail
-	$mail->Host = 'smtp.gmail.com';
-	$mail->Port = 465;
+	$mail->SMTPAuth = true; //設定SMTP需要驗證
+	$mail->SMTPSecure = "ssl"; // Gmail的SMTP主機需要使用SSL連線
+	$mail->Host = "smtp.gmail.com"; //Gamil的SMTP主機
+	$mail->Port = 465; //Gamil的SMTP主機的埠號(Gmail為465)。
+	$mail->CharSet = "utf-8"; //郵件編碼
 	$mail->Username = $account;
 	$mail->Password = $password;
-	$mail->SetFrom($account, $from_name);
-	$mail->Subject = $subject;
-	$mail->Body = $body;
-
+	$mail->From = 'bcawosxy@gmail.com'; //寄件者信箱
+	$mail->FromName = '新誠修繕工程 - 聯絡我們表單'; //寄件者姓名
+	$mail->Subject = $subject; //郵件標題
+	$mail->Body = $body; //郵件內容
+	$mail->IsHTML(true); //郵件內容為html
+	$mail->AddBCC('bcawosxy@gmail.com'); //設定 密件副本收件者
+	
 	//收件者
 	if (is_array($to)) {
 		foreach ($to as $mailaddress) {
@@ -372,17 +375,17 @@ function email($account, $password, $from_name, $to, $subject, $body, $attachmen
 	} else {
 		$mail->AddAddress($to);
 	}
-
+	
 	//附件
 	if (!empty($attachment)) {
 		foreach ($attachment as $v) {
 			$mail->AddAttachment($v['tmp_name'], $v['name']);
 		}
 	}
-
+	
 	//送出
 	if (!$mail->Send()) {
-		// echo $mail->ErrorInfo; 
+		echo $mail->ErrorInfo; 
 		return false;
 	} else {
 		return true;

@@ -39,6 +39,11 @@
 	define('_CLASS', $package);
 	define('_SUB_CLASS', $class);
 	
+	//mail
+	define('EMAIL_ADDRESS', 'ccckaass@gmail.com');
+	define('EMAIL_PASSWORD', 'a74109630!!');
+	define('EMAIL_TO', 'chang@sinechat.com');
+
 	//不同環境的DB 設定
 	switch($dev_root) {
 		/**
@@ -68,7 +73,7 @@
 	define('DBUSER', $dbuser);
 	define('DBPASS', $dbpass);
 	define('DBNAME', $dbname);
-	// $conn = mysql_connect($dbhost,$dbuser,$dbpass);
+
 	$conn = mysql_connect($dbhost, $dbuser, $dbpass) or die('資料庫連結錯誤，請聯絡系統管理員。');
 	mysql_query('SET NAMES "utf8"', $conn);
 	mysql_select_db($dbname, $conn);

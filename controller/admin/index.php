@@ -4,7 +4,6 @@ $join =[['left join', 'service', 'using(`service_id`)']];
 $param = ['status'=>'open'];
 $data =  null;
 $pie_data = array(array('value'=> '0', 'color'=>'#fffff', 'highlight'=>'#FF5A5E', 'label'=>'案件'));
-// $data = $Model->table('product')->column($column)->join($join)->where([[[['product.status', '=', ':status' ]], 'and']])->param($param)->group(['service_id'])->fetchAll();
 $data = Model('product')->column($column)->join($join)->where([[[['product.status', '=', ':status' ]], 'and']])->param($param)->group(['service_id'])->fetchAll();
 
 $color=[
