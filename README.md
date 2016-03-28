@@ -1,4 +1,8 @@
 # sinechat.com
+###0328
+####v2.1.0
+1.add phpmailer on contact page
+
 ###0325
 ####v2.0.2
 1.後台調整為PDO查詢[index][setbanner][news(delete un do)]

@@ -22,7 +22,7 @@
 		$body .= '聯絡時間：'.inserttime().'<br>';
 		$subject = '新誠修繕工程 - 客戶連絡提醒 - '.$name;
 		$send = email(EMAIL_ADDRESS, EMAIL_PASSWORD, '新誠修繕工程', EMAIL_TO,  $subject, $body);				
-		json_encode_return(1, '新增資料完成', url('index', 'index'));
+		json_encode_return(1, '我們已收到您的聯絡資料,將盡快與您聯繫。', url('index', 'index'));
 		
 	}
 	

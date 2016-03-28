@@ -83,6 +83,7 @@
 </div>
 
 <script>
+
 	$('#form_send').on('submit', function(){
 		var name = $('input[name="name"]').val(),email = $('input[name="email"]').val(),tel = $('input[name="tel"]').val(),gender = $('input[name="gender"]').val(),memo=$('#memo').val();
 		var reg = /^[^\s]+@[^\s]+\.[^\s]{2,3}$/;
@@ -97,20 +98,29 @@
 			r = {'message': '電子信箱格式錯誤。'};
 			_jbox(r, 'error');
 		} else {
-			$.post('<?php echo url('contact', 'index') ?>' , {
-				name : name ,
-				email : email ,
-				tel : tel ,
-				gender : gender,
-				memo : memo,
-			},function(r){
-				r = $.parseJSON(r);
-				if(r.result == 1) {
-					_jbox(r, 'success');
-				}else{
-					_jbox(r, 'error');			
-				}
-			});
+			var processingBox = new jBox('Modal', {
+				closeOnClick: false,
+				closeButton: 'title',
+				width: 140,
+				height: 60,
+				onOpen : function(){
+					$.post('<?php echo url('contact', 'index') ?>' , {
+						name : name ,
+						email : email ,
+						tel : tel ,
+						gender : gender,
+						memo : memo,
+					},function(r){
+						r = $.parseJSON(r);
+						processingBox.close();
+						if(r.result == 1) {
+							_jbox(r, 'success');
+						}else{
+							_jbox(r, 'error');			
+						}
+					});
+				},
+			}).setContent('<span style="padding-left:20px;font-weight:bold;color:rgba(85, 85, 85, 0.8);">處理中...</span><img src="http://dev.pinpin.com/static_file/pinpinbox/zh_TW/images/loading.gif">').open();
 		}
 	});
 
