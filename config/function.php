@@ -361,7 +361,7 @@ function email($account, $password, $from_name, $to, $subject, $body, $attachmen
 	$mail->Username = $account;
 	$mail->Password = $password;
 	$mail->From = 'bcawosxy@gmail.com'; //寄件者信箱
-	$mail->FromName = '新誠修繕工程 - 聯絡我們表單'; //寄件者姓名
+	$mail->FromName = $from_name; //寄件者姓名
 	$mail->Subject = $subject; //郵件標題
 	$mail->Body = $body; //郵件內容
 	$mail->IsHTML(true); //郵件內容為html
