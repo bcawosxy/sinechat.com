@@ -29,7 +29,7 @@
 		
 		return array($package, $class, $function, $version);
 	}
-	
+	 
 	define('SITE_FOLDER', null);
 	$dev_root = $_SERVER['SERVER_NAME'];
 	$SITE_FOLDER = constant('SITE_FOLDER');
