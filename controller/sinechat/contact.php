@@ -5,14 +5,25 @@
 		$tel = (!empty($_POST['tel'])) ? $_POST['tel'] : null ;
 		$gender = (!empty($_POST['gender'])) ? $_POST['gender'] : null ;
 		$memo = (!empty($_POST['memo'])) ? $_POST['memo'] : null ;
+	
 		if($name == null || $tel == null || $gender == null || $memo == null ) json_encode_return(0, '資料不完整，請重新填寫');
-
 		$query = query_despace('INSERT INTO `contact` (`name` , `email`, `tel`,`gender`, `memo`, `status`, `reading`, `ip`, `inserttime`, `modifytime` )
 						VALUES ("'.$name.'", "'.$email.'", "'.$tel.'","'.$gender.'", "'.$memo.'", "open", "unread", "'.remote_ip().'", "'.inserttime().'", "'.inserttime().'");');
-
 		$result = mysql_query($query);
 		if(!$result) json_encode_return(0, '新增資料失敗，請重新輸入資料');
+		
+		//send mail
+		require_once(PATH_ROOT.'assets/sdk/phpmailer/PHPMailerAutoload.php');
+		$body = '聯絡人姓名：'.$name.'<br>';
+		$body .= '聯絡人信箱：'.$email.'<br>';
+		$body .= '聯絡人電話：'.$tel.'<br>';
+		$body .= '聯絡人性別：'.$gender.'<br>';
+		$body .= '備註：'.$memo.'<br>';
+		$body .= '聯絡時間：'.inserttime().'<br>';
+		$subject = '新誠修繕工程 - 客戶連絡提醒 - '.$name;
+		$send = email(EMAIL_ADDRESS, EMAIL_PASSWORD, '新誠修繕工程', EMAIL_TO,  $subject, $body);				
 		json_encode_return(1, '新增資料完成', url('index', 'index'));
+		
 	}
 	
 	$query = query_despace('select * from `info`;');
