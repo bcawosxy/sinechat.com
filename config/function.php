@@ -360,7 +360,7 @@ function email($account, $password, $from_name, $to, $subject, $body, $attachmen
 	$mail->CharSet = "utf-8"; //郵件編碼
 	$mail->Username = $account;
 	$mail->Password = $password;
-	$mail->From = 'bcawosxy@gmail.com'; //寄件者信箱
+	$mail->From = EMAIL_FROM; //寄件者信箱
 	$mail->FromName = $from_name; //寄件者姓名
 	$mail->Subject = $subject; //郵件標題
 	$mail->Body = $body; //郵件內容
