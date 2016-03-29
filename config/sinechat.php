@@ -56,7 +56,7 @@
 			define('EMAIL_ADDRESS', 'ccckaass@gmail.com');
 			define('EMAIL_FROM', 'ccckaass@gmail.com');
 			define('EMAIL_PASSWORD', 'a74109630!!');
-			define('EMAIL_TO', 'chang@sinechat.com');
+			define('EMAIL_TO', 'bcawosxy@gmail.com');
 			define('EMAIL_SMtP_HOST', 'smtp.gmail.com');
 		break;
 		
@@ -100,7 +100,7 @@
 			define('EMAIL_ADDRESS', 'service@sinechat.com');
 			define('EMAIL_FROM', 'service@sinechat.com');
 			define('EMAIL_PASSWORD', 'qawsedrfsinechat!!');
-			define('EMAIL_TO', 'bcawosxy@gmail.com');
+			define('EMAIL_TO', 'chang@sinechat.com');
 			define('EMAIL_SMtP_HOST', 'sg2plcpnl0118.prod.sin2.secureserver.net');
 		break;
 
@@ -119,10 +119,11 @@
 			define('ENV', 'product');
 			
 			//mail
-			define('EMAIL_ADDRESS', 'ccckaass@gmail.com');
-			define('EMAIL_PASSWORD', 'a74109630!!');
-			define('EMAIL_TO', 'bcawosxy@gmail.com');
-			define('EMAIL_SMtP_HOST', 'smtp.gmail.com');
+			define('EMAIL_ADDRESS', 'service@sinechat.com');
+			define('EMAIL_FROM', 'service@sinechat.com');
+			define('EMAIL_PASSWORD', 'qawsedrfsinechat!!');
+			define('EMAIL_TO', 'chang@sinechat.com');
+			define('EMAIL_SMtP_HOST', 'sg2plcpnl0118.prod.sin2.secureserver.net');
 		break;
 
 	}
