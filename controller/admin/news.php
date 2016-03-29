@@ -13,8 +13,8 @@ switch (_FUNCTION) {
 		$news_id = (!empty($_POST['news_id'])) ? $_POST['news_id'] : null ;
 		if($news_id == null ) json_encode_return(0, '錯誤，請重新操作');
 		
-		$query = query_despace('DELETE FROM `news` WHERE `news_id`= '.$news_id.' limit 1;');
-		$result = mysql_query($query);
+		$result = Model('news')->where([[[['news_id', '=', $news_id]], 'and']])->edit(['status'=>'delete']);
+
 		if(!$result) json_encode_return(0, '刪除資料失敗，請重新操作');
 		json_encode_return(1, '刪除資料完成', url('admin', 'news'));
 	break;
@@ -73,7 +73,7 @@ switch (_FUNCTION) {
 		];
 		if($news_id != null && is_numeric($news_id)) {
 			$act = 'edit';
-			$data = Model('news')->where([[[['news_id', '=', ':news_id'], ['status', '!=', ':status']], 'and']])->param(['news_id'=>$news_id, 'status'=>'none'])->fetch();
+			$data = Model('news')->where([[[['news_id', '=', $news_id]], 'and']])->fetch();
 		}
 	}
 }

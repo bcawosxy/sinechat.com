@@ -90,6 +90,14 @@ class Model {
 		return $this;
 	}
 	
+	function delete() {
+		$sql = 'Delete from '.$this->db.'.'.$this->table;
+		if (!empty(self::$where)) $sql .= ' where '.implode(' and ', self::$where);
+		$this->pdo->exec($sql);
+
+		return true;
+	}
+
 	function edit(array $param) {
 		if (empty($param)) throw new Exception('Parameters error');
 		
@@ -98,8 +106,9 @@ class Model {
 			$tmp0[] = '`'.$k0.'`'.'='.$this->pdo->quote($v0);
 		}
 		$this->sql = 'Update '.$this->db.'.'.$this->table.' set '.implode(',', $tmp0);
+		
 		if (!empty(self::$where)) $this->sql .= ' where '.implode(' and ', self::$where);
-
+// echo $this->sql;
 		$result = $this->pdo->exec($this->sql);
 		return $result;
 	}
@@ -123,7 +132,7 @@ class Model {
 	function fetch_logic($fetch_case, $method) {
 		$this->sql = 'Select';
 		$this->sql .= (self::$column)? ' '.implode(',', array_map('trim', self::$column)) : ' '.$this->table.'.*';
-		$this->sql .= ' from '.$this->db.'.'.$this->table;
+		$this->sql .= ' From '.$this->db.'.'.$this->table;
 		if (!empty(self::$join)) $this->sql .= ' '.implode(' ', self::$join);
 		if (!empty(self::$where)) $this->sql .= ' where '.implode(' and ', self::$where);
 		if (!empty(self::$group)) $this->sql .= ' group by '.implode(',', array_map('trim', self::$group));
@@ -134,11 +143,11 @@ class Model {
 		if($method=='debug') {
 			//display sql code for debug
 			$method = 'assoc';
-			echo '['.$this->sql.']';
+			echo '['.$this->sql.']<br>';
 	    }
 
 	    $result = $this->pdo->prepare($this->sql);
-	    $result->execute(self::$param);
+	    $result->execute(self::$param);	    
 	    $this->data = null;
 	    
 	    /**
