@@ -354,8 +354,8 @@ function email($account, $password, $from_name, $to, $subject, $body, $attachmen
 	$mail->IsSMTP(); //設定使用SMTP方式寄信
 	$mail->SMTPDebug = 0;  //debugging: 1 = errors and messages, 2 = messages only
 	$mail->SMTPAuth = true; //設定SMTP需要驗證
-	$mail->SMTPSecure = "ssl"; // Gmail的SMTP主機需要使用SSL連線
-	$mail->Host = EMAIL_SMtP_HOST; //Gamil的SMTP主機
+	$mail->SMTPSecure = "ssl"; //SMTP主機需要使用SSL連線
+	$mail->Host = EMAIL_SMtP_HOST; //SMTP主機
 	$mail->Port = 465; //Gamil的SMTP主機的埠號(Gmail為465)。
 	$mail->CharSet = "utf-8"; //郵件編碼
 	$mail->Username = $account;
