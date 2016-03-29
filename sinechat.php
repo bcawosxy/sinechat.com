@@ -70,20 +70,7 @@
 		break;
 
 		/**
-		 *	正式環境
-		 */
-		case 'www.sinechat.com':
-		case 'sinechat.com':
-			//關閉錯誤訊息
-			ini_set('display_errors', 'Off');
-			$dbhost = 'localhost';
-			$dbuser = 'ccckaass';
-			$dbpass = '74109630';
-			$dbname = 'sinechat';
-		break;
-
-		/**
-		 *	正式環境
+		 *	正式環境上測試
 		 */
 		case 'www.ccckaass.com':
 		case 'ccckaass.com':
@@ -94,7 +81,22 @@
 			$dbpass = 'a74109630!';
 			$dbname = 'sinechat';
 		break;
+
+		/**
+		 *	正式環境
+		 */
+		case 'www.sinechat.com':
+		case 'sinechat.com':
+			//關閉錯誤訊息
+			ini_set('display_errors', 'Off');
+			$dbhost = 'localhost';
+			$dbuser = 'sinechat';
+			$dbpass = 'a74109630!';
+			$dbname = 'sinechat';
+		break;
+
 	}
+
 	define('DBHOST', $dbhost);
 	define('DBUSER', $dbuser);
 	define('DBPASS', $dbpass);
