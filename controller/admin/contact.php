@@ -6,8 +6,7 @@ switch (_FUNCTION) {
 		if(is_ajax()) {
 			$contact_id = ( !empty($_POST['contact_id']) ) ? $_POST['contact_id'] : null ;
 			if($contact_id == null ) json_encode_return(0, '錯誤，請重新操作');
-			$query = query_despace('UPDATE `contact` SET `status` = "archive" where `contact_id` = "'.$contact_id.'";');
-			$result = mysql_query($query);
+			$result = Model('contact')->where([[[['contact_id', '=' ,$contact_id]] ,'and']])->edit(['status'=>'archive']);
 			json_encode_return(1, '封存完成', url('admin', 'contact/edit', ['contact_id'=>$contact_id]));
 		}
 	break;
@@ -16,8 +15,8 @@ switch (_FUNCTION) {
 		if(is_ajax()) {
 			$contact_id = (!empty($_POST['contact_id'])) ? $_POST['contact_id'] : null ;
 			if($contact_id == null ) json_encode_return(0, '錯誤，請重新操作');
-			$query = query_despace('DELETE FROM `contact` WHERE `contact_id`= '.$contact_id.' limit 1;');
-			$result = mysql_query($query);
+
+			$result = Model('contact')->where([[[['contact_id', '=' ,$contact_id]] ,'and']])->edit(['status'=>'delete']);
 			if(!$result) json_encode_return(0, '刪除資料失敗，請重新操作');
 			json_encode_return(1, '刪除資料完成', url('admin', 'contact'));
 		}
@@ -26,10 +25,7 @@ switch (_FUNCTION) {
 	case 'edit' :
 		$contact_id = ( !empty($_GET['contact_id']) ) ? $_GET['contact_id'] : null ;
 		if($contact_id != null && is_numeric($contact_id)) {
-			$query = query_despace('select * from `contact` where contact_id = '.$contact_id.' and status != "delete";');
-			$result = mysql_query($query);
-			$data = array();
-			while($row = mysql_fetch_assoc($result)){ $data = $row;	}
+			$data = Model('contact')->where([[[['status', '!=', ':status'], ['status', '!=', ':status'], ['contact_id', '=', ':contact_id']], 'and']])->param([':status'=>'delete', ':status'=>'none', ':contact_id'=>$contact_id])->fetch();
 
 			if($data['status'] == 'open') $status_text  = '一般';
 			if($data['status'] == 'archive') $status_text  = '封存';
@@ -37,19 +33,14 @@ switch (_FUNCTION) {
 
 			//初次讀取時進行資料更新
 			if($data['reading'] == 'unread') {
-				$query = query_despace('UPDATE `contact` SET `reading` = "reading", `readtime` = NOW() where `contact_id` = "'.$contact_id.'";');
-				$result = mysql_query($query);
+				$result = Model('contact')->where([[[['contact_id', '=', $contact_id]], 'and']])->edit(['reading'=>'reading', 'readtime'=>inserttime()]);
 			}
 		}
 	break;
 
 	case 'index' :
 		if(is_ajax()) {}
-
-		$query = query_despace('select * from `contact` where status != "delete" order by `inserttime` desc;');
-		$result = mysql_query($query);
-		$data = $a_open = $a_archive = array();
-		while($row = mysql_fetch_assoc($result)){ $data[] = $row;	}
+		$data = Model('contact')->where([[[['status', '!=', ':status'], ['status', '!=', ':status']], 'and']])->param([':status'=>'delete', ':status'=>'none'])->order(['inserttime'=>'DESC'])->fetchAll();
 
 		foreach ($data as $k0 => $v0) {
 			$reading = ($v0['reading'] == 'reading')  ? '<span class="label label-success">Read</span>' : '<span class="label label-warning">Unread</span>' ;

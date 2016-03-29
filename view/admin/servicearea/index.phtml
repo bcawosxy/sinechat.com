@@ -27,16 +27,18 @@
 							</thead>
 							<tbody>
 								<?php 
-								foreach($data as $k0 => $v0) {
-								$status = ($v0['status']== 'open') ? '<span class="label label-success">OPEN</span>' : '<span class="label label-warning">CLOSE</span>';
-									echo '<tr>
-											<td>'.$v0['servicearea_id'].' </td>
-											<td><a href="'.url('admin', 'servicearea/edit', ['servicearea_id'=>$v0['servicearea_id']]).'">編輯</a></td>
-											<td><a href="'.url('admin', 'servicearea/edit', ['servicearea_id'=>$v0['servicearea_id']]).'">'.$v0['name'].'</a></td>
-											<td>'.$v0['seqence'].' </td>
-											<td>'.$v0['modifytime'].' </td>
-											<td>'.$status.' </td>																
-										</tr>';
+								if( is_array($data)) {
+									foreach($data as $k0 => $v0) {
+									$status = ($v0['status']== 'open') ? '<span class="label label-success">OPEN</span>' : '<span class="label label-warning">CLOSE</span>';
+										echo '<tr>
+												<td>'.$v0['servicearea_id'].' </td>
+												<td><a href="'.url('admin', 'servicearea/edit', ['servicearea_id'=>$v0['servicearea_id']]).'">編輯</a></td>
+												<td><a href="'.url('admin', 'servicearea/edit', ['servicearea_id'=>$v0['servicearea_id']]).'">'.$v0['name'].'</a></td>
+												<td>'.$v0['seqence'].' </td>
+												<td>'.$v0['modifytime'].' </td>
+												<td>'.$status.' </td>																
+											</tr>';
+									}
 								}
 								?>
 							</tbody>

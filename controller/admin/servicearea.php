@@ -5,19 +5,16 @@ switch (_FUNCTION) {
 	case 'index' :
 	{
 		if(is_ajax()) {}
-		$query = query_despace('select * from `servicearea` where status != "none" order by `servicearea_id` desc;');
-		$result = mysql_query($query);
-		$data = array();
-		while($row = mysql_fetch_assoc($result)){ $data[] = $row;	}
+		$data = Model('servicearea')->where([[[['status', '!=', ':status']], 'and']])->param(['status'=>'none'])->fetchAll();
 	}
 	break;	
 
 	case 'delete' :
 		$servicearea_id = (!empty($_POST['servicearea_id'])) ? $_POST['servicearea_id'] : null ;
 		if($servicearea_id == null ) json_encode_return(0, '錯誤，請重新操作');
-		
-		$query = query_despace('DELETE FROM `servicearea` WHERE `servicearea_id`= '.$servicearea_id.' limit 1;');
-		$result = mysql_query($query);
+
+		$result = Model('servicearea')->where([[[['servicearea_id', '=', $servicearea_id]], 'and']])->edit(['status'=>'delete']);
+
 		if(!$result) json_encode_return(0, '刪除資料失敗，請重新操作');
 		json_encode_return(1, '刪除資料完成', url('admin', 'servicearea'));
 	break;
@@ -36,17 +33,29 @@ switch (_FUNCTION) {
 			if($act == null || $name == null|| $status == null ) json_encode_return(0, '資料不完整，請重新填寫');
 			switch ($act) {
 				case 'add':
-					
-					$query = query_despace('INSERT INTO `servicearea` (`name`, `seqence` , `status`, `inserttime`, `modifytime`) VALUES ("'.$name.'", "'.$seqence.'" ,"'.$status.'", NOW(), NOW());');
-					$result = mysql_query($query);
+					$param = [
+						'name' => $name,
+						'seqence' => $seqence,
+						'status' => $status,
+						'inserttime' => inserttime(),
+						'modifytime' => inserttime(),
+					];
+					$result = Model('servicearea')->add($param);
+
 					if(!$result) json_encode_return(0, '新增資料失敗，請重新輸入資料');
 					json_encode_return(1, '新增資料完成', url('admin', 'servicearea'));
 					
 					break;
 
 				case 'edit':
-					$query = query_despace('UPDATE `servicearea` SET  `name` = "'.$name.'" , `seqence` = "'.$seqence.'",`status` = "'.$status.'" , `modifytime` = NOW() where `servicearea_id` = "'.$servicearea_id.'";');
-					$result = mysql_query($query);
+					$param = [
+						'name' => $name,
+						'seqence' => $seqence,
+						'status' => $status,
+						'modifytime' => inserttime(),
+					];
+					$result = Model('servicearea')->where([[[['servicearea_id', '=', $servicearea_id]], 'and']])->edit($param);
+
 					if(!$result) json_encode_return(0, '更新資料失敗，請重新輸入資料');
 					json_encode_return(1, '更新完成', url('admin', 'servicearea/edit', ['servicearea_id'=>$servicearea_id]));
 					
@@ -71,10 +80,7 @@ switch (_FUNCTION) {
 		];
 		if($servicearea_id != null && is_numeric($servicearea_id)) {
 			$act = 'edit';
-			$query = query_despace('select * from `servicearea` where servicearea_id = '.$servicearea_id.' and status != "none";');
-			$result = mysql_query($query);
-			$data = array();
-			while($row = mysql_fetch_assoc($result)){ $data = $row;	}
+			$data = Model('servicearea')->where([[[['servicearea_id', '=', ':servicearea_id'], ['status', '!=', ':status'], ['status', '!=', ':status']] ,'and']])->param(['servicearea_id'=>$servicearea_id, 'status'=>'none' , 'status'=>'delete'])->fetch();
 		}
 	}
 }

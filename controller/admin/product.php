@@ -5,10 +5,9 @@ switch (_FUNCTION) {
 	case 'index' :
 	{
 		if(is_ajax()) {}
-		$query = query_despace('select `product`.*, `service`.`name` as service_name, `service`.`service_id` as service_id from `product` left join `service` using(`service_id`) where `product`.`status` != "none" order by `product`.`product_id` desc;');
-		$result = mysql_query($query);
-		$data = array();
-		while($row = mysql_fetch_assoc($result)){ $data[] = $row;	}
+		$column = ['product.*', 'service.name as service_name', 'service.service_id as service_id' ];
+		$data = Model('product')->column($column)->join([['left join', 'service', 'USING(`service_id`)']])->where([[[['product.status', '!=', ':status'], ['product.status', '!=', ':status'] ], 'and']])->param([':status'=>'none', ':status'=>'delete'])->order(['product.product_id'=>'DESC'])->fetchAll();
+
 	}
 	break;	
 
@@ -17,8 +16,7 @@ switch (_FUNCTION) {
 			$product_id = (!empty($_POST['product_id'])) ? $_POST['product_id'] : null ;
 			if($product_id == null ) json_encode_return(0, '錯誤，請重新操作');
 			
-			$query = query_despace('DELETE FROM `product` WHERE `product_id`= '.$product_id.' limit 1;');
-			$result = mysql_query($query);
+			$result = Model('product')->where([[[['product_id', '=', $product_id]], 'and']])->edit(['status'=>'delete']);
 			if(!$result) json_encode_return(0, '刪除資料失敗，請重新操作');
 			json_encode_return(1, '刪除資料完成', url('admin', 'product'));
 		}
@@ -43,10 +41,22 @@ switch (_FUNCTION) {
 			
 			switch($act){
 				case 'add' :
-					$query = query_despace('INSERT INTO `product` (`name` , `cover`, `image`,`service_id`, `status`, `content`, `description`, `seqence` , `inserttime` ,`modifytime`) VALUES ("'.$name.'", "null", "null", "'.$service_id.'", "'.$status.'" ,"'.$content.'","'.$description.'","'.$seqence.'", NOW(), NOW());');
-					$result = mysql_query($query);
+					$param = [
+						'name' => $name,
+						'cover' => $cover,
+						'image' => $image,
+						'service_id' => $service_id,
+						'status' => $status,
+						'content' => $content,
+						'description' => $description,
+						'seqence' => $seqence,
+						'inserttime' => inserttime(),
+						'modifytime' => inserttime(),
+					];
+					$result = Model('product')->add($param);
+
 					if(!$result) json_encode_return(0, '新增資料失敗，請重新輸入資料[001]');
-					$insert_id = mysql_insert_id();
+					$insert_id = $result ;
 					
 					//建立dir / tmp_dir
 					$dir = _SUB_CLASS.'/'.$insert_id.'/';
@@ -94,9 +104,15 @@ switch (_FUNCTION) {
 							if(is_file($file)) unlink($file); 
 						}
 					}
-					
-					$query = query_despace('UPDATE `product` SET `cover` = "'.$cover.'" ,`image` = "'.implode(',', $a_image).'" , `modifytime` = NOW() where `product_id` = "'.$insert_id.'";');
-					$result = mysql_query($query);
+
+					$param = [
+						'name' => $name,
+						'cover' => $cover,
+						'image' => implode(',', $a_image),
+						'modifytime' => inserttime(),
+					];
+					$result = Model('product')->where([[[['product_id', '=', $insert_id]], 'and']])->edit($param);
+
 					if(!$result) json_encode_return(0, '新增資料失敗，請重新輸入資料[002]');
 					json_encode_return(1, '新增資料完成', url('admin', 'product'));
 				break;
@@ -155,8 +171,19 @@ switch (_FUNCTION) {
 						}
 					}
 					
-					$query = query_despace('UPDATE `product` SET  `name` = "'.$name.'" , `cover` = "'.$cover.'" ,`image` = "'.implode(',', $a_image).'" ,`service_id` = "'.$service_id.'" ,  `status` = "'.$status.'" ,`content` = "'.$content.'" ,`description` = "'.$description.'" , `seqence` = "'.$seqence.'" , `modifytime` = NOW() where `product_id` = "'.$product_id.'";');
-					$result = mysql_query($query);
+					$param = [
+						'name' => $name,
+						'cover' => $cover,
+						'image' => implode(',', $a_image),
+						'service_id' => $service_id,
+						'status' => $status,
+						'content' => $content,
+						'description' => $description,
+						'seqence' => $seqence,
+						'modifytime' => inserttime(),
+					];
+					$result = Model('product')->where([[[['product_id', '=', $product_id]], 'and']])->edit($param);
+
 					if(!$result) json_encode_return(0, '更新資料失敗，請重新輸入資料');
 					json_encode_return(1, '更新完成', url('admin', 'product/edit', ['product_id'=>$product_id]));
 				break;
@@ -180,20 +207,16 @@ switch (_FUNCTION) {
 		];
 		if($product_id != null && is_numeric($product_id)) {
 			$act = 'edit';
-			$query = query_despace('select * from `product` where product_id = '.$product_id.' and status != "none";');
-			$result = mysql_query($query);
-			$data = array();
-			while($row = mysql_fetch_assoc($result)){ $data = $row;	}
+			$where = [[[['status', '!=', ':status'], ['status', '!=', ':status'], ['product_id', '=', ':product_id'] ], 'and']];
+			$data = Model('product')->where($where)->param([':status'=>'none', ':status'=>'delete', ':product_id'=>$product_id])->fetch();
 			$a_image = (!empty($data['image'])) ? explode(',', $data['image']) : null;
 		}
 		
 		/**
 		 * 取得service id 
 		 */
-		$query = query_despace('select * from `service` where status != "none";');
-		$result = mysql_query($query);
-		$service = array();
-		while($row = mysql_fetch_assoc($result)){ $service[] = $row;	}
+		$where = [[[['status', '!=', ':status'], ['status', '!=', ':status']], 'and']];
+		$service = Model('service')->where($where)->param([':status'=>'none', ':status'=>'delete'])->fetchAll();
 
 	}
 	break;

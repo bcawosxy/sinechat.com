@@ -1,5 +1,9 @@
 # sinechat.com
 ###0328
+####v2.2.0
+1.後台全改為PDO 存取
+
+###0328
 ####v2.1.0
 1.add phpmailer on contact page
 
