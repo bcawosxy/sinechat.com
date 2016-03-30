@@ -4,7 +4,6 @@
 	function trackComment(comment) {
 		alert('trigger');
 		$.get('http://disqus.com/api/3.0/posts/list.json' , {
-			'post': comment['id'],
 		},function(r){
 			r = $.parseJSON(r);
 			if(r.result == 1) {
