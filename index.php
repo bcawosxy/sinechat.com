@@ -22,7 +22,7 @@ include('./config/global.php');
 		<!-- Head --><?php include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR.'head.phtml') ?><!-- end Head -->
 				<title>新誠修繕工程 <?php if(!is_null($web_title)) echo ' | '.$web_title ;?></title>
 				<meta charset="utf-8" />
-				<?php if(ENV != 'production') echo '<meta name="Robots" content="none">'; ?>
+				<?php if(ENV != 'production') echo '<meta name="robots" content="none">'; ?>
 
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<meta name="description" content="<?php echo $web_description; ?>">
