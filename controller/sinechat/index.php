@@ -1,20 +1,12 @@
 <?php 
 	//get news
-	$query = query_despace('select * from `news` where status = "open" order by `release` desc limit 5;');
-	$result = mysql_query($query);
-	$a_news = array();
-	while($row = mysql_fetch_assoc($result)){ $a_news[] = $row;	}
+	$a_news = Model('news')->where([[[['status', '=', ':status']], 'and']])->param([':status'=>'open'])->order(['`release`'=>'desc'])->limit(5)->fetchAll();
 
 	//get service_ad
-	$query = query_despace('select * from `service_ad` where `status` = "open" order by `service_ad_id`;');
-	$result = mysql_query($query);
-	$a_ad = array();
-	while($row = mysql_fetch_assoc($result)){ $a_ad[] = $row;	}
+	$a_ad = Model('service_ad')->where([[[['status', '=', ':status']], 'and']])->param([':status'=>'open'])->order(['service_ad_id'=>'desc'])->fetchAll();
 
 	//get product
-	$query = query_despace('select * from `product` where `product`.`status` = "open" order by RAND() limit 5;');
-	$result = mysql_query($query);
-	while($row = mysql_fetch_assoc($result)){ $a_product[] = $row; }
+	$a_product = Model('product')->where([[[['status', '=', ':status']], 'and']])->param([':status'=>'open'])->order(['RAND()'=>'desc'])->limit(5)->fetchAll();
 
 	$web_description = '「免費現場勘估，堅持優良品質，採責任施工；擁有最專業的團隊，在最短時間內完工」';
 	$web_url = url('index', 'index');

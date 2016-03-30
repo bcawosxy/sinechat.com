@@ -29,13 +29,13 @@ class Model {
 	}
 
 	function __destruct() { 
-		if (!empty(self::$where)) self::$where = '';
-		if (!empty(self::$column)) self::$column = '';
-		if (!empty(self::$join)) self::$join = '';
-		if (!empty(self::$group)) self::$group = '';
-		if (!empty(self::$having)) self::$having = '';
-		if (!empty(self::$order)) self::$order = '';
-		if (!empty(self::$param)) self::$param = '';
+		if (!empty(self::$where)) self::$where = [];
+		if (!empty(self::$column)) self::$column = [];
+		if (!empty(self::$join)) self::$join = [];
+		if (!empty(self::$group)) self::$group = [];
+		if (!empty(self::$having)) self::$having = [];
+		if (!empty(self::$order)) self::$order = [];
+		if (!empty(self::$param)) self::$param = [];
 		if (!empty(self::$limit)) self::$limit = '';
 		if (!empty(self::$lock)) self::$lock = '';
 	}

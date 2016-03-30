@@ -1,16 +1,17 @@
 <?php 
-	$query = query_despace('SELECT * FROM `servicearea` where `servicearea`.`status` = "open" order by `seqence` ASC;');
-	$result = mysql_query($query);
-	$data = array();$a_service = array();$a_content = array();
-	while($row = mysql_fetch_assoc($result)){ $data[] = $row;}
+
+	$data = array();$a_service = array();$a_content = array();	
+	$data = Model('servicearea')->where([[[['status', '=', ':status']], 'and']])->param([':status'=>'open'])->fetchAll();
+
 	foreach($data as $k0 => $v0) {
-		$query = query_despace('SELECT * FROM `service` where `service`.`status` = "open" and `servicearea_id` = '.$v0['servicearea_id'].' order by `seqence` asc;');
-		$result = mysql_query($query);
-		$data_service = array();
-		
-		$a_service[$k0]['servicearea_id'] = $v0['servicearea_id'];
-		$a_service[$k0]['servicearea_name'] = $v0['name'];
-		while($row = mysql_fetch_assoc($result)){ $a_service[$k0]['service'][] = $row;	$tmp[] = $row;}
+		$m_service = Model('service')->where([[[['status', '=', ':status'], ['servicearea_id', '=', ':servicearea_id']], 'and']])->param([':status'=>'open', ':servicearea_id'=>$v0['servicearea_id']])->order(['seqence'=>'ASC'])->fetchAll();
+		$a_service[$k0] = [
+			'service' => $m_service,
+			'servicearea_id' => $v0['servicearea_id'],
+			'servicearea_name' => $v0['name'],
+		];
+
+		foreach ($m_service as $k1 => $v1) {  $tmp[] = $v1; }
 	}
 
 	if(!empty($tmp) && is_array($tmp)) {

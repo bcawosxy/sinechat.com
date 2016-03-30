@@ -7,9 +7,21 @@
 		$memo = (!empty($_POST['memo'])) ? $_POST['memo'] : null ;
 	
 		if($name == null || $tel == null || $gender == null || $memo == null ) json_encode_return(0, '資料不完整，請重新填寫');
-		$query = query_despace('INSERT INTO `contact` (`name` , `email`, `tel`,`gender`, `memo`, `status`, `reading`, `ip`, `inserttime`, `modifytime` )
-						VALUES ("'.$name.'", "'.$email.'", "'.$tel.'","'.$gender.'", "'.$memo.'", "open", "unread", "'.remote_ip().'", "'.inserttime().'", "'.inserttime().'");');
-		$result = mysql_query($query);
+		
+		$param = [
+			'name' => $name,
+			'email' => $email,
+			'tel' => $tel,
+			'gender' => $gender,
+			'memo' => $memo,
+			'status' => 'open',
+			'reading' => 'unread',
+			'ip' => remote_ip(),
+			'inserttime' => inserttime(),
+			'modifytime' => inserttime(),
+		];
+		$result = Model('contact')->add($param);
+
 		if(!$result) json_encode_return(0, '新增資料失敗，請重新輸入資料');
 		
 		//send mail
@@ -26,10 +38,7 @@
 		
 	}
 	
-	$query = query_despace('select * from `info`;');
-	$result = mysql_query($query);
-	$data = array();
-	while($row = mysql_fetch_assoc($result)){$data[] = $row;}
+	$data = Model('info')->fetchAll();
 	$a_info = array();
 	foreach ($data as $k0 => $v0) {	
 		if($v0['status'] == 'open') {
