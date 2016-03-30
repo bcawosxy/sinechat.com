@@ -108,22 +108,30 @@ $(function () {
     });
 	
 	$('#save').on('click', function(){
-		$.post('<?php echo url('admin', 'news/edit') ?>' , {
-			act : '<?php echo $act ?>',
-			news_id : '<?php echo $data['news_id'] ?>',
-			title : $('input[name="title"]').val(),
-			release : $('input[name="release"]').val(),
-			status : $('input[name="status"]:checked').val(),
-			content :  CKEDITOR.instances['content'].getData(),
-		},function(r){
-			r = $.parseJSON(r);
-			if(r.result == 1) {
-				_jbox(r, 'success');
-			}else{
-				_jbox(r, 'error');			
-			}
-		});
-		
+		var processingBox = new jBox('Modal', {
+			closeOnClick: false,
+			closeButton: 'title',
+			width: 140,
+			height: 50,
+			onOpen : function(){
+				$.post('<?php echo url('admin', 'news/edit') ?>' , {
+					act : '<?php echo $act ?>',
+					news_id : '<?php echo $data['news_id'] ?>',
+					title : $('input[name="title"]').val(),
+					release : $('input[name="release"]').val(),
+					status : $('input[name="status"]:checked').val(),
+					content :  CKEDITOR.instances['content'].getData(),
+				},function(r){
+					r = $.parseJSON(r);
+					processingBox.close();
+					if(r.result == 1) {
+						_jbox(r, 'success');
+					}else{
+						_jbox(r, 'error');
+					}
+				});
+			},
+		}).setContent('<span style="padding-left:20px;font-weight:bold;color:rgba(85, 85, 85, 0.8);">處理中...</span><img src="<?php echo URL_IMG.'loading.gif'?>">').open();
 	});
 
 	$('#delete').on('click', function(){

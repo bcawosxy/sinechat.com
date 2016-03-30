@@ -5,7 +5,7 @@ switch (_FUNCTION) {
 	case 'index' :
 	{
 		if(is_ajax()) {}
-		$data = Model('servicearea')->where([[[['status', '!=', ':status']], 'and']])->param(['status'=>'none'])->fetchAll();
+		$data = Model('servicearea')->where([[[['status', '!=', ':status'], ['status', '!=', ':status']], 'and']])->param(['status'=>'none', 'status'=>'delete'])->fetchAll();
 	}
 	break;	
 
@@ -80,7 +80,7 @@ switch (_FUNCTION) {
 		];
 		if($servicearea_id != null && is_numeric($servicearea_id)) {
 			$act = 'edit';
-			$data = Model('servicearea')->where([[[['servicearea_id', '=', ':servicearea_id'], ['status', '!=', ':status'], ['status', '!=', ':status']] ,'and']])->param(['servicearea_id'=>$servicearea_id, 'status'=>'none' , 'status'=>'delete'])->fetch();
+			$data = Model('servicearea')->where([[[['servicearea_id', '=', ':servicearea_id'], ['status', '!=', ':status'], ['status', '!=', ':status']] ,'and']])->param(['servicearea_id'=>$servicearea_id, ':status'=>'none' , ':status'=>'delete'])->fetch();
 		}
 	}
 }

@@ -1,7 +1,7 @@
 <?php 
 
 	$data = array();$a_service = array();$a_content = array();	
-	$data = Model('servicearea')->where([[[['status', '=', ':status']], 'and']])->param([':status'=>'open'])->fetchAll();
+	$data = Model('servicearea')->where([[[['status', '=', ':status']], 'and']])->param([':status'=>'open'])->order(['seqence'=>'ASC'])->fetchAll();
 
 	foreach($data as $k0 => $v0) {
 		$m_service = Model('service')->where([[[['status', '=', ':status'], ['servicearea_id', '=', ':servicearea_id']], 'and']])->param([':status'=>'open', ':servicearea_id'=>$v0['servicearea_id']])->order(['seqence'=>'ASC'])->fetchAll();

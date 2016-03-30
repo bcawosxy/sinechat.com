@@ -129,20 +129,30 @@ function save() {
 		var tmp =  {'sequnce' : k, 'set' : $(this).data('set'), 'filename' : $(this).data('filename')}
 		img_item.push(tmp);
 	});
-
-	$.post('<?php echo url('admin', 'setbanner/index') ?>' , {
-		image : JSON.stringify(img_item),
-	},function(r){
-		r = $.parseJSON(r);
-		if(r.result == 1) {
-			$('button._auto').each(function() {
-				$(this).trigger('click');
+	
+	var processingBox = new jBox('Modal', {
+		closeOnClick: false,
+		closeButton: 'title',
+		width: 140,
+		height: 50,
+		onOpen : function(){
+			$.post('<?php echo url('admin', 'setbanner/index') ?>' , {
+				image : JSON.stringify(img_item),
+			},function(r){
+				r = $.parseJSON(r);
+				processingBox.close();
+				if(r.result == 1) {
+					$('button._auto').each(function() {
+						$(this).trigger('click');
+					});	
+					_jbox(r, 'success');
+				}else{
+					_jbox(r, 'error');			
+				}
 			});	
-			_jbox(r, 'success');
-		}else{
-			_jbox(r, 'error');			
-		}
-	});	
+		},
+	}).setContent('<span style="padding-left:20px;font-weight:bold;color:rgba(85, 85, 85, 0.8);">處理中...</span><img src="<?php echo URL_IMG.'loading.gif'?>">').open();
+
 }
 
 $(document).on('click', '.box_delete',function(){

@@ -211,28 +211,37 @@ function save() {
 		r = {'message': '排序須輸入正整數。'};
 		_jbox(r, 'error');
 	}else{
-		$.post('<?php echo url('admin', 'product/edit') ?>' , {
-			act : '<?php echo $act ?>',
-			product_id : '<?php echo $data['product_id'] ?>',
-			image : JSON.stringify(img_item),
-			name : $('input[name="name"]').val(),
-			service_id : $('#service').val(),
-			seqence : seqence.val(),
-			status : $('input[name="status"]:checked').val(),
-			content : CKEDITOR.instances['content'].getData(),
-			description : $('input[name="description"]').val(),
-		},function(r){
-			r = $.parseJSON(r);
-			if(r.result == 1) {
-				$('button._auto').each(function() {
-					$(this).trigger('click');
-				});
-				
-				_jbox(r, 'success');
-			}else{
-				_jbox(r, 'error');			
-			}
-		});	
+		var processingBox = new jBox('Modal', {
+			closeOnClick: false,
+			closeButton: 'title',
+			width: 140,
+			height: 50,
+			onOpen : function(){
+				$.post('<?php echo url('admin', 'product/edit') ?>' , {
+					act : '<?php echo $act ?>',
+					product_id : '<?php echo $data['product_id'] ?>',
+					image : JSON.stringify(img_item),
+					name : $('input[name="name"]').val(),
+					service_id : $('#service').val(),
+					seqence : seqence.val(),
+					status : $('input[name="status"]:checked').val(),
+					content : CKEDITOR.instances['content'].getData(),
+					description : $('input[name="description"]').val(),
+				},function(r){
+					r = $.parseJSON(r);
+					processingBox.close();
+					if(r.result == 1) {
+						$('button._auto').each(function() {
+							$(this).trigger('click');
+						});
+						_jbox(r, 'success');
+					}else{
+						_jbox(r, 'error');			
+					}
+				});	
+		
+			},
+		}).setContent('<span style="padding-left:20px;font-weight:bold;color:rgba(85, 85, 85, 0.8);">處理中...</span><img src="<?php echo URL_IMG.'loading.gif'?>">').open();
 	}
 }
 

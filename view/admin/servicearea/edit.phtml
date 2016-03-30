@@ -77,28 +77,39 @@ $(function () {
     });
 	
 	$('#save').on('click', function(){
-			var seqence = $('input[name=seqence]');
+		var seqence = $('input[name=seqence]');
 
-			if (!/^\d+$/.test(seqence.val())) {
-				seqence.val(/^\d+/.exec(seqence.val()));
-				r = {'message': '排序須輸入正整數。'};
-				site_jBox(r, 'error');
-			}else{
-				$.post('<?php echo url('admin', 'servicearea/edit') ?>' , {
-					act : '<?php echo $act ?>',
-					servicearea_id : '<?php echo $data['servicearea_id'] ?>',
-					name : $('input[name="name"]').val(),
-					seqence : seqence.val(),
-					status : $('input[name="status"]:checked').val(),
-				},function(r){
-					r = $.parseJSON(r);
-					if(r.result == 1) {
-						_jbox(r, 'success');
-					}else{
-						_jbox(r, 'error');			
-					}
-				});
-			}
+		if (!/^\d+$/.test(seqence.val())) {
+			seqence.val(/^\d+/.exec(seqence.val()));
+			r = {'message': '排序須輸入正整數。'};
+			site_jBox(r, 'error');
+		}else{
+			var processingBox = new jBox('Modal', {
+				closeOnClick: false,
+				closeButton: 'title',
+				width: 140,
+				height: 50,
+				onOpen : function(){
+				
+					$.post('<?php echo url('admin', 'servicearea/edit') ?>' , {
+						act : '<?php echo $act ?>',
+						servicearea_id : '<?php echo $data['servicearea_id'] ?>',
+						name : $('input[name="name"]').val(),
+						seqence : seqence.val(),
+						status : $('input[name="status"]:checked').val(),
+					},function(r){
+						r = $.parseJSON(r);
+						processingBox.close();
+						if(r.result == 1) {
+							_jbox(r, 'success');
+						}else{
+							_jbox(r, 'error');			
+						}
+					});
+			
+				},
+			}).setContent('<span style="padding-left:20px;font-weight:bold;color:rgba(85, 85, 85, 0.8);">處理中...</span><img src="<?php echo URL_IMG.'loading.gif'?>">').open();
+		}
 	});
 
 	$('#delete').on('click', function(){
