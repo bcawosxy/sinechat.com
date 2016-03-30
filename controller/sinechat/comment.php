@@ -1,5 +1,6 @@
 <?php 
 if(is_ajax()) {
+	header("Access-Control-Allow-Origin: http://disqus.com");
 	$value = (!empty($_POST['value'])) ? $_POST['value'] : null ;
 
 	json_encode_return(1, $value, null);
@@ -29,12 +30,16 @@ Access Token:
 /* local
 API Key:
 VFbHCDdvJciWERELhQUgAlQ9oxfH6CTJuUOBd0eC0ChROeu8Dupohuxc4BKU1e4W
+
 API Secret:
 FDmEMH1EC47kFWbhffsOVjSHCxmjEF5RQVN8XkWZbFGpufIr8qZssZKPNLfDRAhr
+
 Authorize URL:
 https://disqus.com/api/oauth/2.0/authorize/
+
 Access Token URL:
 https://disqus.com/api/oauth/2.0/access_token/
+
 Your Access Token
 Use this token as the value for access_token to authenticate as ccckaass.
 

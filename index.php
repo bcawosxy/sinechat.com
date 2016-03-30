@@ -19,6 +19,7 @@ include('./config/global.php');
 		 */
 		default : ?>
 			<head>
+				
 		<!-- Head --><?php include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR.'head.phtml') ?><!-- end Head -->
 				<title>新誠修繕工程 <?php if(!is_null($web_title)) echo ' | '.$web_title ;?></title>
 				<meta charset="utf-8" />
