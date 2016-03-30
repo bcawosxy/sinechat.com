@@ -128,7 +128,7 @@
 															<span>選擇檔案</span>
 															<input type="file" name="files[]" multiple>
 														</span>
-														<button type="submit" class="btn btn-primary start">
+														<button type="button" onclick="all_upload()" class="btn btn-primary">
 															<i class="glyphicon glyphicon-upload"></i>
 															<span>上傳全部</span>
 														</button>
@@ -197,6 +197,15 @@
 ?>
 
 <script>
+function all_upload() {
+	$('tr.un_upload').each(function(k, v) {
+		let obj = $(this);
+		setTimeout(function(){
+			obj.find('button.start').trigger('click');
+		},500 + ( k * 1000 ));
+	});
+}
+
 function save() {
 	var img_item = [];
 	$('#sortable li').each(function(k ,v) {
