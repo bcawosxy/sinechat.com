@@ -3,7 +3,7 @@
 <script>
 	function trackComment(comment) {
 		alert('trigger');
-		$.get('http://disqus.com/api/3.0/posts/details.json' , {
+		$.get('http://disqus.com/api/3.0/posts/list.json' , {
 			'post': comment['id'],
 		},function(r){
 			r = $.parseJSON(r);
