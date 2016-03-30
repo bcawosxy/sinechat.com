@@ -2,8 +2,8 @@
 <div id="disqus_thread"></div>
 <script>
 	function trackComment(comment) {
-		alert('trigger');
-		$.get('http://disqus.com/api/3.0/posts/list.json' , {
+		
+		$.get('http://disqus.com/api/3.0/posts/create.json' , {
 		},function(r){
 			r = $.parseJSON(r);
 			if(r.result == 1) {
