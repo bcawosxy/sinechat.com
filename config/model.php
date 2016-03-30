@@ -1,4 +1,4 @@
-<?php 
+<?php
 class Model {
 	protected static $db;
 	protected static $pdo;

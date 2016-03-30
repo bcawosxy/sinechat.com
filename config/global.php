@@ -1,7 +1,7 @@
 <?php
 define('URL_PROTOCOL', is_https()? 'https://' : 'http://');
 define('URL_ROOT', URL_PROTOCOL.$dev_root);	
-define('URL_ADMIN_ROOT', URL_PROTOCOL.$dev_root.'/admin');	
+define('URL_ADMIN_ROOT', URL_PROTOCOL.$dev_root.'/admin');
 
 /**
  * PATH
