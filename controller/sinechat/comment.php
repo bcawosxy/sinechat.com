@@ -1,6 +1,6 @@
 <?php 
 if(is_ajax()) {
-	header("Access-Control-Allow-Origin: http://disqus.com");
+
 	$value = (!empty($_POST['value'])) ? $_POST['value'] : null ;
 
 	json_encode_return(1, $value, null);

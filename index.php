@@ -36,8 +36,8 @@ include('./config/global.php');
 			</head>
 			<body class="homepage">
 				<div id="page-wrapper">
-					<!-- Headbar --><?php include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR.'headbar.phtml') ?> <!-- end Headbar -->
-					<!-- Banner --> <?php include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR.'banner.phtml') ?> <!-- end Banner -->		
+					<!-- Headbar --><?php //include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR.'headbar.phtml') ?> <!-- end Headbar -->
+					<!-- Banner --> <?php //include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR.'banner.phtml') ?> <!-- end Banner -->		
 					<!-- Main -->
 					<div id="main-wrapper">
 						<div id="main" class="container">
@@ -45,9 +45,9 @@ include('./config/global.php');
 						</div>
 					</div>
 					<!-- end main -->
-					<!-- Footer -->	<?php include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR.'footbar.phtml') ?> <!-- end ooter -->
+					<!-- Footer -->	<?php //include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR.'footbar.phtml') ?> <!-- end ooter -->
 				</div>
-				<!-- Foot --> <?php include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR.'foot.phtml') ?> <!-- end Foot -->
+				<!-- Foot --> <?php //include('./view'.DIRECTORY_SEPARATOR.SITE_NAME.DIRECTORY_SEPARATOR.'foot.phtml') ?> <!-- end Foot -->
 			</body>
 		<?php 
 		break;
