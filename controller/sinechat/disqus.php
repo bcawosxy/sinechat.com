@@ -95,6 +95,6 @@ echo $auth_results->access_token;
     //Calling the function to getData
     $forum_details = getData($forums_endpoint, $SECRET_KEY, $access_token);
     echo "<p><h3>Getting forum details:</h3>";
-    var_dump( (array) $forum_details );
+    print_r( json_decode( $forum_details  , true ));
     echo "</p>";
     }
