@@ -5,7 +5,7 @@ if(is_ajax()) {
 
 	json_encode_return(1, $value, null);
 }
-
+$id = (!empty($_GET['id'])) ? $_GET['id'] : 1 ;
 
 /* mars
 API Key:

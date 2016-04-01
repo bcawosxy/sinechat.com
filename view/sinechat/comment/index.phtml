@@ -3,22 +3,13 @@
 <script>
 	function trackComment(comment) {
 		
-		$.get('http://disqus.com/api/3.0/posts/create.json' , {
-		},function(r){
-			r = $.parseJSON(r);
-			if(r.result == 1) {
-				_jbox(r, 'success');
-			}else{
-				_jbox(r, 'error');			
-			}
-		});
 
 	}
 
 	var disqus_config = function () {
 		this.page.shortname = 'ccckaass'; //固定值
 		this.page.url = '<?php echo url('comment') ;?>';
-		this.page.identifier = '<?php echo md5(url('comment')); ?>';
+		this.page.identifier = '<?php echo md5(url('comment', 'index', ['id'=>$id ])); ?>';
 		this.callbacks.onNewComment = [
 			function(comment) { 
 				trackComment(comment);
