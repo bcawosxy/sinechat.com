@@ -85,15 +85,16 @@ echo $auth_results->access_token;
     $cases_endpoint = 'https://disqus.com/api/3.0/users/details.json?';
     //Calling the function to getData
     $user_details = getData($cases_endpoint, $SECRET_KEY, $access_token);
-    echo "<p><h3>Getting user details:</h3>";
-    var_dump($user_details);
-    echo "</p>";
+    // echo "<p><h3>Getting user details:</h3>";
+    // var_dump($user_details);
+    // echo "</p>";
     
     //Setting the correct endpoint
-    $forums_endpoint = 'https://disqus.com/api/3.0/users/listForums.json?';
+    $forums_endpoint = 'https://disqus.com/api/3.0/posts/list.json?';
+    // $forums_endpoint = 'https://disqus.com/api/3.0/users/listForums.json?';
     //Calling the function to getData
     $forum_details = getData($forums_endpoint, $SECRET_KEY, $access_token);
     echo "<p><h3>Getting forum details:</h3>";
-    var_dump($forum_details);
+    print_r($forum_details);
     echo "</p>";
     }
