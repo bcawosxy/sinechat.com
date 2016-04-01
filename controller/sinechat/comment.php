@@ -5,7 +5,7 @@ if(is_ajax()) {
 
 	json_encode_return(1, $value, null);
 }
-$id = (!empty($_GET['id'])) ? $_GET['id'] : 1 ;
+$url = 'https://disqus.com/api/oauth/2.0/authorize?&client_id=zPcgBD8JD8ZhloQJInKuV0evzPmjRWl1KCymZ331zOAsOqwQmSCKDQnzuFGHXZki&scope=read,write&response_type=code&redirect_uri=http://mars-chen.com/';
 
 /* mars
 API Key:
