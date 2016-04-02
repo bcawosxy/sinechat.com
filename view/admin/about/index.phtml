@@ -14,7 +14,7 @@
 			<form method="post">
 				<textarea rows="10" cols="50" id="about_content" name="about_content" class="ckeditor"><?php echo (!empty($data['content'])) ? $data['content'] : null; ?></textarea>
 				<script type="text/javascript">CKEDITOR.replace('about_content',
-				{toolbar : 'Full'});
+				{toolbar : 'Full', height:'600px'});
 				</script><br>
 				<a class="btn btn-app " id="save">
 					<i class="fa fa-save"></i> Save
