@@ -27,8 +27,7 @@
 		
 		$('td').css('vertical-align', 'top');
 		$('table').css('width', 'auto');
-
-		if($(window).width() < 760 ) {
+		if($(window).width() <= 1080 ) {
 			$('.editor_content').find('img').each(function(k,v){
 				let src = $(this).attr('src'), 
 				width = $(this).css('max-width'), 
