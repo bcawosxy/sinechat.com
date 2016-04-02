@@ -63,9 +63,8 @@
 		</section>
 	
 		<section style="max-width: 750px;margin:0 4em;">
-			<!-- Place somewhere in the <body> of your page -->
 			<div id="slider" class="flexslider">
-				<ul class="slides">
+				<ul class="slides slider_big">
 					<?php 
 						if(is_array($a_image)) {
 							foreach($a_image as $k0 => $v0) {
@@ -103,7 +102,22 @@
 		</section>
 	</div>
 </div>
-
+<div id="show_photo" style="display:none;">
+<?php 
+foreach($a_image as $k0 => $v0) {
+	echo '<a href="'.URL_FILES.'product/'.$product['product_id'].'/'.$v0.'" ><img src="'.URL_FILES.'product/'.$product['product_id'].'/'.$v0.'" /></a>';
+} 
+?>
+</div>
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
 <script>
 $(window).load(function() {
  	//縮圖控制
@@ -127,8 +141,25 @@ $(window).load(function() {
 		sync: "#carousel",
 		itemWidth: 750,
 	});
-
 });
+
+$(document).on('click', '.slider_big', function() {
+	$('ul.slider_big li').each(function(k, v){
+		if($(this).css('opacity') == 1) {
+			$('ul.slider_big').data('link', k);
+		}
+	});
+	$('#show_photo').trigger('click');
+});
+
+document.getElementById('show_photo').onclick = function (event) {
+	event = event || window.event;
+    var target = event.target || event.srcElement,
+		link = $('ul.slider_big').data('link');
+        options = {index: link, event: event},
+        links = this.getElementsByTagName('a');
+    blueimp.Gallery(links, options);
+};
 
 	//line icon
 	var socialLikesButtons = {
