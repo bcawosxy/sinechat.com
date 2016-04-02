@@ -7,16 +7,16 @@
 	</div>
 	<div id="content">
 		<article style="min-height:400px;" class="box post">
-			<header><h2><i class="fa fa-gavel">&nbsp;</i><strong>修繕作品</strong> </h2></header>
+			<header><h2><i class="fa fa-gavel">&nbsp;</i><strong>修繕作品</strong></h2></header>
 			<?php 
 				if(is_array($data)) {
 					$num = count($data);
 					foreach($data as $k0 => $v0) {
 						if(is_file(PATH_FILES._CLASS.'/'.$v0['product_id'].'/'.$v0['cover'])) image_reformat(PATH_FILES._CLASS.'/'.$v0['product_id'].'/'.$v0['cover'], 'jpg', 249, 166);
-						if(($k0%4) == 0) {	echo '<div class="row" style="min-height: 280px;">';}		
-
+						$new_icon = (date('Y-m-d', strtotime($v0['inserttime'])) >=  date('Y-m-d', strtotime('-7 days'))) ? '<img width="32" height="10" src="'.URL_IMG.'gif_new.gif'.'">' : null ;
+						if(($k0%4) == 0) {	echo '<div class="row" style="min-height: 280px;">';}
 						echo '<div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
-								<header class="product_item_name"><a href="'.url('detail', 'index', ['id'=>$v0['product_id']]).'">'.$v0['name'].'</a></header>
+								<header class="product_item_name"><a href="'.url('detail', 'index', ['id'=>$v0['product_id']]).'">'.$v0['name'].'</a>&nbsp;&nbsp;&nbsp;'.$new_icon.'</header>
 								<p><a href="'.url('detail', 'index', ['id'=>$v0['product_id']]).'" class="image" style="padding:0.2em;"> <img class="img-responsive" onerror="this.src=\''.static_file('images/origin.png').'\'" src="'.URL_FILES._CLASS.'/'.$v0['product_id'].'/'.sinechat_Thumbnail($v0['cover'], 249, 166).'" width="249" height="166"></a></p>
 							</div>';
 						if(($k0%4) == 3 || $k0 == ($num-1)) {	echo '</div>';	}

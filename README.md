@@ -1,4 +1,8 @@
 # sinechat.com
+###0403
+####v3.4.9
+1.加入 new的icon提示
+
 ###0402
 ####v3.4.8
 1.作品排序方式調整
@@ -7,9 +11,9 @@
 1.調整小size時 about::index 圖片顯示方式
 
 ####v3.4.1
-1.文繞圖
-2.尺寸提示
-3.點圖放大	
+1.文繞圖<br>
+2.尺寸提示<br>
+3.點圖放大<br>
 
 ###0401
 ####v3.4.0
@@ -24,7 +28,7 @@
 
 ###0330
 ####v3.1.0
-1.前台全改為PDO 存取
+1.前台全改為PDO 存取<br>
 2.detail::index 左側其他作品加入title說明
 
 ###0328
@@ -37,7 +41,7 @@
 
 ###0325
 ####v2.0.2
-1.後台調整為PDO查詢[index][setbanner][news(delete un do)]
+1.後台調整為PDO查詢[index][setbanner][news(delete un do)]<br>
 2.facebook info use link
 
 ###0324
@@ -50,7 +54,7 @@
 
 ###0322
 ####v1.3.0
-1.調整頂部logo樣式
+1.調整頂部logo樣式<br>
 2.product::index 分頁完成
 
 
