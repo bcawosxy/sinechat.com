@@ -7,10 +7,11 @@
 	</div>
 	<article style="min-height:400px;" class="box post">
 		<header><h2><i class="fa fa-gavel">&nbsp;</i><strong>關於新誠</strong> </h2></header>
-		<div class="editor_content" style="padding:0 2em;">
+		<div class="editor_content table-responsive" style="padding:0 2em;">
 			<?php 
 				if(!empty($data)) echo htmlspecialchars_decode($data['content']); 
 			?>
+			<div id="append_area"></div>
 			<hr>
 		</div>
 	</article>
@@ -25,5 +26,18 @@
 		});
 		
 		$('td').css('vertical-align', 'top');
+		$('table').css('width', 'auto');
+
+		if($(window).width() < 760 ) {
+			$('.editor_content').find('img').each(function(k,v){
+				let src = $(this).attr('src'), 
+				width = $(this).css('max-width'), 
+				height = $(this).css('max-height'), 
+				obj = '<p><span class="image"><img src="'+src+'" style="max-height:'+height+'; max-width:'+width+'"></span></p>';
+				
+				$(this).parent('span').hide();
+				$('div#append_area').append(obj);
+			});
+		}
 	});
 </script>

@@ -41,7 +41,7 @@ config.filebrowserBrowseUrl = lib_root + 'ckfinder/ckfinder.html';
 config.filebrowserImageBrowseUrl = lib_root + 'ckfinder/ckfinder.html?Type=Images';
 config.filebrowserFlashBrowseUrl = lib_root + 'ckfinder/ckfinder.html?Type=Flash';
 config.filebrowserImageUploadUrl = lib_root + 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files';//可上傳圖檔
-
+config.extraPlugins = 'bootstrapVisibility';
 // config.filebrowserUploadUrl = 'http://ccckaass.tk/lib/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'; //可上傳一般檔案
 // config.filebrowserFlashUploadUrl = 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash';//可上傳Flash檔案
 
