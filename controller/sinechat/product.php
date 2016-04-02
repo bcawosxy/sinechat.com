@@ -8,7 +8,7 @@
 	$join = [['left join', 'service', 'USING(`service_id`)']];
 	$where = [[[['`product`.`status`', '=', ':status']] ,'and']];
 	$param = [':status'=>'open'];
-	$data = Model('product')->column($column)->join($join)->where($where)->param($param)->order(['`product`.`seqence`'=>'ASC'])->limit($page_range)->fetchAll();
+	$data = Model('product')->column($column)->join($join)->where($where)->param($param)->order(['`product`.`seqence`'=>'desc', '`product`.`product_id`'=>'desc'])->limit($page_range)->fetchAll();
 	$num = count(Model('product')->join($join)->where($where)->param($param)->order(['`product`.`seqence`'=>'ASC'])->fetchAll());
 	
 	//總頁數 = 數量 / $per_page_num

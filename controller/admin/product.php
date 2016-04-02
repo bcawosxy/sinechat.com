@@ -33,11 +33,15 @@ switch (_FUNCTION) {
 			$content = (!empty($_POST['content'])) ? $_POST['content'] : null ;
 			$description = (!empty($_POST['description'])) ? $_POST['description']   : null ;
 			$seqence = (!empty($_POST['seqence'])) ? $_POST['seqence'] : null ;
+			$sort_date = (!empty($_POST['sort_date'])) ? $_POST['sort_date'] : null ;
 			$status = (!empty($_POST['status'])) ? $_POST['status'] : null ;
 			$content = stripslashes(htmlspecialchars($content));
 			$cover = null;
 			if($act == 'edit' && $product_id == null ) json_encode_return(0, '資料不完整，請重新填寫');
-			if($act == null || $name == null || $status == null || $seqence == null || $description == null ) json_encode_return(0, '資料不完整，請重新填寫');
+			if($act == null || $name == null || $status == null  || $description == null ) json_encode_return(0, '資料不完整，請重新填寫');
+			
+			//若以時間排序則忽略seqence
+			if($sort_date == 'true') $seqence = 0;
 			
 			switch($act){
 				case 'add' :

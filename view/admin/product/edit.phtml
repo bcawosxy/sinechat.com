@@ -49,6 +49,7 @@
 								<dt>排序:</dt>
 									<dd>
 										<input type="number" class="form-control" name="seqence" placeholder="1~255" min="0" max="255" style="width:20%" value="<?php echo $data['seqence'] ?>">
+										<label for="sort_date"><input type="checkbox" id="sort_date" <?php if($data['seqence'] == 0) echo 'checked="checked"' ?>> 忽略排序數字，依照建立時間排序</label>
 									</dd>
 								<br>
 								<dt>狀態:</dt>
@@ -236,6 +237,7 @@ function save() {
 					status : $('input[name="status"]:checked').val(),
 					content : CKEDITOR.instances['content'].getData(),
 					description : $('input[name="description"]').val(),
+					sort_date : $('#sort_date').prop('checked'),
 				},function(r){
 					r = $.parseJSON(r);
 					processingBox.close();
@@ -258,12 +260,13 @@ $(document).on('click', '.box_delete',function(){
 	$(this).parents('li').remove();
 });
 
-
 $(function () {
     $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
 		checkboxClass: 'icheckbox_minimal-red',
 		radioClass: 'iradio_minimal-red'
     });
+	
+	
 	
 	$('#save').on('click', function(){
 		var img_unput = $('tr.unput').length, img_un_upload  = $('tr.un_upload ').length; 

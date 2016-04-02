@@ -169,7 +169,6 @@ document.getElementById('show_photo').onclick = function (event) {
 		$(this).wrap('<span class="image"></div>'); 
 	});	$('td').css('vertical-align', 'top');
 	$('table').css('width', 'auto');
-	console.log( $(window).width() );
 	if($(window).width() <= 1080 ) {
 		$('.editor_content').find('img').each(function(k,v){
 			let src = $(this).attr('src'), 
