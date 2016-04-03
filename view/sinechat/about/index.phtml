@@ -30,8 +30,8 @@
 		$('table').css('width', 'auto');
 		
 		var m_width = $('.homepage').width();
+		alert( $('.homepage').width() );
 		if(m_width <= 1080 ) {
-			alert( $('.homepage').width() );
 			$('.editor_content').find('img').each(function(k,v){
 				let src = $(this).attr('src'), 
 				width = $(this).css('max-width'), 
