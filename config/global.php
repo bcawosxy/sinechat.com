@@ -16,11 +16,11 @@ define('PATH_STORAGE', null);
 /**
  * URL
  */
-define('URL_ASSETS', URL_ROOT.'/assets/');
+define('URL_ASSETS', URL_ROOT.'/assets');
 define('URL_UPLOAD', URL_ROOT.'/upload/');
-define('URL_CSS', URL_ASSETS.'css/');
-define('URL_IMG', URL_ASSETS.'images/');
-define('URL_JS', URL_ASSETS.'js/');
+define('URL_CSS', URL_ASSETS.'/css/');
+define('URL_IMG', URL_ASSETS.'/images/');
+define('URL_JS', URL_ASSETS.'/js/');
 define('URL_FILES', URL_ROOT.'/files/');
 define('URL_STATIC_FILE', null);
 define('URL_STORAGE', null);
