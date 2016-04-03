@@ -45,7 +45,16 @@
 		?>
 	</div>
 </div>
-
+<div id="show_photo" style="display:none;"></div>
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
 <script>
 	$(function() {
 		$('section').hide(); 
@@ -68,8 +77,22 @@
 		$('.editor_content').find('img').each(function(k,v){
 			var h_w = $(this).css(['height', 'width']);
 			$(this).removeAttr('style').css('max-height', h_w.height).css('max-width', h_w.width);
-			$(this).wrap('<a href="javascript:void(0)" class="image"></a>'); 
+			$(this).wrap('<a href="javascript:void(0)" class="image show_photo" data-link="'+k+'"></a>'); 
+			$('#show_photo').append('<a href="'+$(this).attr('src')+'"><img src="'+$(this).attr('src')+'"></a>');
+		});
+
+		$('.show_photo').on('click' ,function() {
+			$('#show_photo').trigger('click', $(this).data('link'));
 		});
 
 	});
+	
+	document.getElementById('show_photo').onclick = function (event, v) {
+		event = event || window.event;
+		var target = event.target || event.srcElement,
+			link = v;
+			options = {index: link, event: event},
+			links = this.getElementsByTagName('a');
+		blueimp.Gallery(links, options);
+	};
 </script>

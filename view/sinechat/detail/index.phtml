@@ -108,6 +108,7 @@ foreach($a_image as $k0 => $v0) {
 } 
 ?>
 </div>
+<div id="show_photo_content" style="display:none;"></div>
 <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
     <div class="slides"></div>
     <h3 class="title"></h3>
@@ -164,8 +165,14 @@ document.getElementById('show_photo').onclick = function (event) {
 		$('.editor_content').find('img').each(function(k,v) {
 			var h_w = $(this).css(['height', 'width']);
 			$(this).removeAttr('style').css('max-height', h_w.height).css('max-width', h_w.width);
-			$(this).wrap('<a href="javascript:void(0)"  class="image"></a>'); 
+			$(this).wrap('<a href="javascript:void(0)" class="image show_photo_content" data-link="'+k+'"></a>'); 
+			$('#show_photo_content').append('<a href="'+$(this).attr('src')+'"><img src="'+$(this).attr('src')+'"></a>');
 		});
+		
+		$('.show_photo_content').on('click' ,function() {
+			$('#show_photo_content').trigger('click', $(this).data('link'));
+		});
+
 	});
 	
 	$('td').css('vertical-align', 'top');
@@ -194,7 +201,15 @@ document.getElementById('show_photo').onclick = function (event) {
 	    var counter = $(event.currentTarget).find('.social-likes__counter_' + service);
 	    counter.text(+(counter.text()||0)+1).removeClass('social-likes__counter_empty');
 	});
-
+	
+	document.getElementById('show_photo_content').onclick = function (event, v) {
+		event = event || window.event;
+		var target = event.target || event.srcElement,
+			link = v;
+			options = {index: link, event: event},
+			links = this.getElementsByTagName('a');
+		blueimp.Gallery(links, options);
+	};
 </script>
 
 <script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411"></script>
