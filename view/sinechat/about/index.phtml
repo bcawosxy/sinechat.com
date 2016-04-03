@@ -7,7 +7,7 @@
 	</div>
 	<article style="min-height:400px;" class="box post">
 		<header><h2><i class="fa fa-gavel">&nbsp;</i><strong>關於新誠</strong> </h2></header>
-		<div class="editor_content table-responsive" style="padding:0 2em;width:100%;">
+		<div class="editor_content" style="padding:0 2em;width:100%;">
 			<?php 
 				if(!empty($data)) echo htmlspecialchars_decode($data['content']); 
 			?>
@@ -28,8 +28,8 @@
 	$(document).ready(function() {
 		$('.editor_content').find('img').each(function(k,v) {
 			var h_w = $(this).css(['height', 'width']);
-			$(this).removeAttr('style').css('max-height', h_w.height).css('max-width', h_w.width).css('width', 'auto');
-			$(this).wrap('<a href="javascript:void(0)" class="show_photo" data-link="'+k+'"><span class="image"></span></a>'); 
+			$(this).removeAttr('style').css('max-height', h_w.height).css('max-width', h_w.width);
+			$(this).wrap('<a href="javascript:void(0)" class="image"></a>'); 
 			// $('#show_photo').append('<a href="'+$(this).attr('src')+'"><img src="'+$(this).attr('src')+'"></a>');
 		});
 		

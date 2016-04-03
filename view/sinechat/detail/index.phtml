@@ -94,7 +94,7 @@
 			<ul class="divided">
 				<li style="font-size:1.2em;">
 					<article class="box excerpt editor_content" style="min-height: 300px;">
-						<div class="table-responsive"><?php echo htmlspecialchars_decode($product['content']);  ?></div>
+						<?php echo htmlspecialchars_decode($product['content']);  ?>
 					</article>
 				</li>
 			</ul>
@@ -163,8 +163,8 @@ document.getElementById('show_photo').onclick = function (event) {
 	$(document).ready(function() {
 		$('.editor_content').find('img').each(function(k,v) {
 			var h_w = $(this).css(['height', 'width']);
-			$(this).removeAttr('style').css('max-height', h_w.height).css('max-width', h_w.width).css('width', 'auto');;
-			$(this).wrap('<a href="javascript:void(0)"><span class="image"></span></a>'); 
+			$(this).removeAttr('style').css('max-height', h_w.height).css('max-width', h_w.width);
+			$(this).wrap('<a href="javascript:void(0)"  class="image"></a>'); 
 		});
 	});
 	

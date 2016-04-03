@@ -37,7 +37,7 @@
 				echo '<section class="content_'.$v0['service_id'].'" >
 					<ul class="divided">
 						<li>
-							<article data-id="'.$v0['service_id'].'"><div class="table-responsive">'.htmlspecialchars_decode($v0['content']).'</div></article>
+							<article data-id="'.$v0['service_id'].'">'.htmlspecialchars_decode($v0['content']).'</article>
 						</li>
 					</ul>
 				</section>';
@@ -49,7 +49,6 @@
 <script>
 	$(function() {
 		$('section').hide(); 
-
 		$('#main-menu-service').find('a[id]').on('click', function(){
 			$('section').hide();
 			var target = $(this).attr('id');
@@ -68,7 +67,7 @@
 		
 		$('.editor_content').find('img').each(function(k,v){
 			var h_w = $(this).css(['height', 'width']);
-			$(this).removeAttr('style').css('max-height', h_w.height).css('max-width', h_w.width).css('width', 'auto');
+			$(this).removeAttr('style').css('max-height', h_w.height).css('max-width', h_w.width);
 			$(this).wrap('<a href="javascript:void(0)" class="image"></a>'); 
 		});
 
