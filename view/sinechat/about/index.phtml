@@ -37,7 +37,7 @@
 				height = $(this).css('max-height'), 
 				obj = '<tr><td style="vertical-align: top;"><span class="image"><img src="'+src+'" style="max-height:'+height+'; max-width:'+width+'"></span></td></tr>';
 				
-				$(this).parent('span').hide();
+				$(this).parents('td').remove();
 				$('tbody').append(obj);
 			});
 		}
