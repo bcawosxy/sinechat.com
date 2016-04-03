@@ -146,7 +146,7 @@ $(document).ready(function() {
 	$('td').css('vertical-align', 'top');
 	$('table').addClass('table').css('width', 'auto');
 }).on('click', '.show_gallery', function() {
-	let img =  $(this).data('src');
+	var img =  $(this).data('src');
 	$('#show_photo').empty().append('<a href="'+img+'"></a>').trigger('click');
 
 });;
