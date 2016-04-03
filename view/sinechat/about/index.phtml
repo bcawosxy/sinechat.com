@@ -29,8 +29,8 @@
 		
 		$('table').css('width', 'auto');
 		
-		
-		if($(window).width() <= 1080 ) {
+		var m_width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+		if(m_width <= 1080 ) {
 			alert('tips');
 			$('.editor_content').find('img').each(function(k,v){
 				let src = $(this).attr('src'), 
