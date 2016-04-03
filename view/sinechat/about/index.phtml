@@ -7,7 +7,7 @@
 	</div>
 	<article style="min-height:400px;" class="box post">
 		<header><h2><i class="fa fa-gavel">&nbsp;</i><strong>關於新誠</strong> </h2></header>
-		<div class="editor_content table-responsive" style="padding:0 2em;">
+		<div class="editor_content" style="padding:0 2em;width:100%;">
 			<?php 
 				if(!empty($data)) echo htmlspecialchars_decode($data['content']); 
 			?>
@@ -26,7 +26,11 @@
 		});
 		
 		$('td').css('vertical-align', 'top');
+		
+		
 		$('table').css('width', 'auto');
+		
+		
 		if($(window).width() <= 1080 ) {
 			$('.editor_content').find('img').each(function(k,v){
 				let src = $(this).attr('src'), 
