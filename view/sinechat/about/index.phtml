@@ -29,19 +29,18 @@
 		
 		$('table').css('width', 'auto');
 		
-		var m_width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-		alert( $('.homepage').width() );
-		// if(m_width <= 1080 ) {
-			// alert( $('.homepage').width() );
-			// $('.editor_content').find('img').each(function(k,v){
-				// let src = $(this).attr('src'), 
-				// width = $(this).css('max-width'), 
-				// height = $(this).css('max-height'), 
-				// obj = '<tr><td style="vertical-align: top;"><span class="image"><img src="'+src+'" style="max-height:'+height+'; max-width:'+width+'"></span></td></tr>';
+		var m_width = $('.homepage').width();
+		if(m_width <= 1080 ) {
+			alert( $('.homepage').width() );
+			$('.editor_content').find('img').each(function(k,v){
+				let src = $(this).attr('src'), 
+				width = $(this).css('max-width'), 
+				height = $(this).css('max-height'), 
+				obj = '<tr><td style="vertical-align: top;"><span class="image"><img src="'+src+'" style="max-height:'+height+'; max-width:'+width+'"></span></td></tr>';
 				
-				// $(this).parents('td').remove();
-				// $('tbody').append(obj);
-			// });
-		// }
+				$(this).parents('td').remove();
+				$('tbody').append(obj);
+			});
+		}
 	});
 </script>
