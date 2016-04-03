@@ -7,7 +7,7 @@
 	</div>
 	<article style="min-height:400px;" class="box post">
 		<header><h2><i class="fa fa-gavel">&nbsp;</i><strong>關於新誠</strong> </h2></header>
-		<div class="editor_content" style="padding:0 2em;width:100%;">
+		<div class="editor_content table-responsive" style="padding:0 2em;width:100%;">
 			<?php 
 				if(!empty($data)) echo htmlspecialchars_decode($data['content']); 
 			?>
@@ -15,32 +15,41 @@
 		</div>
 	</article>
 </div>
-
+<div id="show_photo" style="display:none;"></div>
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('.editor_content').find('img').each(function(k,v){
+		$('.editor_content').find('img').each(function(k,v) {
 			var h_w = $(this).css(['height', 'width']);
-			$(this).removeAttr('style').css('max-height', h_w.height).css('max-width', h_w.width);
-			$(this).wrap('<span class="image"></div>'); 
+			$(this).removeAttr('style').css('max-height', h_w.height).css('max-width', h_w.width).addClass('editor_content');
+			$(this).wrap('<a href="javascript:void(0)" class="show_photo" data-link="'+k+'"><span class="image"></span></a>'); 
+			$('#show_photo').append('<a href="'+$(this).attr('src')+'"><img src="'+$(this).attr('src')+'"></a>');
 		});
 		
 		$('td').css('vertical-align', 'top');
+		$('table').addClass('table').css('width', 'auto');
 		
-		
-		$('table').css('width', 'auto');
-		
-		// var m_width = $('.homepage').width();
-		alert(  'tips' );
-		// if(m_width <= 1080 ) {
-			// $('.editor_content').find('img').each(function(k,v){
-				// let src = $(this).attr('src'), 
-				// width = $(this).css('max-width'), 
-				// height = $(this).css('max-height'), 
-				// obj = '<tr><td style="vertical-align: top;"><span class="image"><img src="'+src+'" style="max-height:'+height+'; max-width:'+width+'"></span></td></tr>';
-				
-				// $(this).parents('td').remove();
-				// $('tbody').append(obj);
-			// });
-		// }
+		$('.show_photo').on('click' ,function() {
+			$('#show_photo').trigger('click', $(this).data('link'));
+		});
 	});
+
+	document.getElementById('show_photo').onclick = function (event, v) {
+		event = event || window.event;
+		var target = event.target || event.srcElement,
+			link = v;
+			options = {index: link, event: event},
+			links = this.getElementsByTagName('a');
+		blueimp.Gallery(links, options);
+	};
+
+
 </script>
