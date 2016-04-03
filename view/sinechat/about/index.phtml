@@ -11,7 +11,6 @@
 			<?php 
 				if(!empty($data)) echo htmlspecialchars_decode($data['content']); 
 			?>
-			<div id="append_area"></div>
 			<hr>
 		</div>
 	</article>
@@ -36,10 +35,10 @@
 				let src = $(this).attr('src'), 
 				width = $(this).css('max-width'), 
 				height = $(this).css('max-height'), 
-				obj = '<p><span class="image"><img src="'+src+'" style="max-height:'+height+'; max-width:'+width+'"></span></p>';
+				obj = '<span class="image"><img src="'+src+'" style="max-height:'+height+'; max-width:'+width+'"></span>';
 				
 				$(this).parent('span').hide();
-				$('div#append_area').append(obj);
+				$('tbody').append(obj);
 			});
 		}
 	});
