@@ -94,16 +94,12 @@
 			<ul class="divided">
 				<li style="font-size:1.2em;">
 					<article class="box excerpt editor_content" style="min-height: 300px;">
-						<?php echo htmlspecialchars_decode($product['content']);  ?>
-						<div id="append_area"></div>
+						<div class="table-responsive"><?php echo htmlspecialchars_decode($product['content']);  ?></div>
 					</article>
 				</li>
 			</ul>
 		</section>
 	</div>
-	
-	
-	
 </div>
 <div id="show_photo" style="display:none;">
 <?php 
@@ -164,24 +160,17 @@ document.getElementById('show_photo').onclick = function (event) {
     blueimp.Gallery(links, options);
 };
 	
-	// $('.editor_content').find('img').each(function(k,v){
-		// var h_w = $(this).css(['height', 'width']);
-		// $(this).removeAttr('style').css('max-height', h_w.height).css('max-width', h_w.width);
-		// $(this).wrap('<span class="image"></div>'); 
-	// });	$('td').css('vertical-align', 'top');
-	// $('table').css('width', 'auto');
-	// if($(window).width() <= 1080 ) {
-		// $('.editor_content').find('img').each(function(k,v){
-			// let src = $(this).attr('src'), 
-			// width = $(this).css('max-width'), 
-			// height = $(this).css('max-height'), 
-			// obj = '<p><span class="image"><img src="'+src+'" style="max-height:'+height+'; max-width:'+width+'"></span></p>';
-			
-			// $(this).parent('span').hide();
-			// $('div#append_area').append(obj);
-		// });
-	// }
-
+	$(document).ready(function() {
+		$('.editor_content').find('img').each(function(k,v) {
+			var h_w = $(this).css(['height', 'width']);
+			$(this).removeAttr('style').css('max-height', h_w.height).css('max-width', h_w.width);
+			$(this).wrap('<a href="javascript:void(0)"><span class="image"></span></a>'); 
+		});
+	});
+	
+	$('td').css('vertical-align', 'top');
+	$('table').addClass('table').css('width', 'auto');
+	
 	//line icon
 	var socialLikesButtons = {
 		line: {

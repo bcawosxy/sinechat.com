@@ -31,21 +31,19 @@
 			</nav>
 		</article>
 	</div>
-	<div id="sidebar" class="9u 12u(mobile) service editor_content">
+	<div id="sidebar" class="9u 12u(mobile) service editor_content ">
 		<?php 
 			foreach($a_content as $k0 => $v0) {
 				echo '<section class="content_'.$v0['service_id'].'" >
 					<ul class="divided">
 						<li>
-							<article data-id="'.$v0['service_id'].'">'.htmlspecialchars_decode($v0['content']).'</article>
+							<article data-id="'.$v0['service_id'].'"><div class="table-responsive">'.htmlspecialchars_decode($v0['content']).'</div></article>
 						</li>
 					</ul>
-					<div id="append_area_'.$v0['service_id'].'"></div>
 				</section>';
 			}
 		?>
 	</div>
-	<div id="show_photo" style="display:none;"></div>
 </div>
 
 <script>
@@ -66,27 +64,13 @@
 		});
 		
 		$('td').css('vertical-align', 'top');
-		$('table').css('width', 'auto');
+		$('table').addClass('table').css('width', 'auto');
 		
 		$('.editor_content').find('img').each(function(k,v){
 			var h_w = $(this).css(['height', 'width']);
-			$(this).removeAttr('style').css('max-height', h_w.height).css('max-width', h_w.width);
-			$(this).wrap('<span class="image"></div>'); 
+			$(this).removeAttr('style').css('max-height', h_w.height).css('max-width', h_w.width).css('width', 'auto');
+			$(this).wrap('<a href="javascript:void(0)" class="image"></a>'); 
 		});
-		
-		if($(window).width() <= 1080 ) {
-			$('.editor_content').find('img').each(function(k,v){
-				let src = $(this).attr('src'), 
-				width = $(this).css('max-width'), 
-				height = $(this).css('max-height'), 
-				obj = '<p><span class="image"><img src="'+src+'" style="max-height:'+height+'; max-width:'+width+'"></span></p>',
-				target = $(this).parents('article').data('id');
-				
-				
-				$(this).parent('span').hide();
-				$('div#append_area_'+target).append(obj);
-			});
-		}
 
 	});
 </script>
