@@ -163,7 +163,7 @@ document.getElementById('show_photo').onclick = function (event) {
 	$(document).ready(function() {
 		$('.editor_content').find('img').each(function(k,v) {
 			var h_w = $(this).css(['height', 'width']);
-			$(this).removeAttr('style').css('max-height', h_w.height).css('max-width', h_w.width);
+			$(this).removeAttr('style').css('max-height', h_w.height).css('max-width', h_w.width).css('width', 'auto');;
 			$(this).wrap('<a href="javascript:void(0)"><span class="image"></span></a>'); 
 		});
 	});
