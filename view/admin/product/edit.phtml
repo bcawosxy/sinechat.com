@@ -203,7 +203,7 @@ function all_upload() {
 		let obj = $(this);
 		setTimeout(function(){
 			obj.find('button.start').trigger('click');
-		},500 + ( k * 2000 ));
+		},500 + ( k * 1500 ));
 	});
 }
 
@@ -265,8 +265,6 @@ $(function () {
 		checkboxClass: 'icheckbox_minimal-red',
 		radioClass: 'iradio_minimal-red'
     });
-	
-	
 	
 	$('#save').on('click', function(){
 		var img_unput = $('tr.unput').length, img_un_upload  = $('tr.un_upload ').length; 
