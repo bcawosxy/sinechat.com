@@ -1,5 +1,8 @@
 # sinechat.com
 ###0403
+####v3.5.4
+1.改變 detail頁面開啟gallery圖片方式
+
 ####v3.4.9
 1.加入 new的icon提示
 

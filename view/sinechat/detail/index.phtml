@@ -68,7 +68,7 @@
 						if(is_array($a_image)) {
 							foreach($a_image as $k0 => $v0) {
 								if(is_file(PATH_FILES.'product/'.$product['product_id'].'/'.$v0)) image_reformat(PATH_FILES.'product/'.$product['product_id'].'/'.$v0, 'jpg', 750, 495);
-								echo '<li><img src="'.URL_FILES.'product/'.$product['product_id'].'/'.sinechat_Thumbnail($v0, 750, 495).'" /></li>';
+								echo '<li><a href="javascript:void(0)" class="show_gallery" data-src="'.URL_FILES.'product/'.$product['product_id'].'/'.$v0.'"><img src="'.URL_FILES.'product/'.$product['product_id'].'/'.sinechat_Thumbnail($v0, 750, 495).'" /></a></li>';
 							}
 						}
 					?>
@@ -101,14 +101,7 @@
 		</section>
 	</div>
 </div>
-<div id="show_photo" style="display:none;">
-<?php 
-foreach($a_image as $k0 => $v0) {
-	echo '<a href="'.URL_FILES.'product/'.$product['product_id'].'/'.$v0.'" ><img src="'.URL_FILES.'product/'.$product['product_id'].'/'.$v0.'" /></a>';
-} 
-?>
-</div>
-<div id="show_photo_content" style="display:none;"></div>
+<div id="show_photo" style="display:none;"></div>
 <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
     <div class="slides"></div>
     <h3 class="title"></h3>
@@ -143,73 +136,52 @@ $(window).load(function() {
 	});
 });
 
-$(document).on('click', '.slider_big', function() {
-	$('ul.slider_big li').each(function(k, v){
-		if($(this).css('opacity') == 1) {
-			$('ul.slider_big').data('link', k);
-		}
-	});
-	$('#show_photo').trigger('click');
-});
-
-document.getElementById('show_photo').onclick = function (event) {
-	event = event || window.event;
-    var target = event.target || event.srcElement,
-		link = $('ul.slider_big').data('link');
-        options = {index: link, event: event},
-        links = this.getElementsByTagName('a');
-    blueimp.Gallery(links, options);
-};
-	
-	$(document).ready(function() {
-		$('.editor_content').find('img').each(function(k,v) {
-			var h_w = $(this).css(['height', 'width']);
-			$(this).removeAttr('style').css('max-height', h_w.height).css('max-width', h_w.width);
-			$(this).wrap('<a href="javascript:void(0)" class="image show_photo_content" data-link="'+k+'"></a>'); 
-			$('#show_photo_content').append('<a href="'+$(this).attr('src')+'"><img src="'+$(this).attr('src')+'"></a>');
-		});
-		
-		$('.show_photo_content').on('click' ,function() {
-			$('#show_photo_content').trigger('click', $(this).data('link'));
-		});
-
+$(document).ready(function() {
+	$('.editor_content').find('img').each(function(k,v) {
+		var h_w = $(this).css(['height', 'width']);
+		$(this).removeAttr('style').css('max-height', h_w.height).css('max-width', h_w.width);
+		$(this).wrap('<a href="javascript:void(0)" class="image show_gallery" data-src="'+$(this).attr('src')+'"></a>'); 
 	});
 	
 	$('td').css('vertical-align', 'top');
 	$('table').addClass('table').css('width', 'auto');
-	
-	//line icon
-	var socialLikesButtons = {
-		line: {
-			clickUrl: 'http://line.naver.jp/R/msg/text/?<?php echo $product['name'].'  -  '.$web_url; ?>',	
-			pupupWidth: 650,
-			popupHeight: 500,
-		}
-	};
+}).on('click', '.show_gallery', function() {
+	let img =  $(this).data('src');
+	$('#show_photo').empty().append('<a href="'+img+'"></a>').trigger('click');
 
-	//initialize social
-	$('#social_share').socialLikes({
-		url: '<?php echo $web_url ?>',
-		title: '<?php echo $web_title; ?>',
-	    counters: true,
-	    singleTitle: 'Share it!',
-	});
+});;
 
-	//counter link
-	$('#social_share').on('popup_closed.social-likes', function(event, service) {
-	    $(event.currentTarget).socialLikes({forceUpdate: true});
-	    var counter = $(event.currentTarget).find('.social-likes__counter_' + service);
-	    counter.text(+(counter.text()||0)+1).removeClass('social-likes__counter_empty');
-	});
+document.getElementById('show_photo').onclick = function (event) {
+	event = event || window.event;
+    var target = event.target || event.srcElement,
+        options = {index: 0, event: event},
+        links = this.getElementsByTagName('a');
+    blueimp.Gallery(links, options);
+};
 	
-	document.getElementById('show_photo_content').onclick = function (event, v) {
-		event = event || window.event;
-		var target = event.target || event.srcElement,
-			link = v;
-			options = {index: link, event: event},
-			links = this.getElementsByTagName('a');
-		blueimp.Gallery(links, options);
-	};
+//line icon
+var socialLikesButtons = {
+	line: {
+		clickUrl: 'http://line.naver.jp/R/msg/text/?<?php echo $product['name'].'  -  '.$web_url; ?>',	
+		pupupWidth: 650,
+		popupHeight: 500,
+	}
+};
+
+//initialize social
+$('#social_share').socialLikes({
+	url: '<?php echo $web_url ?>',
+	title: '<?php echo $web_title; ?>',
+	counters: true,
+	singleTitle: 'Share it!',
+});
+
+//counter link
+$('#social_share').on('popup_closed.social-likes', function(event, service) {
+	$(event.currentTarget).socialLikes({forceUpdate: true});
+	var counter = $(event.currentTarget).find('.social-likes__counter_' + service);
+	counter.text(+(counter.text()||0)+1).removeClass('social-likes__counter_empty');
+});
 </script>
 
 <script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411"></script>
