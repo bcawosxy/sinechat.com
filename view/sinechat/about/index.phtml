@@ -29,9 +29,9 @@
 		
 		$('table').css('width', 'auto');
 		
-		var m_width = $('.homepage').width();
+		// var m_width = $('.homepage').width();
 		alert(  $('.homepage').width() );
-		if(m_width <= 1080 ) {
+		// if(m_width <= 1080 ) {
 			$('.editor_content').find('img').each(function(k,v){
 				let src = $(this).attr('src'), 
 				width = $(this).css('max-width'), 
@@ -41,6 +41,6 @@
 				$(this).parents('td').remove();
 				$('tbody').append(obj);
 			});
-		}
+		// }
 	});
 </script>
