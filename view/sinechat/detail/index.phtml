@@ -25,7 +25,7 @@
 					<?php 
 						if(!empty($other) && is_array($other)) {
 							foreach($other as $k0 => $v0) {
-								if(is_file(PATH_FILES.'product/'.$v0['product_id'].'/'.$v0['cover'])) image_reformat(PATH_FILES.'product/'.$v0['product_id'].'/'.$v0['cover'], 'jpg', 228, 152);
+								if(is_file(PATH_FILES.'product/'.$v0['product_id'].'/'.$v0['cover'])) image_remake(PATH_FILES.'product/'.$v0['product_id'].'/'.$v0['cover'], 'jpg', 228, 152, 'w');
 								echo '<article class="box excerpt" title="'.$v0['service_name'].' | '.$v0['name'].'">
 									<a href="'.url('detail', 'index', ['id'=>$v0['product_id']]).'" class="image"><img onerror="this.src=\''.static_file('images/origin.png').'\'" src="'.URL_FILES.'product/'.$v0['product_id'].'/'.sinechat_Thumbnail($v0['cover'], 228, 152).'" width="228" height="152"></a>
 								</article>';
@@ -67,7 +67,7 @@
 					<?php 
 						if(is_array($a_image)) {
 							foreach($a_image as $k0 => $v0) {
-								if(is_file(PATH_FILES.'product/'.$product['product_id'].'/'.$v0)) image_reformat(PATH_FILES.'product/'.$product['product_id'].'/'.$v0, 'jpg', 750, 495);
+								if(is_file(PATH_FILES.'product/'.$product['product_id'].'/'.$v0)) image_remake(PATH_FILES.'product/'.$product['product_id'].'/'.$v0, 'jpg', 750, 495, 'w');
 								echo '<li><a href="javascript:void(0)" class="show_gallery" data-src="'.URL_FILES.'product/'.$product['product_id'].'/'.$v0.'"><img src="'.URL_FILES.'product/'.$product['product_id'].'/'.sinechat_Thumbnail($v0, 750, 495).'" /></a></li>';
 							}
 						}

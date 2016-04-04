@@ -7,7 +7,6 @@ switch (_FUNCTION) {
 		if(is_ajax()) {}
 		$column = ['product.*', 'service.name as service_name', 'service.service_id as service_id' ];
 		$data = Model('product')->column($column)->join([['left join', 'service', 'USING(`service_id`)']])->where([[[['product.status', '!=', ':status'], ['product.status', '!=', ':status'] ], 'and']])->param([':status'=>'none', ':status'=>'delete'])->order(['product.product_id'=>'DESC'])->fetchAll();
-
 	}
 	break;	
 
@@ -98,8 +97,8 @@ switch (_FUNCTION) {
 						foreach($files as $file){
 							$_info = fileinfo($file);
 							if(is_file($file)) rename($file, PATH_FILES.$dir.basename($file));
-							image_reformat(PATH_FILES.$dir.basename($file), 'jpg', 750, 500);	//前台燈箱
-							image_reformat(PATH_FILES.$dir.basename($file), 'jpg', 72, 72);		//前台燈箱縮圖
+							image_remake(PATH_FILES.$dir.basename($file), 'jpg', 750, 495); //製造燈箱大圖
+							image_reformat(PATH_FILES.$dir.basename($file), 'jpg', 72, 72); //前台燈箱縮圖
 						}
 						
 						//clean tmp dir
@@ -133,6 +132,7 @@ switch (_FUNCTION) {
 						$image = json_decode($image, true);
 						foreach($image as $k0 => $v0) {
 							$info = fileinfo($v0['filename']);
+
 							switch($v0['set']) {
 								//新增圖片
 								case 'new' :
@@ -143,7 +143,6 @@ switch (_FUNCTION) {
 								
 								//原有圖片
 								case 'old' :
-									//檔名 = 順序名 故可能要重新命名
 									if(!file_exists(PATH_FILES.$dir.$v0['filename'])) json_encode_return(0, '檔案不存在, 請重新檢查['.$v0['filename'].']');
 									if(!rename(PATH_FILES.$dir.$v0['filename'], PATH_FILES.$tmp_dir.$v0['filename']))  json_encode_return(0, '檔案處理異常, 請重新操作[old]');
 								break;
@@ -164,7 +163,7 @@ switch (_FUNCTION) {
 						foreach($files as $file){
 							$_info = fileinfo($file);
 							if(is_file($file)) rename($file, PATH_FILES.$dir.basename($file));
-							image_reformat(PATH_FILES.$dir.basename($file), 'jpg', 750, 500);	//前台燈箱
+							image_remake(PATH_FILES.$dir.basename($file), 'jpg', 750, 495); //製造燈箱大圖
 							image_reformat(PATH_FILES.$dir.basename($file), 'jpg', 72, 72);		//前台燈箱縮圖
 						}
 						
@@ -204,7 +203,7 @@ switch (_FUNCTION) {
 			'content'=>null,
 			'service_id'=>null,
 			'description'=>null,
-			'seqence'=>null,
+			'seqence'=>0,
 			'status'=>'open',
 			'inserttime'=>'open',
 			'modifytime'=>null,

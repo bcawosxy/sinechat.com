@@ -12,7 +12,7 @@
 				if(is_array($data)) {
 					$num = count($data);
 					foreach($data as $k0 => $v0) {
-						if(is_file(PATH_FILES._CLASS.'/'.$v0['product_id'].'/'.$v0['cover'])) image_reformat(PATH_FILES._CLASS.'/'.$v0['product_id'].'/'.$v0['cover'], 'jpg', 249, 166);
+						if(is_file(PATH_FILES._CLASS.'/'.$v0['product_id'].'/'.$v0['cover'])) image_remake(PATH_FILES._CLASS.'/'.$v0['product_id'].'/'.$v0['cover'], 'jpg', 249, 166, 'w');
 						$new_icon = (date('Y-m-d', strtotime($v0['inserttime'])) >=  date('Y-m-d', strtotime('-7 days'))) ? '<img width="32" height="10" src="'.URL_IMG.'gif_new.gif'.'">' : '<br>' ;
 						if(($k0%4) == 0) {	echo '<div class="row" style="min-height: 280px;">';}
 						echo '<div class="col-lg-3 col-md-3 col-xs-6 col-sm-6" style="padding-top:5px;">

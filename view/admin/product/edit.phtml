@@ -104,7 +104,7 @@
 												<?php 
 													if(is_array($a_image)){
 														foreach($a_image as $k0 => $v0) {
-															if(is_file(PATH_FILES._SUB_CLASS.'/'.$data['product_id'].'/'.$v0)) image_reformat(PATH_FILES._SUB_CLASS.'/'.$data['product_id'].'/'.$v0, 'jpg', 150, 100);
+															if(is_file(PATH_FILES._SUB_CLASS.'/'.$data['product_id'].'/'.$v0)) image_remake(PATH_FILES._SUB_CLASS.'/'.$data['product_id'].'/'.$v0, 'jpg', 150, 100, 'w');
 															echo '<li class="ui-state-default" data-set="old" data-filename="'.$v0.'">
 																	<a href="'.URL_FILES._SUB_CLASS.'/'.$data['product_id'].'/'.$v0.'" data-gallery><img src="'.URL_FILES._SUB_CLASS.'/'.$data['product_id'].'/'.sinechat_Thumbnail($v0, 150, 100).'">
 																	<a href="javascript:void(0)"> <button type="button" style="padding:0;margin-top:5px;" class="btn btn-block btn-danger box_delete">移除</button></a>
@@ -371,7 +371,6 @@ $(function () {
 });
 
 </script>
-
 
 <script id="template-upload" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
