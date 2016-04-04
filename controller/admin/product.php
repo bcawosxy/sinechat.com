@@ -97,7 +97,7 @@ switch (_FUNCTION) {
 						foreach($files as $file){
 							$_info = fileinfo($file);
 							if(is_file($file)) rename($file, PATH_FILES.$dir.basename($file));
-							image_remake(PATH_FILES.$dir.basename($file), 'jpg', 750, 495); //製造燈箱大圖
+							image_remake(PATH_FILES.$dir.basename($file), 'jpg', 750, 495, 'w'); //製造燈箱大圖
 							image_reformat(PATH_FILES.$dir.basename($file), 'jpg', 72, 72); //前台燈箱縮圖
 						}
 						
@@ -163,7 +163,7 @@ switch (_FUNCTION) {
 						foreach($files as $file){
 							$_info = fileinfo($file);
 							if(is_file($file)) rename($file, PATH_FILES.$dir.basename($file));
-							image_remake(PATH_FILES.$dir.basename($file), 'jpg', 750, 495); //製造燈箱大圖
+							image_remake(PATH_FILES.$dir.basename($file), 'jpg', 750, 495, 'w'); //製造燈箱大圖
 							image_reformat(PATH_FILES.$dir.basename($file), 'jpg', 72, 72);		//前台燈箱縮圖
 						}
 						
