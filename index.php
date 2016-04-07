@@ -24,7 +24,6 @@ include('./config/global.php');
 				<title>新誠修繕工程 <?php if(!is_null($web_title)) echo ' | '.$web_title ;?></title>
 				<meta charset="utf-8" />
 				<?php if(ENV != 'production' || _CLASS != 'index') echo '<meta name="robots" content="none">'; ?>
-
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<meta name="description" content="<?php echo $web_description; ?>">
 				<meta property="og:title" content="新誠修繕工程 <?php if(!is_null($web_title)) echo ' | '.$web_title ;?>" />
