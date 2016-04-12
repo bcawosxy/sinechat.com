@@ -37,7 +37,7 @@
 ###0401
 ####v3.4.0
 1.移除其他檔案
-
+<!--
 ###0330
 ####v3.3.2
 1.大量上傳造成error 500問題
@@ -77,7 +77,7 @@
 2.product::index 分頁完成
 
 
-<!--
+
 ####v1.2.1
 1.banner img resize
 2.product::content set min-height
