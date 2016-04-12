@@ -64,4 +64,10 @@ if($data != null) {
 	}
 }
 $pie_data = json_encode($pie_data);
+
+
+/*LineChart 人次統計*/
+$viewed = Model('viewed')->order(['`date`'=>'desc'])->limit('30')->fetchAll();
+$line_data = array_reverse($viewed, false);
+
 ?>

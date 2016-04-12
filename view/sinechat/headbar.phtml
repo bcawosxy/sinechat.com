@@ -23,4 +23,22 @@
 			</ul>
 		</nav>
 	</div>
-</div>	
+</div>
+<?php 
+$tmp0 = md5(url('index', 'index'));
+if (!isset($_COOKIE[$tmp0])) {
+	$today = '"'.date("Y-m-d").'"';
+	$viewed = Model('viewed')->where([[[['`date`', '=', $today]], 'and']])->fetch();
+	if(count($viewed) == 0) {
+		$param = [
+			'date' => date("Y-m-d"),
+			'count' => 0,
+		];
+		Model('viewed')->add($param);
+	}
+
+	setcookie($tmp0, true, time() + 86400);
+	Model('viewed')->where(array(array(array(array('date', '=', $today)), 'and')))->edit(['count'=>$viewed['count'] + 1]);
+}
+
+?>
