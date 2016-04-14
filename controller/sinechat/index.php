@@ -8,6 +8,7 @@
 	//get product
 	$a_product = Model('product')->where([[[['status', '=', ':status']], 'and']])->param([':status'=>'open'])->order(['RAND()'=>'desc'])->limit(5)->fetchAll();
 
+	$web_description = ' -「免費現場勘估，堅持優良品質，採責任施工；擁有最專業的團隊，在最短時間內完工」-';
 	$web_url = url('index', 'index');
 
 ?>
