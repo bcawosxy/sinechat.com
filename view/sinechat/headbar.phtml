@@ -26,6 +26,7 @@
 </div>
 <?php 
 $tmp0 = md5(url('index', 'index'));
+
 if (!isset($_COOKIE[$tmp0])) {
 	$today = '"'.date("Y-m-d").'"';
 	$viewed = Model('viewed')->where([[[['`date`', '=', $today]], 'and']])->fetch();
