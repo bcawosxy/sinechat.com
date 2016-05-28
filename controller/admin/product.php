@@ -132,7 +132,6 @@ switch (_FUNCTION) {
 						$image = json_decode($image, true);
 						foreach($image as $k0 => $v0) {
 							$info = fileinfo($v0['filename']);
-
 							switch($v0['set']) {
 								//新增圖片
 								case 'new' :
@@ -148,27 +147,12 @@ switch (_FUNCTION) {
 									//原圖檔名
 									if(!rename(PATH_FILES.$dir.$v0['filename'], PATH_FILES.$tmp_dir.$v0['filename']))  json_encode_return(0, '檔案處理異常, 請重新操作[old]');
 									
-
-
-									//750_495 前台燈箱大圖
-									$img_750x495 = $info['filename'].'_750x495'.'.'.$info['extension'];
-									if(file_exists(PATH_FILES.$dir.$img_750x495)) {
-										if(!rename(PATH_FILES.$dir.$img_750x495, PATH_FILES.$tmp_dir.$img_750x495))  json_encode_return(0, '檔案處理異常, 請重新操作[old]');
-									}
-									
-									//72_72 前台燈箱大圖
-									$img_72x72 = $info['filename'].'_72x72'.'.'.$info['extension'];
-									if(file_exists(PATH_FILES.$dir.$img_72x72)) {
-										if(!rename(PATH_FILES.$dir.$img_72x72, PATH_FILES.$tmp_dir.$img_72x72))  json_encode_return(0, '檔案處理異常, 請重新操作[old]');
-									}
-
-									//150_150 縮圖
-									$img_150_100 = $info['filename'].'_150x100'.'.'.$info['extension'];
-									if(file_exists(PATH_FILES.$dir.$img_150_100)) {
-										if(!rename(PATH_FILES.$dir.$img_150_100, PATH_FILES.$tmp_dir.$img_150_100))  json_encode_return(0, '檔案處理異常, 請重新操作[old]');
-									}
-								
-
+									/**
+									 * A: 為了避免舊圖片的各種size重新被處理, 這邊需要移動其他size圖片來避掉這個問題
+									 * @這裡只是負責將有相關聯的resize圖片往tmp放及取回來,不負責產生"所有"新的size 
+									 */
+									$a_resize = ['750x495', '72x72', '150x100', '228x152', '249x166', '371x248', '370x493'];
+									admin_resized_img_move(PATH_FILES.$dir.$info['basename'], $a_resize);
 								break;
 							}
 							
@@ -185,22 +169,23 @@ switch (_FUNCTION) {
 						//copy all file
 						$files = glob(PATH_FILES.$tmp_dir.'*'); 
 						foreach($files as $file){
-							$_info = fileinfo($file);
 							if(is_file($file)) rename($file, PATH_FILES.$dir.basename($file));
 						}
 						
-						//檢查是否已經產生resize圖 如果存在則不重新產生
+						/**
+						 * 承A - 這裡檢查是否已經產生resize圖 如果存在則不重新產生, 但並非所有size都由這邊處理
+						 */
 						foreach ($a_image as $k0 => $v0) {
-							$_info2 = fileinfo($v0);
+							$_info = fileinfo($v0);
 							
 							//檢查是否存在750x495圖
-							$img_check = $_info2['filename'].'_750x495'.'.'.$_info2['extension'];
+							$img_check = $_info['filename'].'_750x495'.'.'.$_info['extension'];
 							if(!file_exists(PATH_FILES.$dir.$img_check)) {
 								image_remake(PATH_FILES.$dir.basename($v0), 'jpg', 750, 495, 'w');	//製造燈箱大圖
 							}
 
 							//檢查是否存在72x72圖
-							$img_check2 = $_info2['filename'].'_72x72'.'.'.$_info2['extension'];
+							$img_check2 = $_info['filename'].'_72x72'.'.'.$_info['extension'];
 							if(!file_exists(PATH_FILES.$dir.$img_check2)) {
 								image_remake(PATH_FILES.$dir.basename($v0), 'jpg', 72, 72, 'w');	//前台燈箱縮圖
 							}
