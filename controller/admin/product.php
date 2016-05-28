@@ -144,7 +144,22 @@ switch (_FUNCTION) {
 								//原有圖片
 								case 'old' :
 									if(!file_exists(PATH_FILES.$dir.$v0['filename'])) json_encode_return(0, '檔案不存在, 請重新檢查['.$v0['filename'].']');
+									
+									//原圖檔名
 									if(!rename(PATH_FILES.$dir.$v0['filename'], PATH_FILES.$tmp_dir.$v0['filename']))  json_encode_return(0, '檔案處理異常, 請重新操作[old]');
+									
+									//750_495 前台燈箱大圖
+									$img_750x495 = $info['filename'].'_750x495'.'.'.$info['extension'];
+									if(file_exists(PATH_FILES.$dir.$img_750x495)) {
+										if(!rename(PATH_FILES.$dir.$img_750x495, PATH_FILES.$tmp_dir.$img_750x495))  json_encode_return(0, '檔案處理異常, 請重新操作[old]');
+									}
+									
+									//72_72 前台燈箱大圖
+									$img_72x72 = $info['filename'].'_72x72'.'.'.$info['extension'];
+									if(file_exists(PATH_FILES.$dir.$img_72x72)) {
+										if(!rename(PATH_FILES.$dir.$img_72x72, PATH_FILES.$tmp_dir.$img_72x72))  json_encode_return(0, '檔案處理異常, 請重新操作[old]');
+									}
+								
 								break;
 							}
 							
@@ -163,10 +178,32 @@ switch (_FUNCTION) {
 						foreach($files as $file){
 							$_info = fileinfo($file);
 							if(is_file($file)) rename($file, PATH_FILES.$dir.basename($file));
-							image_remake(PATH_FILES.$dir.basename($file), 'jpg', 750, 495, 'w'); //製造燈箱大圖
-							// image_reformat(PATH_FILES.$dir.basename($file), 'jpg', 72, 72);		//前台燈箱縮圖
+
+							//存入原圖而非resize的圖
+							if(!strpos($_info['filename'], '_750x495') || !strpos($_info['filename'], '_72x72'))  {
+								$origin_img[]= $_info['basename'];
+							}
+					
 						}
 						
+						//檢查已經產生的resize圖 如果已經存在則不重新產生
+						foreach ($origin_img as $k0 => $v0) {
+							$_info2 = fileinfo($v0);
+							
+							//檢查是否存在750x495圖
+							$img_check = $_info2['filename'].'_750x495'.'.'.$_info2['extension'];
+							if(!file_exists(PATH_FILES.$dir.$img_check)) {
+								image_remake(PATH_FILES.$dir.basename($v0), 'jpg', 750, 495, 'w');	//製造燈箱大圖
+							}
+
+							//檢查是否存在72x72圖
+							$img_check2 = $_info2['filename'].'_72x72'.'.'.$_info2['extension'];
+							if(!file_exists(PATH_FILES.$dir.$img_check2)) {
+								image_remake(PATH_FILES.$dir.basename($v0), 'jpg', 72, 72, 'w');	//前台燈箱縮圖
+							}
+
+						}
+
 						//clean tmp dir
 						$files = glob(PATH_FILES.$tmp_dir.'*'); 
 						foreach($files as $file){
