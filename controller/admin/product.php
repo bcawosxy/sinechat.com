@@ -148,6 +148,8 @@ switch (_FUNCTION) {
 									//原圖檔名
 									if(!rename(PATH_FILES.$dir.$v0['filename'], PATH_FILES.$tmp_dir.$v0['filename']))  json_encode_return(0, '檔案處理異常, 請重新操作[old]');
 									
+
+
 									//750_495 前台燈箱大圖
 									$img_750x495 = $info['filename'].'_750x495'.'.'.$info['extension'];
 									if(file_exists(PATH_FILES.$dir.$img_750x495)) {
@@ -159,7 +161,14 @@ switch (_FUNCTION) {
 									if(file_exists(PATH_FILES.$dir.$img_72x72)) {
 										if(!rename(PATH_FILES.$dir.$img_72x72, PATH_FILES.$tmp_dir.$img_72x72))  json_encode_return(0, '檔案處理異常, 請重新操作[old]');
 									}
+
+									//150_150 縮圖
+									$img_150_100 = $info['filename'].'_150x100'.'.'.$info['extension'];
+									if(file_exists(PATH_FILES.$dir.$img_150_100)) {
+										if(!rename(PATH_FILES.$dir.$img_150_100, PATH_FILES.$tmp_dir.$img_150_100))  json_encode_return(0, '檔案處理異常, 請重新操作[old]');
+									}
 								
+
 								break;
 							}
 							
@@ -173,21 +182,15 @@ switch (_FUNCTION) {
 							if(is_file($file)) unlink($file); 
 						}
 						
-						//copy file
+						//copy all file
 						$files = glob(PATH_FILES.$tmp_dir.'*'); 
 						foreach($files as $file){
 							$_info = fileinfo($file);
 							if(is_file($file)) rename($file, PATH_FILES.$dir.basename($file));
-
-							//存入原圖而非resize的圖
-							if(!strpos($_info['filename'], '_750x495') || !strpos($_info['filename'], '_72x72'))  {
-								$origin_img[]= $_info['basename'];
-							}
-					
 						}
 						
-						//檢查已經產生的resize圖 如果已經存在則不重新產生
-						foreach ($origin_img as $k0 => $v0) {
+						//檢查是否已經產生resize圖 如果存在則不重新產生
+						foreach ($a_image as $k0 => $v0) {
 							$_info2 = fileinfo($v0);
 							
 							//檢查是否存在750x495圖
@@ -201,7 +204,6 @@ switch (_FUNCTION) {
 							if(!file_exists(PATH_FILES.$dir.$img_check2)) {
 								image_remake(PATH_FILES.$dir.basename($v0), 'jpg', 72, 72, 'w');	//前台燈箱縮圖
 							}
-
 						}
 
 						//clean tmp dir
