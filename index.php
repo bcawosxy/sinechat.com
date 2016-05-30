@@ -21,7 +21,7 @@ if(MAIN != 'admin') {
 			Model('viewed')->add($param);
 		}
 
-		setcookie('viewed', $tmp0, time() + 86400, '/'));
+		setcookie('viewed', $tmp0, time() + 86400, '/');
 		Model('viewed')->where([[[['date', '=', $today]], 'and']])->edit(['count'=>$viewed['count'] + 1]);
 	}
 }
