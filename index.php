@@ -5,6 +5,26 @@ include('./config/function.php');
 include('./config/model.php');
 include('./config/global.php');
 ?>
+
+<?php 
+if(MAIN != 'admin') {
+	$tmp0 = md5(url('index', 'index'));
+	if (!isset($_COOKIE['viewed'])) {
+		$today = '"'.date("Y-m-d").'"';
+		$viewed = Model('viewed')->where([[[['`date`', '=', $today]], 'and']])->fetch();
+		if(count($viewed) == 0) {
+			$param = [
+				'date' => date("Y-m-d"),
+				'count' => 0,
+			];
+			Model('viewed')->add($param);
+		}
+
+		setcookie('viewed', $tmp0, time() + 86400, '/');
+		Model('viewed')->where([[[['date', '=', $today]], 'and']])->edit(['count'=>$viewed['count'] + 1]);
+	}
+}
+?>
 <!DOCTYPE HTML>
 <!--
 	Strongly Typed by HTML5 UP
