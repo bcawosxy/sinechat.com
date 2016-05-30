@@ -26,8 +26,7 @@
 </div>
 <?php 
 $tmp0 = md5(url('index', 'index'));
-
-if (!isset($_COOKIE[$tmp0])) {
+if (!isset($_COOKIE['viewed'])) {
 	$today = '"'.date("Y-m-d").'"';
 	$viewed = Model('viewed')->where([[[['`date`', '=', $today]], 'and']])->fetch();
 	if(count($viewed) == 0) {
@@ -38,8 +37,8 @@ if (!isset($_COOKIE[$tmp0])) {
 		Model('viewed')->add($param);
 	}
 
-	setcookie($tmp0, true, time() + 86400);
-	Model('viewed')->where(array(array(array(array('date', '=', $today)), 'and')))->edit(['count'=>$viewed['count'] + 1]);
+	setcookie('viewed', $tmp0, time() + 86400);
+	Model('viewed')->where([[[['date', '=', $today]], 'and']])->edit(['count'=>$viewed['count'] + 1]);
 }
 
 ?>
