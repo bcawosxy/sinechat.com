@@ -174,7 +174,7 @@ $(function () {
               pointBorderColor : '#5B90BF',
               pointBackgroundColor : '#5B90BF',
               pointBorderWidth : 3,
-              data: [<?php foreach ($a_line_product_num as $k0 => $v0) { echo '"'.$v0.'",';}  ?>]
+              data: [<?php foreach ($a_line_product_num as $k0 => $v0) { echo '"-'.$v0.'",';}  ?>]
             }]
         },
         options: {
@@ -189,6 +189,7 @@ $(function () {
                 titleFontSize : 16,
                 bodyFontSize : 14,
                 callbacks: {
+                    
                 }
             },
             hover: {
