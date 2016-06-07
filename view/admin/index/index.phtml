@@ -36,7 +36,7 @@
 </div>
 
 <div class="row">
-	<div class="col-md-10 col-sm-10 col-xs-10 ">
+	<div class="col-md-10 col-sm-12 col-xs-12 ">
 		<div class="box box-info">
 			<div class="box-header with-border">
 				<h4>網站瀏覽人數 / 案件新增數量</h4>
@@ -45,8 +45,11 @@
 					<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
 				</div>
 			</div>
-			<div class="box-body">
+			<div class="box-body">            
 				<div style="float:left;" class="col-md-11 col-sm-11 col-xs-11">
+                    <div id="line_charts_tips" class="alert alert-danger alert-dismissible" style="display: none;">
+                        <h4><i class="icon fa fa-ban"></i></h4>手機版無法顯示線型圖表
+                    </div>
 				 	<canvas id="lineChart" style="max-height:550px"></canvas>
 				</div>
 			</div>
@@ -97,7 +100,7 @@ $(function () {
     };
 
     var barChartData = {
-        labels: [<?php foreach ($bar_data as $k0 => $v0) { echo '"'.date('m/d', strtotime($v0['date'])).'",';}  ?>],
+        labels: [<?php foreach ($bar_data as $k0 => $v0) { echo '"~'.date('m/d', strtotime($v0['date'])).'",';}  ?>],
         datasets: [{
             label: '案件新增(週)',
             backgroundColor: "#108199",
@@ -105,7 +108,6 @@ $(function () {
         }]
 
     };
-
 
     var ctx = document.getElementById("bar").getContext("2d");
     window.myBar = new Chart(ctx, {
@@ -120,8 +122,23 @@ $(function () {
                 display: true,
                 text: '案件新增統計',
                 fontSize : 22,
+            },
+            scales: {
+                xAxes: [{
+                        stacked: true,
+                }],
+                yAxes: [{
+                        stacked: true,
+                        ticks: {
+                            min: 0,
+                            stepSize: 1,
+                            suggestedMax : 5,
+                        }
+                }]
             }
-        }
+        
+        },
+      
     });
 
     //-------------
@@ -179,7 +196,6 @@ $(function () {
                         labelString: 'Day'
                     }
                 }],
-
                 yAxes: [{
                     display: true,
                     scaleLabel: {
@@ -194,6 +210,11 @@ $(function () {
     };
 
     var ctx = document.getElementById("lineChart").getContext("2d");
-    if(window.outerWidth > 1240 )window.myLine = new Chart(ctx, config);
+    if(window.outerWidth > 1240 ) {
+        window.myLine = new Chart(ctx, config);
+        $('div#line_charts_tips').hide();
+    }else{
+        $('div#line_charts_tips').show();
+    }
 });
 </script>
