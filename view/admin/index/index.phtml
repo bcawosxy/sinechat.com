@@ -8,18 +8,27 @@
 <!-- Main content -->
 <section class="content">
 <div class="row">
-	<div class="col-md-5 col-sm-12 col-xs-12 ">
+  <div class="col-md-4 col-sm-12 col-xs-12 ">
+    <div class="box box-danger">
+      <div class="box-header with-border">
+        <h4>案件類型</h4>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        </div>
+      </div>
+      <div class="box-body">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <canvas id="pieChart" style="height:200px"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-sm-12 col-xs-12 ">
 		<div class="box box-danger">
-			<div class="box-header with-border">
-				<h4>案件類型</h4>
-				<div class="box-tools pull-right">
-					<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-					<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-				</div>
-			</div>
 			<div class="box-body">
 				<div class="col-md-12 col-sm-12 col-xs-12">
-					<canvas id="pieChart" style="height:250px"></canvas>
+					 <canvas id="bar"></canvas>
 				</div>
 			</div>
 		</div>
@@ -64,16 +73,57 @@ $(function () {
                 data: [<?php foreach ($pie_data as $k0 => $v0) { echo '"'.$v0['value'].'",';} ?>],
                 backgroundColor: [<?php foreach ($pie_data as $k0 => $v0) { echo 'randomColor(0.8),';} ?>],
             }],
-            labels: [<?php foreach ($pie_data as $k0 => $v0) { echo '"'.$v0['label'].'",';} ?>]
+            labels: [<?php foreach ($pie_data as $k0 => $v0) { echo '"'.$v0['label'].'",';} ?>],
         },
         options: {
             responsive: true
-        }
+        },
     };
 
     var ctx = document.getElementById("pieChart").getContext("2d");
     window.myPie = new Chart(ctx, config);
-	
+	 
+    //-------------
+    //- Bar CHART -
+    //--------------
+    var randomScalingFactor = function() {
+        return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+    };
+    var randomColorFactor = function() {
+        return Math.round(Math.random() * 255);
+    };
+    var randomColor = function() {
+        return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',.7)';
+    };
+
+    var barChartData = {
+        labels: [<?php foreach ($bar_data as $k0 => $v0) { echo '"'.date('m/d', strtotime($v0['date'])).'",';}  ?>],
+        datasets: [{
+            label: '案件新增(週)',
+            backgroundColor: "#108199",
+            data: [<?php foreach ($bar_data as $k0 => $v0) { echo '"'.$v0['data'].'",';}  ?>]
+        }]
+
+    };
+
+
+    var ctx = document.getElementById("bar").getContext("2d");
+    window.myBar = new Chart(ctx, {
+        type: 'bar',
+        data: barChartData,
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: '案件新增統計',
+                fontSize : 22,
+            }
+        }
+    });
+
     //-------------
     //- LINE CHART -
     //--------------
@@ -129,12 +179,15 @@ $(function () {
                         labelString: 'Day'
                     }
                 }],
+
                 yAxes: [{
                     display: true,
                     scaleLabel: {
                         show: true,
                         labelString: 'Value'
                     },
+                     ticks: {
+                    }
                 }]
             }
         }
