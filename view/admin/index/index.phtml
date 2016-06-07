@@ -11,7 +11,7 @@
   <div class="col-md-4 col-sm-12 col-xs-12 ">
     <div class="box box-danger">
       <div class="box-header with-border">
-        <h4>案件類型</h4>
+        <h4>案件類型 : <?php echo $service_count; ?> / 案件總數 : <?php echo $product_count; ?></h4>
         <div class="box-tools pull-right">
           <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
           <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -100,7 +100,13 @@ $(function () {
     };
 
     var barChartData = {
-        labels: [<?php foreach ($bar_data as $k0 => $v0) { echo '"~'.date('m/d', strtotime($v0['date'])).'",';}  ?>],
+        labels: [
+            <?php 
+                foreach ($bar_data as $k0 => $v0) { 
+                    echo ($k0 < 5 ) ? '"~'.date('m/d', strtotime($v0['date'])).'",' : '"~'.$v0['date'].'",';
+                }
+            ?>
+        ],
         datasets: [{
             label: '案件新增(週)',
             backgroundColor: "#108199",
